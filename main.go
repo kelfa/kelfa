@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
+	"os"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/viper"
 
 	"fmt"
@@ -42,8 +44,20 @@ func main() {
 	}
 	fmt.Printf(timeSlot)
 
-	spew.Dump(p.ListFilesInTimeSlot(timeSlot))
-
+	bm, err := NewBucketManager(sess)
+	w := bufio.NewWriter(os.Stdout)
+	lfs, err := p.ListFilesInTimeSlot(timeSlot)
+	if err != nil {
+		log.Fatalf("Impossible to read the list of files in the %s timeslot: %v", timeSlot, err)
+	}
+	for _, lf := range lfs {
+		content, err := bm.ReadLogFile(lf)
+		if err != nil {
+			log.Fatalf("unable to read the content of the %s file:", lf, err)
+		}
+		w.Write(content)
+	}
+	w.Flush()
 	/*
 		// 3) Create a new AWS S3 downloader
 		downloader := s3manager.NewDownloader(sess)
