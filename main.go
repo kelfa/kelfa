@@ -53,7 +53,7 @@ func main() {
 	for _, lf := range lfs {
 		content, err := bm.ReadLogFile(lf)
 		if err != nil {
-			log.Fatalf("unable to read the content of the %s file:", lf, err)
+			log.Fatalf("unable to read the content of the %s file: %v", lf, err)
 		}
 		w.Write(content)
 	}
