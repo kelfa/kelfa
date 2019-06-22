@@ -1,18 +1,20 @@
-package main
+package timeSafety_test
 
 import (
 	"testing"
 	"time"
+
+	"github.com/selffa/aws-cloudfront-logCompactor/pkg/timeSafety"
 )
 
-type DataPoint struct {
+type dataPoint struct {
 	Time time.Time
 	Safe bool
 }
 
 func TestIsTimeSlotSafe(T *testing.T) {
 
-	dps := []DataPoint{
+	dps := []dataPoint{
 		{
 			Time: time.Now().In(time.UTC).Add(-26 * time.Hour),
 			Safe: true,
@@ -24,7 +26,7 @@ func TestIsTimeSlotSafe(T *testing.T) {
 	}
 
 	for _, dp := range dps {
-		act, err := IsTimeSlotSafe(dp.Time.Format("2006-01-02-15"))
+		act, err := timeSafety.IsTimeSlotSafe(dp.Time.Format("2006-01-02-15"))
 		if err != nil {
 			T.Fatal(err)
 		}
@@ -36,7 +38,7 @@ func TestIsTimeSlotSafe(T *testing.T) {
 
 func TestIsTimeSlotDaySafe(T *testing.T) {
 
-	dps := []DataPoint{
+	dps := []dataPoint{
 		{
 			Time: time.Now().In(time.UTC).Add(-48 * time.Hour),
 			Safe: true,
@@ -48,7 +50,7 @@ func TestIsTimeSlotDaySafe(T *testing.T) {
 	}
 
 	for _, dp := range dps {
-		act, err := IsTimeSlotDaySafe(dp.Time.Format("2006-01-02-15"))
+		act, err := timeSafety.IsTimeSlotDaySafe(dp.Time.Format("2006-01-02-15"))
 		if err != nil {
 			T.Fatal(err)
 		}
