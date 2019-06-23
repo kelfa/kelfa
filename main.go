@@ -23,12 +23,7 @@ func main() {
 	}
 	// you need to store your AWS credentials in ~/.aws/credentials
 
-	// 1) Define your bucket and item names
-	//bucket := viper.GetString("bucket")
 	region := viper.GetString("region")
-	//item := "E37CQXRMYUPQRC.2019-06-03-08.034cf05a.gz"
-
-	// 2) Create an AWS session
 	sess, _ := session.NewSession(&aws.Config{Region: &region})
 	svc := s3.New(sess)
 	l := NewLogBucket(svc)
