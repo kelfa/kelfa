@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/selffa/elff"
 )
 
@@ -18,11 +19,12 @@ var ex = `#Version: 1.0
 
 func TestReadHeaders(t *testing.T) {
 	r := elff.NewReader(strings.NewReader(ex))
-	_, err := r.ReadAll()
+	d, err := r.ReadAll()
 	if err != nil {
 		fmt.Println(err)
 	}
 	fmt.Println(r.Version)
 	fmt.Println(r.Fields)
 	fmt.Println(r.Date)
+	spew.Dump(d)
 }

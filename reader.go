@@ -2,6 +2,7 @@ package elff
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"strings"
 )
@@ -56,11 +57,21 @@ func (r *Reader) readRecord() (map[string]string, error) {
 	if len(bs) == 0 {
 		return nil, nil
 	}
+	// If it starts with a # it is either a Directive or a comment
 	if bs[0] == '#' {
 		r.identifyDirectives(bs)
 		return nil, nil
 	}
-	return nil, nil
+	// TODO: Version and Format are mandatory. This constrain should be checked
+	fs := strings.Fields(string(bs))
+	if len(fs) != len(r.Fields) {
+		return nil, fmt.Errorf("was expecting %v columns while line %v has %v", len(r.Fields), r.numLine, len(fs))
+	}
+	record := make(map[string]string)
+	for i, f := range fs {
+		record[r.Fields[i]] = f
+	}
+	return record, nil
 }
 
 func (r *Reader) identifyDirectives(bs []byte) {
