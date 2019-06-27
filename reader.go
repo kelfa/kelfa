@@ -27,13 +27,10 @@ func NewReader(r io.Reader) *Reader {
 	}
 }
 
-/*
-func (r *Reader) Read() (record map[string]string, err error) {
-	//record, err = r.readRecord(nil)
-
+func (r *Reader) Read() (map[string]string, error) {
+	record, err := r.readRecord()
 	return record, err
 }
-*/
 
 func (r *Reader) ReadAll() ([]map[string]string, error) {
 	var records []map[string]string
