@@ -2,6 +2,7 @@ package elff
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"io"
 	"strings"
@@ -59,7 +60,12 @@ func (r *Reader) readRecord() (map[string]string, error) {
 		r.identifyDirectives(bs)
 		return nil, nil
 	}
-	// TODO: Version and Format are mandatory. This constrain should be checked
+	if r.Version != "1.0" {
+		return nil, fmt.Errorf("elff package only supports ELFF version 1.0")
+	}
+	if len(r.Fields) == 0 {
+		return nil, errors.New("no Fields directive found")
+	}
 	fs := strings.Fields(string(bs))
 	if len(fs) != len(r.Fields) {
 		return nil, fmt.Errorf("was expecting %v columns while line %v has %v", len(r.Fields), r.numLine, len(fs))
