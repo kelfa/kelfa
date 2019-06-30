@@ -1,4 +1,4 @@
-package elff
+package elf
 
 import (
 	"bufio"
@@ -30,7 +30,7 @@ func NewWriter(w io.Writer, fields []string) *Writer {
 	}
 }
 
-// WriteAll writes multiple ELFF records to w using Write and then calls Flush.
+// WriteAll writes multiple elf records to w using Write and then calls Flush.
 func (w *Writer) WriteAll(records []map[string]string) error {
 	if err := w.WriteHeaders(); err != nil {
 		return err

@@ -1,4 +1,4 @@
-package elff_test
+package elf_test
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/selffa/elff"
+	"github.com/kelfa/elf"
 )
 
 var examples = []string{
@@ -25,7 +25,7 @@ var examples = []string{
 
 func TestReadHeaders(t *testing.T) {
 	for _, example := range examples {
-		r := elff.NewReader(strings.NewReader(example))
+		r := elf.NewReader(strings.NewReader(example))
 		d, err := r.ReadAll()
 		if err != nil {
 			fmt.Println(err)

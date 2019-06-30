@@ -1,4 +1,4 @@
-package elff
+package elf
 
 import (
 	"bufio"
@@ -61,7 +61,7 @@ func (r *Reader) readRecord() (map[string]string, error) {
 		return nil, nil
 	}
 	if r.Version != "1.0" {
-		return nil, fmt.Errorf("elff package only supports ELFF version 1.0")
+		return nil, fmt.Errorf("elf package only supports elf version 1.0")
 	}
 	if len(r.Fields) == 0 {
 		return nil, errors.New("no Fields directive found")

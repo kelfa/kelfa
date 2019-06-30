@@ -1,16 +1,16 @@
-package elff_test
+package elf_test
 
 import (
 	"bytes"
 	"fmt"
 	"testing"
 
-	"github.com/selffa/elff"
+	"github.com/kelfa/elf"
 )
 
 func TestWriteAll(t *testing.T) {
 	b := &bytes.Buffer{}
-	w := elff.NewWriter(b, []string{"A", "B", "C"})
+	w := elf.NewWriter(b, []string{"A", "B", "C"})
 	err := w.WriteAll(
 		[]map[string]string{
 			map[string]string{
