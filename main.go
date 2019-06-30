@@ -42,19 +42,20 @@ func main() {
 	fmt.Printf(timeSlot)
 
 	bm, err := NewBucketManager(sess)
-	lfs, err := p.ListFilesInTimeSlot(timeSlot)
+	lfs, err := p.ListFilesInDay(timeSlot[:len(timeSlot)-3])
 	if err != nil {
 		log.Fatalf("Impossible to read the list of files in the %s timeslot: %v", timeSlot, err)
 	}
 	var fields []string
-	var entries []map[string]string
+	var allEntries []map[string]string
 	for _, lf := range lfs {
 		content, err := bm.ReadLogFile(lf)
 		if err != nil {
 			log.Fatalf("unable to read the content of the %s file: %v", lf, err)
 		}
 		elfReader := elf.NewReader(bytes.NewReader(content))
-		entries, err = elfReader.ReadAll()
+		entries, err := elfReader.ReadAll()
+		allEntries = append(allEntries, entries...)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -62,7 +63,7 @@ func main() {
 	}
 	b := bufio.NewWriter(os.Stdout)
 	w := elf.NewWriter(b, fields)
-	err = w.WriteAll(entries)
+	err = w.WriteAll(allEntries)
 	if err != nil {
 		log.Fatalf("%s", err)
 	}
