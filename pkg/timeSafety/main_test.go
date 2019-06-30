@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/selffa/aws-cloudfront-logCompactor/pkg/timeSafety"
+	"github.com/kelfa/aws-cloudfront-logCompactor/pkg/timeSafety"
 )
 
 type dataPoint struct {

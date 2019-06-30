@@ -16,7 +16,7 @@ import (
 func main() {
 	viper.SetConfigType("yaml")
 	viper.SetConfigName("aws-cloudfront-logCompactor")
-	viper.AddConfigPath("$HOME/.selffa")
+	viper.AddConfigPath("$HOME/.kelfa")
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("Fatal error config file: %s \n", err))

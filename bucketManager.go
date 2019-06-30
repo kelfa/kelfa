@@ -21,7 +21,7 @@ type BucketManager struct {
 }
 
 func NewBucketManager(session *session.Session) (*BucketManager, error) {
-	dir, err := ioutil.TempDir(os.TempDir(), "selffa")
+	dir, err := ioutil.TempDir(os.TempDir(), "kelfa")
 	if err != nil {
 		return nil, err
 	}
