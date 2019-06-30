@@ -2,11 +2,13 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
+	"github.com/kelfa/elf"
 	"github.com/spf13/viper"
 
 	"fmt"
@@ -40,17 +42,29 @@ func main() {
 	fmt.Printf(timeSlot)
 
 	bm, err := NewBucketManager(sess)
-	w := bufio.NewWriter(os.Stdout)
 	lfs, err := p.ListFilesInTimeSlot(timeSlot)
 	if err != nil {
 		log.Fatalf("Impossible to read the list of files in the %s timeslot: %v", timeSlot, err)
 	}
+	var fields []string
+	var entries []map[string]string
 	for _, lf := range lfs {
 		content, err := bm.ReadLogFile(lf)
 		if err != nil {
 			log.Fatalf("unable to read the content of the %s file: %v", lf, err)
 		}
-		w.Write(content)
+		elfReader := elf.NewReader(bytes.NewReader(content))
+		entries, err = elfReader.ReadAll()
+		if err != nil {
+			fmt.Println(err)
+		}
+		fields = elfReader.Fields
+	}
+	b := bufio.NewWriter(os.Stdout)
+	w := elf.NewWriter(b, fields)
+	err = w.WriteAll(entries)
+	if err != nil {
+		log.Fatalf("%s", err)
 	}
 	w.Flush()
 }
