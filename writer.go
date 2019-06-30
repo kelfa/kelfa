@@ -123,6 +123,11 @@ func (w *Writer) Write(record map[string]string) error {
 		return errors.New("invalid field or comment delimiter")
 	}
 
+	// Pointless to write an empty line
+	if len(record) == 0 {
+		return nil
+	}
+
 	for _, field := range w.Fields {
 		if val, ok := record[field]; ok {
 			_, err = w.w.WriteString(val)
