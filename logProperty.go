@@ -27,6 +27,7 @@ func NewLogProperty(svc *s3.S3, property string) *LogProperty {
 	return &l
 }
 
+// TODO: Make it AWS S3 API limit safe
 func (l *LogProperty) GetFirstTimeSlotName() (string, error) {
 	logFiles, _ := regexp.Compile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
 	resp, _ := l.service.ListObjects(&s3.ListObjectsInput{
@@ -45,6 +46,7 @@ func (l *LogProperty) GetFirstTimeSlotName() (string, error) {
 	return "", errors.New("No log files found in the bucket")
 }
 
+// TODO: Make it AWS S3 API limit safe
 func (l *LogProperty) ListFilesInTimeSlot(ts string) ([]string, error) {
 	logFiles, _ := regexp.Compile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
 	resp, _ := l.service.ListObjects(&s3.ListObjectsInput{
@@ -63,6 +65,7 @@ func (l *LogProperty) ListFilesInTimeSlot(ts string) ([]string, error) {
 	return files, nil
 }
 
+// TODO: Make it AWS S3 API limit safe
 func (l *LogProperty) ListFilesInDay(day string) ([]string, error) {
 	logFiles, _ := regexp.Compile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
 	resp, _ := l.service.ListObjects(&s3.ListObjectsInput{
