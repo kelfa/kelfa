@@ -7,7 +7,6 @@ import (
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/kelfa/elf"
 	"github.com/spf13/viper"
 
@@ -27,22 +26,18 @@ func main() {
 
 	region := viper.GetString("region")
 	sess, _ := session.NewSession(&aws.Config{Region: &region})
-	svc := s3.New(sess)
-	l := NewLogBucket(svc)
-	property, err := l.GetFirstPropertyName()
+	bm, err := NewBucketManager(sess)
+
+	property, err := bm.GetFirstPropertyName()
 	if err != nil {
 		log.Fatalf("Unable to identify the property to manage: %v", err)
 	}
-	fmt.Printf(property)
-	p := NewLogProperty(svc, property)
-	timeSlot, err := p.GetFirstTimeSlotName()
+	timeSlot, err := bm.GetFirstTimeSlotName(property)
 	if err != nil {
 		log.Fatalf("Unable to identify the first time slot for the %s property to manage: %v", property, err)
 	}
-	fmt.Printf(timeSlot)
 
-	bm, err := NewBucketManager(sess)
-	lfs, err := p.ListFilesInDay(timeSlot[:len(timeSlot)-3])
+	lfs, err := bm.ListFilesInDay(property, timeSlot[:len(timeSlot)-3])
 	if err != nil {
 		log.Fatalf("Impossible to read the list of files in the %s timeslot: %v", timeSlot, err)
 	}
