@@ -1,3 +1,7 @@
+// Copyright 2019 The Kelfe authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE.txt file.
+
 package elf
 
 import (
@@ -95,12 +99,14 @@ func (w *Writer) writeFields() error {
 	if err != nil {
 		return err
 	}
-	for _, field := range w.Fields {
-		_, err = w.w.WriteString(field)
-		if err != nil {
-			return err
+	for c, field := range w.Fields {
+		if c > 0 {
+			_, err = w.w.WriteRune(w.Separator)
+			if err != nil {
+				return err
+			}
 		}
-		_, err = w.w.WriteRune(w.Separator)
+		_, err = w.w.WriteString(field)
 		if err != nil {
 			return err
 		}
@@ -128,22 +134,20 @@ func (w *Writer) Write(record map[string]string) error {
 		return nil
 	}
 
-	for _, field := range w.Fields {
+	for c, field := range w.Fields {
+		if c > 0 {
+			_, err = w.w.WriteRune(w.Separator)
+			if err != nil {
+				return err
+			}
+		}
 		if val, ok := record[field]; ok {
 			_, err = w.w.WriteString(val)
 			if err != nil {
 				return err
 			}
-			_, err = w.w.WriteRune(w.Separator)
-			if err != nil {
-				return err
-			}
 		} else {
 			_, err = w.w.WriteString("-")
-			if err != nil {
-				return err
-			}
-			_, err = w.w.WriteRune(w.Separator)
 			if err != nil {
 				return err
 			}
