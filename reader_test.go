@@ -1,38 +1,68 @@
 package elf_test
 
 import (
-	"fmt"
+	"reflect"
 	"strings"
 	"testing"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/kelfa/elf"
 )
 
-var examples = []string{
-	`#Version: 1.0
-#Date: 12-Jan-1996 00:00:00
-#Fields: time cs-method cs-uri
-00:34:23 GET /foo/bar.html
-12:21:16 GET /foo/bar.html
-12:45:52 GET /foo/bar.html
-12:57:34 GET /foo/bar.html`,
-	`#Version: 1.0
-#Fields: date time x-edge-location sc-bytes c-ip cs-method cs(Host) cs-uri-stem sc-status cs(Referer) cs(User-Agent) cs-uri-query cs(Cookie) x-edge-result-type x-edge-request-id x-host-header cs-protocol cs-bytes time-taken x-forwarded-for ssl-protocol ssl-cipher x-edge-response-result-type cs-protocol-version fle-status fle-encrypted-fields
-2019-06-03      08:53:51        BOS50-C1        708     159.65.224.212  GET     d2bau79chpbdbg.cloudfront.net   /index.xml      304     -       NewsBlur%2520Feed%2520Fetcher%2520-%25201%2520subscriber%2520-%2520http://www.newsblur.com/site/7072202/fabio-alessandro-fale-locatis-blog%2520(Mozilla/5.0%2520(Macintosh;%2520Intel%2520Mac%2520OS%2520X%252010_12_3)%2520AppleWebKit/537.36%2520(KHTML,%2520like%2520Gecko)%2520Chrome/56.0.2924.87%2520Safari/537.36)     -       -       Hit     OpEFs4f8-BiSQBK9fWLCyc8ueiLtORLV9l-4TY_DpngcR7JWDmeUkg==        fale.io https   591   0.014    -       TLSv1.2 ECDHE-RSA-AES128-GCM-SHA256     Hit     HTTP/1.1        -       -
-2019-06-03      08:53:51        BOS50-C1        713     159.65.224.212  GET     d2bau79chpbdbg.cloudfront.net   /index.xml      304     -       NewsBlur%2520Feed%2520Fetcher%2520-%25201%2520subscriber%2520-%2520http://www.newsblur.com/site/7072202/fabio-alessandro-fale-locatis-blog%2520(Mozilla/5.0%2520(Macintosh;%2520Intel%2520Mac%2520OS%2520X%252010_12_3)%2520AppleWebKit/537.36%2520(KHTML,%2520like%2520Gecko)%2520Chrome/56.0.2924.87%2520Safari/537.36)     -       -       Hit     zPyO_tGB_BEqcjqHfDuX0lUXA2t6jj5alpzPdw2Vd1ZosKxiaAUk3A==        fale.io https   559   0.028    -       TLSv1.2 ECDHE-RSA-AES128-GCM-SHA256     Hit     HTTP/1.1        -       -`,
+type ReaderTestCase struct {
+	ELF             string
+	UseCRLF         bool
+	ExpectedError   error
+	ExpectedVersion string
+	ExpectedOutput  []map[string]string
+	ExpectedFields  []string
+}
+
+var readerTestCases = []ReaderTestCase{
+	ReaderTestCase{
+		ELF:             "#Version: 1.0\n#Date: 12-Jan-1996 00:00:00\n#Fields: time cs-method cs-uri\n00:34:23 GET /foo/bar.html\n12:21:16 GET /foo/bar.html\n12:45:52 GET /foo/bar.html\n12:57:34 GET /foo/bar.html",
+		ExpectedError:   nil,
+		ExpectedVersion: "1.0",
+		ExpectedFields:  []string{"time", "cs-method", "cs-uri"},
+		ExpectedOutput: []map[string]string{
+			map[string]string{
+				"time":      "00:34:23",
+				"cs-method": "GET",
+				"cs-uri":    "/foo/bar.html",
+			},
+			map[string]string{
+				"time":      "12:21:16",
+				"cs-method": "GET",
+				"cs-uri":    "/foo/bar.html",
+			},
+			map[string]string{
+				"time":      "12:45:52",
+				"cs-method": "GET",
+				"cs-uri":    "/foo/bar.html",
+			},
+			map[string]string{
+				"time":      "12:57:34",
+				"cs-method": "GET",
+				"cs-uri":    "/foo/bar.html",
+			},
+		},
+	},
 }
 
 func TestReadHeaders(t *testing.T) {
-	for _, example := range examples {
-		r := elf.NewReader(strings.NewReader(example))
+	for _, tc := range readerTestCases {
+		r := elf.NewReader(strings.NewReader(tc.ELF))
 		d, err := r.ReadAll()
-		if err != nil {
-			fmt.Println(err)
+		if err != tc.ExpectedError {
+			t.Errorf("Unexpected error: got %v wanted %v", err, tc.ExpectedError)
 		}
-		fmt.Println(r.Version)
-		fmt.Println(r.Fields)
-		fmt.Println(r.Date)
-		spew.Dump(d)
+		if !reflect.DeepEqual(d, tc.ExpectedOutput) {
+			t.Errorf("Unexpected output: got:\n%v\nwanted:\n%v", d, tc.ExpectedOutput)
+		}
+		if r.Version != tc.ExpectedVersion {
+			t.Errorf("Unexpected version: got %v wanted %v", r.Version, tc.ExpectedVersion)
+		}
+		if !reflect.DeepEqual(r.Fields, tc.ExpectedFields) {
+			t.Errorf("Unexpected fields: got %v wanted %v", r.Fields, tc.ExpectedFields)
+		}
 	}
 }
