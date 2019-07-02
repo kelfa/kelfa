@@ -47,7 +47,9 @@ func (r *Reader) ReadAll() ([]map[string]string, error) {
 		if err != nil {
 			return nil, err
 		}
-		records = append(records, record)
+		if record != nil {
+			records = append(records, record)
+		}
 	}
 }
 
