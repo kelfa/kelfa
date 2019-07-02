@@ -48,7 +48,7 @@ var readerTestCases = []ReaderTestCase{
 	},
 }
 
-func TestReadHeaders(t *testing.T) {
+func TestReadAll(t *testing.T) {
 	for _, tc := range readerTestCases {
 		r := elf.NewReader(strings.NewReader(tc.ELF))
 		d, err := r.ReadAll()
