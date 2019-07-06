@@ -3,15 +3,15 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"fmt"
+	"log"
 	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/kelfa/elf"
 	"github.com/spf13/viper"
 
-	"fmt"
-	"log"
+	"go.kelfa.io/elf"
 )
 
 func main() {
