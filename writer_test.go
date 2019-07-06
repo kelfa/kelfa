@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/kelfa/elf"
+	"go.kelfa.io/elf"
 )
 
 type WriterTestCase struct {

@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/kelfa/elf"
+	"go.kelfa.io/elf"
 )
 
 type ReaderTestCase struct {
