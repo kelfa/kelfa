@@ -38,7 +38,7 @@ func main() {
 		log.Fatalf("unable to determine if the %s timeslot is safe: %v", timeSlot, err)
 	}
 	if !safe {
-		fmt.Printf("the %s timeslot is not safe to be processed", timeSlot)
+		fmt.Printf("the %s timeslot is not safe to be processed\n", timeSlot)
 		return
 	}
 	lfs, err := bm.ListFilesInDay(property, timeSlot[:len(timeSlot)-3])
