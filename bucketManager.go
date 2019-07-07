@@ -215,7 +215,7 @@ func (b *BucketManager) MoveFile(src string, dst string) (err error) {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
 			case s3.ErrCodeObjectNotInActiveTierError:
-				return fmt.Errorf(s3.ErrCodeObjectNotInActiveTierError, aerr.Error())
+				return fmt.Errorf("%v %v\n", s3.ErrCodeObjectNotInActiveTierError, aerr.Error())
 			default:
 				return aerr
 			}
