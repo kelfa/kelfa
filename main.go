@@ -7,6 +7,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/spf13/viper"
+
+	"go.kelfa.io/aws-cloudfront-logCompactor/pkg/timeSafety"
 )
 
 func main() {
@@ -31,7 +33,14 @@ func main() {
 	if err != nil {
 		log.Fatalf("Unable to identify the first time slot for the %s property to manage: %v", property, err)
 	}
-
+	safe, err := timeSafety.IsTimeSlotDaySafe(timeSlot)
+	if err != nil {
+		log.Fatalf("unable to determine if the %s timeslot is safe: %v", timeSlot, err)
+	}
+	if !safe {
+		fmt.Printf("the %s timeslot is not safe to be processed", timeSlot)
+		return
+	}
 	lfs, err := bm.ListFilesInDay(property, timeSlot[:len(timeSlot)-3])
 	if err != nil {
 		log.Fatalf("Impossible to read the list of files in the %s timeslot: %v", timeSlot, err)
