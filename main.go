@@ -1,17 +1,12 @@
 package main
 
 import (
-	"bufio"
-	"bytes"
 	"fmt"
 	"log"
-	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/spf13/viper"
-
-	"go.kelfa.io/elf"
 )
 
 func main() {
@@ -41,26 +36,16 @@ func main() {
 	if err != nil {
 		log.Fatalf("Impossible to read the list of files in the %s timeslot: %v", timeSlot, err)
 	}
-	var fields []string
-	var allEntries []map[string]string
-	for _, lf := range lfs {
-		content, err := bm.ReadLogFile(lf)
-		if err != nil {
-			log.Fatalf("unable to read the content of the %s file: %v", lf, err)
-		}
-		elfReader := elf.NewReader(bytes.NewReader(content))
-		entries, err := elfReader.ReadAll()
-		allEntries = append(allEntries, entries...)
-		if err != nil {
-			fmt.Println(err)
-		}
-		fields = elfReader.Fields
-	}
-	b := bufio.NewWriter(os.Stdout)
-	w := elf.NewWriter(b, fields)
-	err = w.WriteAll(allEntries)
+	err = bm.MergeFiles(lfs, viper.GetString("archive_folder")+"/"+timeSlot[:len(timeSlot)-3]+".log")
 	if err != nil {
-		log.Fatalf("%s", err)
+		log.Fatal(err)
 	}
-	w.Flush()
+	fmt.Printf("File %s created\n", viper.GetString("archive_folder")+"/"+timeSlot[:len(timeSlot)-3]+".log")
+	for _, lf := range lfs {
+		err := bm.MoveFile(lf, viper.GetString("compacted_folder")+"/"+lf)
+		if err != nil {
+			log.Fatalf("unable to move the %s file: %v", lf, err)
+		}
+		fmt.Printf("File %s moved to %s folder\n", lf, viper.GetString("compacted_folder"))
+	}
 }

@@ -1,19 +1,26 @@
 package main
 
 import (
+	"bytes"
 	"compress/gzip"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
+	"log"
 	"os"
 	"path"
 	"regexp"
+	"sort"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/spf13/viper"
+
+	"go.kelfa.io/elf"
 )
 
 type BucketManager struct {
@@ -146,4 +153,94 @@ func (b *BucketManager) ReadLogFile(filename string) ([]byte, error) {
 		return nil, err
 	}
 	return s, nil
+}
+
+func (b *BucketManager) MergeFiles(fromFiles []string, toFile string) (err error) {
+	var fields []string
+	var allEntries []map[string]string
+	for _, lf := range fromFiles {
+		content, err := b.ReadLogFile(lf)
+		if err != nil {
+			return fmt.Errorf("unable to read the content of the %s file: %v", lf, err)
+		}
+		elfReader := elf.NewReader(bytes.NewReader(content))
+		entries, err := elfReader.ReadAll()
+		allEntries = append(allEntries, entries...)
+		if err != nil {
+			return err
+		}
+		fields = elfReader.Fields
+	}
+	sort.Slice(allEntries,
+		func(i, j int) bool {
+			return allEntries[i]["time"] < allEntries[j]["time"]
+		})
+	r, w := io.Pipe()
+	ew := elf.NewWriter(w, fields)
+	go func() {
+		err = ew.WriteAll(allEntries)
+		if err != nil {
+			log.Fatalf("%s", err)
+		}
+		ew.Flush()
+		w.Close()
+	}()
+
+	// Upload input parameters
+	upParams := &s3manager.UploadInput{
+		Body:   aws.ReadSeekCloser(r),
+		Bucket: &b.bucket,
+		Key:    &toFile,
+	}
+
+	// Perform an upload.
+	uploader := s3manager.NewUploader(b.session)
+	_, err = uploader.Upload(upParams)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (b *BucketManager) MoveFile(src string, dst string) (err error) {
+	svc := s3.New(b.session)
+	copyInput := &s3.CopyObjectInput{
+		Bucket:     &b.bucket,
+		CopySource: aws.String(fmt.Sprintf("%s/%s", b.bucket, src)),
+		Key:        &dst,
+	}
+
+	_, err = svc.CopyObject(copyInput)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			case s3.ErrCodeObjectNotInActiveTierError:
+				return fmt.Errorf(s3.ErrCodeObjectNotInActiveTierError, aerr.Error())
+			default:
+				return aerr
+			}
+		} else {
+			return err
+		}
+		return err
+	}
+
+	deleteInput := &s3.DeleteObjectInput{
+		Bucket: &b.bucket,
+		Key:    &src,
+	}
+	_, err = svc.DeleteObject(deleteInput)
+	if err != nil {
+		if aerr, ok := err.(awserr.Error); ok {
+			switch aerr.Code() {
+			default:
+				return aerr
+			}
+		} else {
+			return err
+		}
+		return
+	}
+
+	return nil
 }
