@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"time"
 
-	"go.kelfa.io/kelfa/dal"
-	"go.kelfa.io/kelfa/dal/objects"
-
 	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/cobra"
+
+	"go.kelfa.io/kelfa/pkg/dal"
+	"go.kelfa.io/kelfa/pkg/dal/objects"
 )
 
 func init() {

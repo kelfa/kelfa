@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"go.kelfa.io/kelfa/dal/filesystem"
-	"go.kelfa.io/kelfa/dal/objects"
+	"go.kelfa.io/kelfa/pkg/dal/filesystem"
+	"go.kelfa.io/kelfa/pkg/dal/objects"
 )
 
 type CacheTest struct {
