@@ -1,8 +1,6 @@
 package filesystem
 
-import (
-	"go.kelfa.io/kelfa/dal/objects"
-)
+import "go.kelfa.io/kelfa/pkg/dal/objects"
 
 func (d *DP) CacheDataAvailable() bool {
 	if _, ok := d.data[0]["x-edge-response-result-type"]; ok {
