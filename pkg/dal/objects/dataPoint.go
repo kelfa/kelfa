@@ -26,7 +26,7 @@ type DataPoint struct {
 	// Communication
 	CommunicationProtocol    string // The request protocol like HTTP, HTTPS - cs-protocol
 	CommunicationTLSProtocol string // SSL/TLS protocol used - ssl-protocol
-	CoomunicationTLSCipher   string // SSL/TLS cipher used - ssl-cipher
+	CommunicationTLSCipher   string // SSL/TLS cipher used - ssl-cipher
 	// x-forwarded-for
 
 	// Response
