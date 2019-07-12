@@ -1,4 +1,4 @@
-package filesystem_test
+package analytics_test
 
 import (
 	"testing"

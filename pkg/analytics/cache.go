@@ -1,19 +1,19 @@
-package filesystem
+package analytics
 
 import "go.kelfa.io/kelfa/pkg/dal/objects"
 
-func (d *DP) CacheDataAvailable() bool {
-	if _, ok := d.data[0]["x-edge-response-result-type"]; ok {
-		return true
+func (a *Analytics) CacheDataAvailable() bool {
+	if len(a.dataPoints[0].CDNCache) == 0 {
+		return false
 	}
-	return false
+	return true
 }
 
-func (d *DP) CacheStats() *objects.CacheStats {
+func (a *Analytics) CacheStats() *objects.CacheStats {
 	cs := objects.CacheStats{}
-	for _, log := range d.data {
+	for _, log := range a.dataPoints {
 		cs.Total = cs.Total + 1
-		switch log["x-edge-response-result-type"] {
+		switch log.CDNCache {
 		case "Hit":
 			cs.Hits = cs.Hits + 1
 		case "RefreshHit":
