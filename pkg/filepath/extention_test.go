@@ -17,6 +17,7 @@ var ExtTestCases = []ExtTC{
 	ExtTC{Path: "/home/test/file", DefExt: "html", ExpectedOutput: "html"},    // File without extention
 	ExtTC{Path: "/home/test/", DefExt: "html", ExpectedOutput: "html"},        // Folder with tailing slash
 	ExtTC{Path: "/home/test", DefExt: "html", ExpectedOutput: "html"},         // Folder with no tailing slash
+	ExtTC{Path: "/ho.me/test", DefExt: "html", ExpectedOutput: "html"},        // Folder with no tailing slash
 }
 
 func TestExt(t *testing.T) {

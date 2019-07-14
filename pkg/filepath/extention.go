@@ -7,8 +7,12 @@ func Ext(path string, defaultExt string) string {
 	if path[l:l] == "/" {
 		return defaultExt
 	}
+	lp := len(Path(path))
 	if strings.ContainsRune(path, '.') {
-		return path[strings.LastIndexByte(path, '.')+1 : l]
+		lastDotPosition := strings.LastIndexByte(path, '.')
+		if lastDotPosition > lp {
+			return path[lastDotPosition+1 : l]
+		}
 	}
 	return defaultExt
 }
