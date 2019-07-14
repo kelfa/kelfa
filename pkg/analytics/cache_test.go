@@ -4,7 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"go.kelfa.io/kelfa/pkg/dal/filesystem"
+	"go.kelfa.io/kelfa/pkg/analytics"
+	"go.kelfa.io/kelfa/pkg/dal"
 	"go.kelfa.io/kelfa/pkg/dal/objects"
 )
 
@@ -25,12 +26,16 @@ var cacheTestData = []CacheTest{
 }
 
 func TestCacheStats(t *testing.T) {
+	data, err := dal.New("filesystem", objects.BackendOptions{Path: "../../data"})
+	if err != nil {
+		t.Errorf("an error occurred while creating the filesystem object: %v", err)
+	}
 	for _, dp := range cacheTestData {
-		f, err := filesystem.New(objects.BackendOptions{Path: "../../data", From: dp.From, To: dp.To})
+		a, err := analytics.New(&data, dp.From, dp.To)
 		if err != nil {
-			t.Errorf("an error occurred while creating the filesystem object: %v", err)
+			t.Errorf("an error occurred while creating the analytics object: %v", err)
 		}
-		stats := f.CacheStats()
+		stats := a.CacheStats()
 		if stats.Hits != dp.Hits {
 			t.Errorf("counted %v hits instead of %v", stats.Hits, dp.Hits)
 		}
