@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-// FIXME: This should return the 23:59:59 and not the 00:00:00
 func (d *DP) DataEndTime() (*time.Time, error) {
 	newest := "0000-01-01"
 
@@ -27,5 +26,6 @@ func (d *DP) DataEndTime() (*time.Time, error) {
 	if err != nil {
 		return nil, err
 	}
+	t = t.Add(time.Hour*24 - time.Second)
 	return &t, nil
 }
