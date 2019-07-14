@@ -1,12 +1,12 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"time"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 
 	"go.kelfa.io/kelfa/pkg/analytics"
 	"go.kelfa.io/kelfa/pkg/dal"
@@ -15,33 +15,22 @@ import (
 
 func init() {
 	rootCmd.AddCommand(cacheCmd)
-	cacheCmd.Flags().StringVarP(&from, "from", "f", "", "from")
-	cacheCmd.Flags().StringVarP(&to, "to", "t", "", "to")
+	cacheCmd.MarkFlagRequired("from")
+	cacheCmd.MarkFlagRequired("to")
 }
-
-var from string
-var to string
-var fromTime time.Time
-var toTime time.Time
 
 var cacheCmd = &cobra.Command{
 	Use:   "cache",
 	Short: "see hits rates",
 	Args: func(cmd *cobra.Command, args []string) error {
 		var err error
-		if len(from) == 0 {
-			return errors.New("the from option is required")
-		}
-		fromTime, err = time.Parse(time.RFC3339, from)
+		fromTime, err = time.Parse(time.RFC3339, viper.GetString("period_from"))
 		if err != nil {
-			return fmt.Errorf("%v is not a valid date in the YYYY-MM-DDTHH:mm:SS+ZZ:ZZ format", from)
+			return fmt.Errorf("%v is not a valid date in the YYYY-MM-DDTHH:mm:SS+ZZ:ZZ format", viper.GetString("period_from"))
 		}
-		if len(to) == 0 {
-			return errors.New("the to option is required")
-		}
-		toTime, err = time.Parse(time.RFC3339, to)
+		toTime, err = time.Parse(time.RFC3339, viper.GetString("period_to"))
 		if err != nil {
-			return fmt.Errorf("%v is not a valid date in the YYYY-MM-DDTHH:mm:SS+ZZ:ZZ format", to)
+			return fmt.Errorf("%v is not a valid date in the YYYY-MM-DDTHH:mm:SS+ZZ:ZZ format", viper.GetString("period_to"))
 		}
 		return nil
 	},
@@ -49,7 +38,7 @@ var cacheCmd = &cobra.Command{
 }
 
 func cache(cmd *cobra.Command, args []string) error {
-	ds, err := dal.New("filesystem", objects.BackendOptions{Path: "../../data/", From: fromTime, To: toTime})
+	ds, err := dal.New("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder"), From: fromTime, To: toTime})
 	if err != nil {
 		return err
 	}
