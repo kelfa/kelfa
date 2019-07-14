@@ -8,6 +8,7 @@ import (
 	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/cobra"
 
+	"go.kelfa.io/kelfa/pkg/analytics"
 	"go.kelfa.io/kelfa/pkg/dal"
 	"go.kelfa.io/kelfa/pkg/dal/objects"
 )
@@ -52,7 +53,11 @@ func cache(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	cs := ds.CacheStats()
+	a, err := analytics.New(&ds, fromTime, toTime)
+	if err != nil {
+		return err
+	}
+	cs := a.CacheStats()
 	spew.Dump(cs)
 	return nil
 }
