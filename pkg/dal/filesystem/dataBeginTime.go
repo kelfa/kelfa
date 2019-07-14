@@ -7,7 +7,7 @@ import (
 )
 
 func (d *DP) DataBeginTime() (*time.Time, error) {
-	oldest := "9999-12-31"
+	oldest := "9999-12-31.log"
 
 	err := filepath.Walk(d.folder, func(path string, info os.FileInfo, err error) error {
 		if filepath.Ext(path) != ".log" {
