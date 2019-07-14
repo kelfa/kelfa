@@ -34,9 +34,6 @@ func init() {
 	viper.BindPFlag("period_to", rootCmd.PersistentFlags().Lookup("to"))
 }
 
-var fromTime time.Time
-var toTime time.Time
-
 var rootCmd = &cobra.Command{
 	Use: "kelfa",
 }

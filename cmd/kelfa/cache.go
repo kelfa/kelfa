@@ -37,6 +37,9 @@ var cacheCmd = &cobra.Command{
 	RunE: cache,
 }
 
+var fromTime time.Time
+var toTime time.Time
+
 func cache(cmd *cobra.Command, args []string) error {
 	ds, err := dal.New("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder"), From: fromTime, To: toTime})
 	if err != nil {
