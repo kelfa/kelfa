@@ -2,7 +2,8 @@ package session
 
 import "time"
 
-func SplitSessions(s Session, mit time.Duration) (ss []Session) {
+// Split a session to multiple sessions based on a given maximum inactive time
+func SplitSessionsByMaxInactiveTime(s Session, mit time.Duration) (ss []Session) {
 	var pdpdt time.Time
 	lastCut := 0
 	for k, dp := range s.DataPoints {
