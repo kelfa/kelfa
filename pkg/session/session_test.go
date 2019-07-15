@@ -31,6 +31,24 @@ var sessionAddDataPointsTests = []SessionAddDataPointsTest{
 		ExpectedIP:        net.IPv4(8, 8, 8, 8),
 		ExpectedUserAgent: "test",
 	},
+	SessionAddDataPointsTest{
+		Datapoints: []objects.DataPoint{
+			objects.DataPoint{
+				DateTime:        time.Date(2019, time.July, 01, 3, 0, 0, 0, time.UTC),
+				ClientIP:        net.IPv4(8, 8, 8, 8),
+				ClientUserAgent: "test",
+			},
+			objects.DataPoint{
+				DateTime:        time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
+				ClientIP:        net.IPv4(8, 8, 8, 8),
+				ClientUserAgent: "test",
+			},
+		},
+		ExpectedBegin:     time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
+		ExpectedEnd:       time.Date(2019, time.July, 01, 3, 0, 0, 0, time.UTC),
+		ExpectedIP:        net.IPv4(8, 8, 8, 8),
+		ExpectedUserAgent: "test",
+	},
 }
 
 func TestCacheStats(t *testing.T) {
