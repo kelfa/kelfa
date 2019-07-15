@@ -53,3 +53,19 @@ func (s *Session) AddDataPoint(dp *objects.DataPoint) error {
 	s.syncTimes()
 	return nil
 }
+
+// TODO: Make this stronger against the injection of data-points from different IP/UA
+func NewSessionWithDataPoints(dps []objects.DataPoint) (*Session, error) {
+	s := Session{}
+	for _, dp := range dps {
+		s.DataPoints = append(s.DataPoints, dp)
+	}
+	if s.IP == nil {
+		s.IP = &dps[0].ClientIP
+	}
+	if s.UserAgent == nil {
+		s.UserAgent = &dps[0].ClientUserAgent
+	}
+	s.syncTimes()
+	return &s, nil
+}
