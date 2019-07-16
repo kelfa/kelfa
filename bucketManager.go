@@ -219,8 +219,6 @@ func (b *BucketManager) MoveFile(src string, dst string) (err error) {
 			default:
 				return aerr
 			}
-		} else {
-			return err
 		}
 		return err
 	}
@@ -236,8 +234,6 @@ func (b *BucketManager) MoveFile(src string, dst string) (err error) {
 			default:
 				return aerr
 			}
-		} else {
-			return err
 		}
 		return
 	}
