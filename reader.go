@@ -13,6 +13,7 @@ import (
 )
 
 var (
+	// ErrFieldCount is returned when the line has the wrong number of fields
 	ErrFieldCount = errors.New("wrong number of fields")
 )
 

@@ -11,6 +11,7 @@ import (
 	"io"
 )
 
+// Writer writes records to an ELF encoded file.
 type Writer struct {
 	Fields    []string
 	Version   string
@@ -64,6 +65,7 @@ func validDelim(r rune) bool {
 	return r == ' ' || r == '\t'
 }
 
+// WriteHeaders write the ELF file header lines
 func (w *Writer) WriteHeaders() error {
 	if len(w.Fields) == 0 {
 		return errors.New("the Fields field needs to be populated")
