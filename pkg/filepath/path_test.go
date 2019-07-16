@@ -12,10 +12,10 @@ type PathTC struct {
 }
 
 var PathTestCases = []PathTC{
-	PathTC{Path: "/home/test/file.txt", ExpectedOutput: "/home/test"}, // Standard file
-	PathTC{Path: "/home/test/file", ExpectedOutput: "/home/test"},     // File without extension
-	PathTC{Path: "/home/test/", ExpectedOutput: "/home/test"},         // Folder with tailing slash
-	PathTC{Path: "/home/test", ExpectedOutput: "/home"},               // Folder with no tailing slash
+	{Path: "/home/test/file.txt", ExpectedOutput: "/home/test"}, // Standard file
+	{Path: "/home/test/file", ExpectedOutput: "/home/test"},     // File without extension
+	{Path: "/home/test/", ExpectedOutput: "/home/test"},         // Folder with tailing slash
+	{Path: "/home/test", ExpectedOutput: "/home"},               // Folder with no tailing slash
 }
 
 func TestPath(t *testing.T) {
