@@ -14,7 +14,7 @@ type ExtTC struct {
 
 var ExtTestCases = []ExtTC{
 	ExtTC{Path: "/home/test/file.txt", DefExt: "html", ExpectedOutput: "txt"}, // Standard file
-	ExtTC{Path: "/home/test/file", DefExt: "html", ExpectedOutput: "html"},    // File without extention
+	ExtTC{Path: "/home/test/file", DefExt: "html", ExpectedOutput: "html"},    // File without extension
 	ExtTC{Path: "/home/test/", DefExt: "html", ExpectedOutput: "html"},        // Folder with tailing slash
 	ExtTC{Path: "/home/test", DefExt: "html", ExpectedOutput: "html"},         // Folder with no tailing slash
 	ExtTC{Path: "/ho.me/test", DefExt: "html", ExpectedOutput: "html"},        // Folder with no tailing slash

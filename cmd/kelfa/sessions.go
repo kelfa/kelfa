@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -47,10 +46,6 @@ func sessions(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	ss := a.GetSessions()
-	for _, s := range ss.Sessions {
-		if len(s.DataPoints) > 1 {
-			spew.Dump(s)
-		}
-	}
+	fmt.Printf("a total of %v sessions have been registered\n", len(ss.Sessions))
 	return nil
 }

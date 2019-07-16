@@ -7,7 +7,7 @@ import (
 func TestGetBeginDate(t *testing.T) {
 	/*f, err := filesystem.New(objects.BackendOptions{Path: "../../data"})
 	if err != nil {
-		t.Errorf("an error occured while creating the filesystem object: %v", err)
+		t.Errorf("an error occurred while creating the filesystem object: %v", err)
 	}
 	spew.Dump(f.GetBeginDate())
 	*/
@@ -16,7 +16,7 @@ func TestGetBeginDate(t *testing.T) {
 func TestGetEndDate(t *testing.T) {
 	/*f, err := filesystem.New(objects.BackendOptions{Path: "../../data"})
 	if err != nil {
-		t.Errorf("an error occured while creating the filesystem object: %v", err)
+		t.Errorf("an error occurred while creating the filesystem object: %v", err)
 	}
 	spew.Dump(f.GetEndDate())*/
 }
