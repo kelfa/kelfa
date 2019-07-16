@@ -6,7 +6,7 @@ go:
   - master
 go_import_path: go.kelfa.io/elf
 before_script:
-  - go install https://github.com/securego/gosec
+  - go install https://github.com/securego/gosec/cmd/gosec
 script:
   - go test -v ./...
   - gosec ./...
