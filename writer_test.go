@@ -17,10 +17,10 @@ type WriterTestCase struct {
 
 var writerTestCases = []WriterTestCase{
 	// Parameters inverted
-	WriterTestCase{
+	{
 		Fields: []string{"A", "B", "C"},
 		Entries: []map[string]string{
-			map[string]string{
+			{
 				"C": "c",
 				"A": "a",
 				"B": "b",
@@ -30,10 +30,10 @@ var writerTestCases = []WriterTestCase{
 		ExpectedOutput: "#Version: 1.0\n#Fields: A\tB\tC\na\tb\tc\n",
 	},
 	// Missing parameter
-	WriterTestCase{
+	{
 		Fields: []string{"A", "B", "C"},
 		Entries: []map[string]string{
-			map[string]string{
+			{
 				"A": "a",
 				"B": "b",
 			},
@@ -42,11 +42,11 @@ var writerTestCases = []WriterTestCase{
 		ExpectedOutput: "#Version: 1.0\n#Fields: A\tB\tC\na\tb\t-\n",
 	},
 	// CRLF
-	WriterTestCase{
+	{
 		Fields:  []string{"A", "B", "C"},
 		UseCRLF: true,
 		Entries: []map[string]string{
-			map[string]string{
+			{
 				"A": "a",
 				"B": "b",
 				"C": "c",
