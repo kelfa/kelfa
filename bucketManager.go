@@ -137,10 +137,13 @@ func (b *BucketManager) ReadLogFile(filename string) ([]byte, error) {
 		})
 
 	if err != nil {
-		return nil, fmt.Errorf("Unable to download item %q, %v", filename, err)
+		return nil, fmt.Errorf("unable to download item %q, %v", filename, err)
 	}
 
 	_, err = file.Seek(0, 0)
+	if err != nil {
+		return nil, fmt.Errorf("unable to reset seeker location for file %q, %v", filename, err)
+	}
 
 	gzr, err := gzip.NewReader(file)
 	if err != nil {
