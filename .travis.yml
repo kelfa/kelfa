@@ -6,7 +6,7 @@ go:
   - master
 go_import_path: go.kelfa.io/elf
 before_script:
-  - go install https://github.com/securego/gosec/cmd/gosec
+  - go install github.com/golangci/golangci-lint/cmd/golangci-lint
 script:
-  - go test -v ./...
-  - gosec ./...
+  - golangci-lint run --enable gosec
+  - go test -v -race ./...
