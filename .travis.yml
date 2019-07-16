@@ -5,4 +5,8 @@ go:
   - 1.11.x
   - master
 go_import_path: go.kelfa.io/elf
-script: go test -v ./...
+before_script:
+  - go install https://github.com/securego/gosec
+script:
+  - go test -v ./...
+  - gosec ./...
