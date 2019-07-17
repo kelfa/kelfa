@@ -47,7 +47,7 @@ func NewBucketManager(session *session.Session) (*BucketManager, error) {
 // TODO: Make it AWS S3 API limit safe
 func (b *BucketManager) GetFirstPropertyName() (string, error) {
 	svc := s3.New(b.session)
-	logFiles, _ := regexp.Compile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
+	logFiles := regexp.MustCompile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
 	resp, _ := svc.ListObjects(&s3.ListObjectsInput{Bucket: &b.bucket})
 	if len(resp.Contents) == 0 {
 		return "", errors.New("No files in the bucket")
@@ -64,7 +64,7 @@ func (b *BucketManager) GetFirstPropertyName() (string, error) {
 // TODO: Make it AWS S3 API limit safe
 func (b *BucketManager) GetFirstTimeSlotName(property string) (string, error) {
 	svc := s3.New(b.session)
-	logFiles, _ := regexp.Compile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
+	logFiles := regexp.MustCompile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
 	resp, _ := svc.ListObjects(&s3.ListObjectsInput{
 		Bucket: &b.bucket,
 		Prefix: aws.String(fmt.Sprintf("%s.", property)),
@@ -84,7 +84,7 @@ func (b *BucketManager) GetFirstTimeSlotName(property string) (string, error) {
 // TODO: Make it AWS S3 API limit safe
 func (b *BucketManager) ListFilesInTimeSlot(property string, ts string) ([]string, error) {
 	svc := s3.New(b.session)
-	logFiles, _ := regexp.Compile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
+	logFiles := regexp.MustCompile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
 	resp, _ := svc.ListObjects(&s3.ListObjectsInput{
 		Bucket: &b.bucket,
 		Prefix: aws.String(fmt.Sprintf("%s.%s.", property, ts)),
@@ -104,7 +104,7 @@ func (b *BucketManager) ListFilesInTimeSlot(property string, ts string) ([]strin
 // TODO: Make it AWS S3 API limit safe
 func (b *BucketManager) ListFilesInDay(property string, day string) ([]string, error) {
 	svc := s3.New(b.session)
-	logFiles, _ := regexp.Compile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
+	logFiles := regexp.MustCompile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
 	resp, _ := svc.ListObjects(&s3.ListObjectsInput{
 		Bucket: &b.bucket,
 		Prefix: aws.String(fmt.Sprintf("%s.%s-", property, day)),
