@@ -144,7 +144,6 @@ func (r *Reader) identifyDirectives(bs []byte) {
 	if dir := getDirective(bs, []byte("#Remark: ")); len(dir) > 0 {
 		r.Remark = string(dir)
 	}
-	return
 }
 
 func getDirective(bs []byte, directive []byte) []byte {
