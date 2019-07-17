@@ -12,7 +12,7 @@ type dataPoint struct {
 	Safe bool
 }
 
-func TestIsTimeSlotSafe(T *testing.T) {
+func TestIsTimeSlotSafe(t *testing.T) {
 
 	dps := []dataPoint{
 		{
@@ -28,15 +28,15 @@ func TestIsTimeSlotSafe(T *testing.T) {
 	for _, dp := range dps {
 		act, err := timeSafety.IsTimeSlotSafe(dp.Time.Format("2006-01-02-15"))
 		if err != nil {
-			T.Fatal(err)
+			t.Fatal(err)
 		}
 		if act != dp.Safe {
-			T.Errorf("%v was expected to be %v to safety while it was %v", dp.Time, dp.Safe, act)
+			t.Errorf("%v was expected to be %v to safety while it was %v", dp.Time, dp.Safe, act)
 		}
 	}
 }
 
-func TestIsTimeSlotDaySafe(T *testing.T) {
+func TestIsTimeSlotDaySafe(t *testing.T) {
 
 	dps := []dataPoint{
 		{
@@ -52,10 +52,10 @@ func TestIsTimeSlotDaySafe(T *testing.T) {
 	for _, dp := range dps {
 		act, err := timeSafety.IsTimeSlotDaySafe(dp.Time.Format("2006-01-02-15"))
 		if err != nil {
-			T.Fatal(err)
+			t.Fatal(err)
 		}
 		if act != dp.Safe {
-			T.Errorf("%v was expected to be %v to safety while it was %v", dp.Time, dp.Safe, act)
+			t.Errorf("%v was expected to be %v to safety while it was %v", dp.Time, dp.Safe, act)
 		}
 	}
 }
