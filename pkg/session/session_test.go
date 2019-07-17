@@ -9,52 +9,51 @@ import (
 	"go.kelfa.io/kelfa/pkg/session"
 )
 
-type SessionAddDataPointsTest struct {
-	Datapoints        []objects.DataPoint
-	ExpectedBegin     time.Time
-	ExpectedEnd       time.Time
-	ExpectedIP        net.IP
-	ExpectedUserAgent string
-}
-
-var sessionAddDataPointsTests = []SessionAddDataPointsTest{
-	SessionAddDataPointsTest{
-		Datapoints: []objects.DataPoint{
-			objects.DataPoint{
-				DateTime:        time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
-				ClientIP:        net.IPv4(8, 8, 8, 8),
-				ClientUserAgent: "test",
-			},
-		},
-		ExpectedBegin:     time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
-		ExpectedEnd:       time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
-		ExpectedIP:        net.IPv4(8, 8, 8, 8),
-		ExpectedUserAgent: "test",
-	},
-	SessionAddDataPointsTest{
-		Datapoints: []objects.DataPoint{
-			objects.DataPoint{
-				DateTime:        time.Date(2019, time.July, 01, 3, 0, 0, 0, time.UTC),
-				ClientIP:        net.IPv4(8, 8, 8, 8),
-				ClientUserAgent: "test",
-			},
-			objects.DataPoint{
-				DateTime:        time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
-				ClientIP:        net.IPv4(8, 8, 8, 8),
-				ClientUserAgent: "test",
-			},
-		},
-		ExpectedBegin:     time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
-		ExpectedEnd:       time.Date(2019, time.July, 01, 3, 0, 0, 0, time.UTC),
-		ExpectedIP:        net.IPv4(8, 8, 8, 8),
-		ExpectedUserAgent: "test",
-	},
-}
-
 func TestCacheStats(t *testing.T) {
-	for _, st := range sessionAddDataPointsTests {
+	tests := []struct {
+		Datapoints        []objects.DataPoint
+		ExpectedBegin     time.Time
+		ExpectedEnd       time.Time
+		ExpectedIP        net.IP
+		ExpectedUserAgent string
+	}{
+		{
+			Datapoints: []objects.DataPoint{
+				{
+					DateTime:        time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
+					ClientIP:        net.IPv4(8, 8, 8, 8),
+					ClientUserAgent: "test",
+				},
+			},
+			ExpectedBegin:     time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
+			ExpectedEnd:       time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
+			ExpectedIP:        net.IPv4(8, 8, 8, 8),
+			ExpectedUserAgent: "test",
+		},
+		{
+			Datapoints: []objects.DataPoint{
+				{
+					DateTime:        time.Date(2019, time.July, 01, 3, 0, 0, 0, time.UTC),
+					ClientIP:        net.IPv4(8, 8, 8, 8),
+					ClientUserAgent: "test",
+				},
+				{
+					DateTime:        time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
+					ClientIP:        net.IPv4(8, 8, 8, 8),
+					ClientUserAgent: "test",
+				},
+			},
+			ExpectedBegin:     time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
+			ExpectedEnd:       time.Date(2019, time.July, 01, 3, 0, 0, 0, time.UTC),
+			ExpectedIP:        net.IPv4(8, 8, 8, 8),
+			ExpectedUserAgent: "test",
+		},
+	}
+
+	for _, st := range tests {
 		s := session.Session{}
 		for c, dp := range st.Datapoints {
+			dp := dp
 			err := s.AddDataPoint(&dp)
 			if err != nil {
 				t.Errorf("an error occurred while adding the datapoint #%v object: %v", c, err)

@@ -22,7 +22,8 @@ func init() {
 	viper.AddConfigPath("$HOME/.kelfa")
 	err := viper.ReadInConfig()
 	if err != nil {
-		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+		fmt.Printf("fatal error config file: %s \n", err)
+		return
 	}
 
 	rootCmd.PersistentFlags().StringP("from", "f", defaultFromDate(), "from")

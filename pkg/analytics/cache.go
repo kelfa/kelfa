@@ -3,33 +3,30 @@ package analytics
 import "go.kelfa.io/kelfa/pkg/dal/objects"
 
 func (a *Analytics) CacheDataAvailable() bool {
-	if len(a.dataPoints[0].CDNCache) == 0 {
-		return false
-	}
-	return true
+	return len(a.dataPoints[0].CDNCache) == 0
 }
 
 func (a *Analytics) CacheStats() *objects.CacheStats {
 	cs := objects.CacheStats{}
 	for _, log := range a.dataPoints {
-		cs.Total = cs.Total + 1
+		cs.Total++
 		switch log.CDNCache {
 		case "Hit":
-			cs.Hits = cs.Hits + 1
+			cs.Hits++
 		case "RefreshHit":
-			cs.RefreshHits = cs.RefreshHits + 1
+			cs.RefreshHits++
 		case "Miss":
-			cs.Misses = cs.Misses + 1
+			cs.Misses++
 		case "LimitExceeded":
-			cs.LimitExceeded = cs.LimitExceeded + 1
+			cs.LimitExceeded++
 		case "CapacityExceeded":
-			cs.CapacityExceeded = cs.CapacityExceeded + 1
+			cs.CapacityExceeded++
 		case "Error":
-			cs.Errors = cs.Errors + 1
+			cs.Errors++
 		case "Redirect":
-			cs.Redirects = cs.Redirects + 1
+			cs.Redirects++
 		default:
-			cs.Others = cs.Others + 1
+			cs.Others++
 		}
 	}
 	return &cs

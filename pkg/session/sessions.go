@@ -17,7 +17,7 @@ func (ss *Sessions) AddDataPoint(dp *objects.DataPoint) {
 		if dp.ClientIP.Equal(*s.IP) &&
 			dp.ClientUserAgent == *s.UserAgent {
 			// Ignoring the error since we have just checked that no error will occur
-			_ = (*ss).Sessions[k].AddDataPoint(dp)
+			_ = ss.Sessions[k].AddDataPoint(dp)
 			return
 		}
 	}
