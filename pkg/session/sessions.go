@@ -22,6 +22,6 @@ func (ss *Sessions) AddDataPoint(dp *objects.DataPoint) {
 		}
 	}
 	ns := Session{}
-	ns.AddDataPoint(dp)
+	_ = ns.AddDataPoint(dp) // Surely safe, being the first one
 	ss.Sessions = append(ss.Sessions, ns)
 }
