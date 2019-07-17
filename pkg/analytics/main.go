@@ -9,7 +9,6 @@ import (
 )
 
 type Analytics struct {
-	ds         *dal.DataSource
 	from       time.Time
 	to         time.Time
 	dataPoints []objects.DataPoint
