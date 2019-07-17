@@ -1,7 +1,12 @@
 language: go
 go:
-  - 1.x
-  - "1.10"
   - 1.11.x
+  - 1.12.x
   - master
-script: go test -v ./...
+go_import_path: go.kelfa.io/aws-cloudfront-logCompactor
+before_script:
+  - go get github.com/golangci/golangci-lint/cmd/golangci-lint
+  - go install github.com/golangci/golangci-lint/cmd/golangci-lint
+script:
+  - golangci-lint run --enable gosec
+  - go test -v -race ./...
