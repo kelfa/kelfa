@@ -50,7 +50,7 @@ func (b *BucketManager) GetFirstPropertyName() (string, error) {
 	logFiles := regexp.MustCompile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
 	resp, _ := svc.ListObjects(&s3.ListObjectsInput{Bucket: &b.bucket})
 	if len(resp.Contents) == 0 {
-		return "", errors.New("No files in the bucket")
+		return "", errors.New("no files in the bucket")
 	}
 	for _, key := range resp.Contents {
 		lfs := logFiles.FindStringSubmatch(*key.Key)
@@ -58,7 +58,7 @@ func (b *BucketManager) GetFirstPropertyName() (string, error) {
 			return lfs[1], nil
 		}
 	}
-	return "", errors.New("No log files found in the bucket")
+	return "", errors.New("no log files found in the bucket")
 }
 
 // TODO: Make it AWS S3 API limit safe
@@ -70,7 +70,7 @@ func (b *BucketManager) GetFirstTimeSlotName(property string) (string, error) {
 		Prefix: aws.String(fmt.Sprintf("%s.", property)),
 	})
 	if len(resp.Contents) == 0 {
-		return "", errors.New("No files in the bucket")
+		return "", errors.New("no files in the bucket")
 	}
 	for _, key := range resp.Contents {
 		lfs := logFiles.FindStringSubmatch(*key.Key)
@@ -78,7 +78,7 @@ func (b *BucketManager) GetFirstTimeSlotName(property string) (string, error) {
 			return lfs[2], nil
 		}
 	}
-	return "", errors.New("No log files found in the bucket")
+	return "", errors.New("no log files found in the bucket")
 }
 
 // TODO: Make it AWS S3 API limit safe
@@ -90,7 +90,7 @@ func (b *BucketManager) ListFilesInTimeSlot(property string, ts string) ([]strin
 		Prefix: aws.String(fmt.Sprintf("%s.%s.", property, ts)),
 	})
 	if len(resp.Contents) == 0 {
-		return nil, errors.New("No log files matching the requested parameters in the bucket")
+		return nil, errors.New("no log files matching the requested parameters in the bucket")
 	}
 	var files []string
 	for _, key := range resp.Contents {
@@ -110,7 +110,7 @@ func (b *BucketManager) ListFilesInDay(property string, day string) ([]string, e
 		Prefix: aws.String(fmt.Sprintf("%s.%s-", property, day)),
 	})
 	if len(resp.Contents) == 0 {
-		return nil, errors.New("No log files matching the requested parameters in the bucket")
+		return nil, errors.New("no log files matching the requested parameters in the bucket")
 	}
 	var files []string
 	for _, key := range resp.Contents {
