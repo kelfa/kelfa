@@ -23,16 +23,16 @@ func (s *Session) isValidDataPoint(dp *objects.DataPoint) error {
 		return errors.New("impossible to add a nil data-point to a session")
 	}
 	if s.IP != nil && !s.IP.Equal(dp.ClientIP) {
-		return fmt.Errorf("impossible to add a data-point that is referring to %v to a session about %v", dp.ClientIP, s.IP)
+		return fmt.Errorf("mismatching ip: expecting '%v', received '%v'", s.IP, dp.ClientIP)
 	}
 	if s.UserAgent != nil && *s.UserAgent != dp.ClientUserAgent {
-		return fmt.Errorf("impossible to add a data-point that is referring to %s to a session about %v", dp.ClientUserAgent, s.UserAgent)
+		return fmt.Errorf("mismatching user-agent: expecting '%v', received '%s'", s.UserAgent, dp.ClientUserAgent)
 	}
 	return nil
 }
 
 func (s *Session) syncTimes() {
-	sort.Slice(s.DataPoints[:], func(i, j int) bool {
+	sort.Slice(s.DataPoints, func(i, j int) bool {
 		return s.DataPoints[i].DateTime.Before(s.DataPoints[j].DateTime)
 	})
 	s.Begin = &s.DataPoints[0].DateTime
