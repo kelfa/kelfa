@@ -17,7 +17,7 @@ type DataPoint struct {
 	// Request
 	RequestDomain   string // The requested domain - es: x-host-header
 	RequestURI      string // Requested URI - cs-uri-stem
-	RequestUriQuery string // Query string portion of the URI - cs-uri-query
+	RequestURIQuery string // Query string portion of the URI - cs-uri-query
 	RequestReferer  string // Referrer, if present - cs(Referer)
 	RequestMethod   string // DELETE, GET, HEAD, OPTIONS, PATCH, POST, or PUT - cs-method
 	RequestCookie   string // Cookie - cs(Cookie)

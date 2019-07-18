@@ -100,7 +100,7 @@ func (d *DP) GetDataPoints(from time.Time, to time.Time) (datapoints []objects.D
 			ClientUserAgent:          log["cs(User-Agent)"],
 			RequestDomain:            log["x-host-header"],
 			RequestURI:               log["cs-uri-stem"],
-			RequestUriQuery:          log["cs-uri-query"],
+			RequestURIQuery:          log["cs-uri-query"],
 			RequestReferer:           log["cs(Referer)"],
 			RequestMethod:            log["cs-method"],
 			RequestCookie:            log["cs(Cookie)"],
