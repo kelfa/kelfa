@@ -6,22 +6,20 @@ import (
 	"go.kelfa.io/kelfa/pkg/filepath"
 )
 
-type ExtTC struct {
-	Path           string
-	DefExt         string
-	ExpectedOutput string
-}
-
-var ExtTestCases = []ExtTC{
-	ExtTC{Path: "/home/test/file.txt", DefExt: "html", ExpectedOutput: "txt"}, // Standard file
-	ExtTC{Path: "/home/test/file", DefExt: "html", ExpectedOutput: "html"},    // File without extension
-	ExtTC{Path: "/home/test/", DefExt: "html", ExpectedOutput: "html"},        // Folder with tailing slash
-	ExtTC{Path: "/home/test", DefExt: "html", ExpectedOutput: "html"},         // Folder with no tailing slash
-	ExtTC{Path: "/ho.me/test", DefExt: "html", ExpectedOutput: "html"},        // Folder with no tailing slash
-}
-
 func TestExt(t *testing.T) {
-	for _, tc := range ExtTestCases {
+	tests := []struct {
+		Path           string
+		DefExt         string
+		ExpectedOutput string
+	}{
+		{Path: "/home/test/file.txt", DefExt: "html", ExpectedOutput: "txt"}, // Standard file
+		{Path: "/home/test/file", DefExt: "html", ExpectedOutput: "html"},    // File without extension
+		{Path: "/home/test/", DefExt: "html", ExpectedOutput: "html"},        // Folder with tailing slash
+		{Path: "/home/test", DefExt: "html", ExpectedOutput: "html"},         // Folder with no tailing slash
+		{Path: "/ho.me/test", DefExt: "html", ExpectedOutput: "html"},        // Folder with no tailing slash
+	}
+
+	for _, tc := range tests {
 		if filepath.Ext(tc.Path, tc.DefExt) != tc.ExpectedOutput {
 			t.Fatalf("for %s, expecting %s, got %s", tc.Path, tc.ExpectedOutput, filepath.Ext(tc.Path, tc.DefExt))
 		}
