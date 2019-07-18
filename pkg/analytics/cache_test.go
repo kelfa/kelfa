@@ -19,12 +19,12 @@ func TestCacheStats(t *testing.T) {
 		{
 			From:   time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
 			To:     time.Date(2019, time.July, 01, 23, 59, 59, 0, time.UTC),
-			Hits:   423,
-			Misses: 253,
+			Hits:   9,
+			Misses: 10,
 		},
 	}
 
-	data, err := dal.New("filesystem", objects.BackendOptions{Path: "../../data"})
+	data, err := dal.New("filesystem", objects.BackendOptions{Path: "../../test/data/logs"})
 	if err != nil {
 		t.Errorf("an error occurred while creating the filesystem object: %v", err)
 	}
