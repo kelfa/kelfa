@@ -54,12 +54,35 @@ func (s *Session) AddDataPoint(dp *objects.DataPoint) error {
 	return nil
 }
 
-// TODO: Make this stronger against the injection of data-points from different IP/UA
+func (s *Session) Validate() error {
+	if s.DataPoints == nil {
+		return errors.New("session without any data-point")
+	}
+	if s.IP == nil {
+		return errors.New("ip is null")
+	}
+	if s.UserAgent == nil {
+		return errors.New("user agent is null")
+	}
+	for k, dp := range s.DataPoints {
+		if dp.ClientIP.Equal(*s.IP) {
+			return fmt.Errorf("expecting the '%v' IP, while the '%s' was found in line %v", s.IP, dp.ClientIP, k)
+		}
+		if *s.UserAgent != dp.ClientUserAgent {
+			return fmt.Errorf("expecting the '%v' UA, while the '%s' was found in line %v", s.UserAgent, dp.ClientUserAgent, k)
+		}
+	}
+	return nil
+}
+
 func NewSessionWithDataPoints(dps []objects.DataPoint) (*Session, error) {
 	s := Session{}
 	s.DataPoints = append(s.DataPoints, dps...)
 	s.IP = &dps[0].ClientIP
 	s.UserAgent = &dps[0].ClientUserAgent
 	s.syncTimes()
+	if err := s.Validate(); err != nil {
+		return nil, err
+	}
 	return &s, nil
 }
