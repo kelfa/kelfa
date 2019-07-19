@@ -58,12 +58,8 @@ func (s *Session) AddDataPoint(dp *objects.DataPoint) error {
 func NewSessionWithDataPoints(dps []objects.DataPoint) (*Session, error) {
 	s := Session{}
 	s.DataPoints = append(s.DataPoints, dps...)
-	if s.IP == nil {
-		s.IP = &dps[0].ClientIP
-	}
-	if s.UserAgent == nil {
-		s.UserAgent = &dps[0].ClientUserAgent
-	}
+	s.IP = &dps[0].ClientIP
+	s.UserAgent = &dps[0].ClientUserAgent
 	s.syncTimes()
 	return &s, nil
 }
