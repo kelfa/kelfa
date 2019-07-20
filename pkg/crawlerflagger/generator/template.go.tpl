@@ -11,19 +11,17 @@ type Crawler struct {
 
 func IdentifyCrawler(ua string) *Crawler {
 	switch ua {
-{{ range . }}
-{{ if .Instances }}
-	case {{ range $i, $e := .Instances }} {{if $i}}, {{end}} "{{ . }}"{{ end }}:
+{{ range . }}{{ if .Instances }}
+	case {{ range $i, $e := .Instances }}{{if $i}}{{printf ",\n        "}}{{end}}"{{ . }}"{{ end }}:
 		return &Crawler{
 			Pattern:      `{{ .Pattern }}`,
-			Instances:    []string{ {{ range $i, $e := .Instances }} {{if $i}}, {{end}} "{{ . }}"{{ end }} },
+			Instances:    []string{ {{ range $i, $e := .Instances }}{{if $i}}, {{end}}"{{ . }}"{{ end }} },
 			URL:          {{ if .URL }}stringer("{{ .URL }}"){{ else }}nil{{ end }},
 			Description:  {{ if .Description }}stringer("{{ .Description }}"){{ else }}nil{{ end }},
 			AdditionDate: {{ if .AdditionDate }}stringer("{{ .AdditionDate }}"){{ else }}nil{{ end }},
 			DependsOn:    {{ if .DependsOn }}stringer("{{ .DependsOn }}"){{ else }}nil{{ end }},
 		}
-{{ end }}
-{{ end }}
+{{ end }}{{ end }}
 	default:
 		return nil
 	}

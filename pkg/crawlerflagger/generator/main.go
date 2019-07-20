@@ -17,7 +17,7 @@ type Crawler struct {
 	URL          *string  `json:"url"`
 	Description  *string  `json:"description"`
 	AdditionDate *string  `json:"additional_date"`
-	DependsOn    *string  `json:"depends_on"`
+	DependsOn    []string `json:"depends_on"`
 }
 
 func main() {
