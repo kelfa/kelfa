@@ -29,7 +29,10 @@ func main() {
 	}
 	defer r.Body.Close()
 
-	json.NewDecoder(r.Body).Decode(&crawlers)
+	err = json.NewDecoder(r.Body).Decode(&crawlers)
+	if err != nil {
+		log.Fatalf("an error occurred while decoding the JSON: %v", err)
+	}
 	var tplOutput bytes.Buffer
 	f, err := ioutil.ReadFile("template.go.tpl")
 	if err != nil {
