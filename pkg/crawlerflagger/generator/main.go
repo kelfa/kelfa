@@ -9,8 +9,6 @@ import (
 	"net/http"
 	"text/template"
 	"time"
-
-	"github.com/davecgh/go-spew/spew"
 )
 
 type Crawler struct {
@@ -32,7 +30,6 @@ func main() {
 	defer r.Body.Close()
 
 	json.NewDecoder(r.Body).Decode(&crawlers)
-	spew.Dump(crawlers)
 	var tplOutput bytes.Buffer
 	f, err := ioutil.ReadFile("template.go.tpl")
 	if err != nil {
