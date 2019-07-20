@@ -1,3 +1,4 @@
+// DO NOT EDIT: Auto generated
 package crawlerflagger
 
 type Crawler struct {
@@ -9,7 +10,9 @@ type Crawler struct {
 	DependsOn    []string
 }
 
-func IdentifyCrawler(ua string) *Crawler {
+// ByExactMatch allows you to identify if and which kind of crawler a User Agent belongs to
+// The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
+func ByExactMatch(ua string) *Crawler {
 	switch ua {
 {{ range . }}{{ if .Instances }}
 	case {{ range $i, $e := .Instances }}{{if $i}}{{printf ",\n        "}}{{end}}"{{ . }}"{{ end }}:
