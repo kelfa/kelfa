@@ -10,9 +10,9 @@ type Crawler struct {
 	DependsOn    []string
 }
 
-// ByExactMatch allows you to identify if and which kind of crawler a User Agent belongs to
+// ExactMatch allows you to identify if and which kind of crawler a User Agent belongs to
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
-func ByExactMatch(ua string) *Crawler {
+func ExactMatch(ua string) *Crawler {
 	switch ua {
 
 	case "Googlebot/2.1 (+http://www.google.com/bot.html)",
