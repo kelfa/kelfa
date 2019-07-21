@@ -45,7 +45,7 @@ func sessions(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	ss := a.GetSessions()
+	ss := a.GetSessions(viper.GetDuration("session_inactivity_timeout"))
 	var cs int
 	for _, s := range ss.Sessions {
 		if s.Crawler {

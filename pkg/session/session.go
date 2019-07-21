@@ -70,7 +70,7 @@ func (s *Session) Validate() error {
 		return errors.New("user agent is null")
 	}
 	for k, dp := range s.DataPoints {
-		if dp.ClientIP.Equal(*s.IP) {
+		if !dp.ClientIP.Equal(*s.IP) {
 			return fmt.Errorf("expecting the '%v' IP, while the '%s' was found in line %v", s.IP, dp.ClientIP, k)
 		}
 		if *s.UserAgent != dp.ClientUserAgent {
@@ -81,10 +81,16 @@ func (s *Session) Validate() error {
 }
 
 func NewSessionWithDataPoints(dps []objects.DataPoint) (*Session, error) {
+	if len(dps) == 0 {
+		return nil, errors.New("at lease one data-point needs to be provided")
+	}
 	s := Session{}
 	s.DataPoints = append(s.DataPoints, dps...)
 	s.IP = &dps[0].ClientIP
 	s.UserAgent = &dps[0].ClientUserAgent
+	if c := crawlerflagger.ExactMatch(*s.UserAgent); c != nil {
+		s.Crawler = true
+	}
 	s.syncTimes()
 	if err := s.Validate(); err != nil {
 		return nil, err

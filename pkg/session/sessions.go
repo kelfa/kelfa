@@ -1,6 +1,8 @@
 package session
 
 import (
+	"time"
+
 	"go.kelfa.io/kelfa/pkg/dal/objects"
 )
 
@@ -8,8 +10,12 @@ type Sessions struct {
 	Sessions []Session
 }
 
-func (ss *Sessions) SplitSessions() {
-	// session_inactivity_timeout
+func (ss *Sessions) SplitSessions(mit time.Duration) {
+	nss := []Session{}
+	for _, s := range ss.Sessions {
+		nss = append(nss, SplitSessionsByMaxInactiveTime(s, mit)...)
+	}
+	ss.Sessions = nss
 }
 
 func (ss *Sessions) AddDataPoint(dp *objects.DataPoint) {
