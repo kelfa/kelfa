@@ -46,6 +46,13 @@ func sessions(cmd *cobra.Command, args []string) error {
 		return err
 	}
 	ss := a.GetSessions()
+	var cs int
+	for _, s := range ss.Sessions {
+		if s.Crawler {
+			cs++
+		}
+	}
 	fmt.Printf("a total of %v sessions have been registered\n", len(ss.Sessions))
+	fmt.Printf("of those, %v sessions are made by crawlers\n", cs)
 	return nil
 }
