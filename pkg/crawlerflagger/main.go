@@ -717,10 +717,11 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
 
-	case "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)":
+	case "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)",
+        "Mozilla/5.0 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)":
 		return &Crawler{
 			Pattern:      `Baiduspider`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)", "Mozilla/5.0 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)" },
 			URL:          stringer("http://www.baidu.jp/spider/"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -850,10 +851,11 @@ func ExactMatch(ua string) *Crawler {
 
 	case "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)",
         "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/",
-        "Mozilla/5.0 (compatible; Mail.RU_Bot/2.0; +http://go.mail.ru/":
+        "Mozilla/5.0 (compatible; Mail.RU_Bot/2.0; +http://go.mail.ru/",
+        "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/Robots/2.0; +http://go.mail.ru/help/robots)":
 		return &Crawler{
 			Pattern:      `Mail.RU_Bot`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)", "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/", "Mozilla/5.0 (compatible; Mail.RU_Bot/2.0; +http://go.mail.ru/" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)", "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/", "Mozilla/5.0 (compatible; Mail.RU_Bot/2.0; +http://go.mail.ru/", "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/Robots/2.0; +http://go.mail.ru/help/robots)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -927,10 +929,11 @@ func ExactMatch(ua string) *Crawler {
         "Mozilla/5.0 (compatible; AhrefsSiteAudit/6.1; +http://ahrefs.com/robot/)",
         "Mozilla/5.0 (compatible; AhrefsBot/5.2; News; +http://ahrefs.com/robot/)",
         "Mozilla/5.0 (compatible; AhrefsBot/5.2; +http://ahrefs.com/robot/)",
-        "Mozilla/5.0 (compatible; AhrefsSiteAudit/5.2; +http://ahrefs.com/robot/)":
+        "Mozilla/5.0 (compatible; AhrefsSiteAudit/5.2; +http://ahrefs.com/robot/)",
+        "Mozilla/5.0 (compatible; AhrefsBot/6.1; News; +http://ahrefs.com/robot/)":
 		return &Crawler{
 			Pattern:      `Ahrefs(Bot|SiteAudit)`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; AhrefsBot/6.1; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsSiteAudit/6.1; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsBot/5.2; News; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsBot/5.2; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsSiteAudit/5.2; +http://ahrefs.com/robot/)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; AhrefsBot/6.1; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsSiteAudit/6.1; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsBot/5.2; News; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsBot/5.2; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsSiteAudit/5.2; +http://ahrefs.com/robot/)", "Mozilla/5.0 (compatible; AhrefsBot/6.1; News; +http://ahrefs.com/robot/)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -3983,7 +3986,7 @@ func ExactMatch(ua string) *Crawler {
 
 	case "Uptimebot.org - Free website monitoring":
 		return &Crawler{
-			Pattern:      `Uptimebot`,
+			Pattern:      `Uptimebot\.org`,
 			Instances:    []string{ "Uptimebot.org - Free website monitoring" },
 			URL:          stringer("http://uptimebot.org/"),
 			Description:  nil,
@@ -4094,10 +4097,12 @@ func ExactMatch(ua string) *Crawler {
 		}
 
 	case "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36(KHTML, like Gecko) Chrome/69.0.3464.0 Mobile Safari/537.36 Chrome-Lighthouse",
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/69.0.3464.0 Safari/537.36 Chrome-Lighthouse":
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/69.0.3464.0 Safari/537.36 Chrome-Lighthouse",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Safari/537.36 Chrome-Lighthouse",
+        "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse":
 		return &Crawler{
 			Pattern:      `Chrome-Lighthouse`,
-			Instances:    []string{ "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36(KHTML, like Gecko) Chrome/69.0.3464.0 Mobile Safari/537.36 Chrome-Lighthouse", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/69.0.3464.0 Safari/537.36 Chrome-Lighthouse" },
+			Instances:    []string{ "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36(KHTML, like Gecko) Chrome/69.0.3464.0 Mobile Safari/537.36 Chrome-Lighthouse", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/69.0.3464.0 Safari/537.36 Chrome-Lighthouse", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Safari/537.36 Chrome-Lighthouse", "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3694.0 Mobile Safari/537.36 Chrome-Lighthouse" },
 			URL:          stringer("https://developers.google.com/speed/pagespeed/insights"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -4119,6 +4124,16 @@ func ExactMatch(ua string) *Crawler {
 			Pattern:      `CheckMarkNetwork\/`,
 			Instances:    []string{ "CheckMarkNetwork/1.0 (+http://www.checkmarknetwork.com/spider.html)" },
 			URL:          stringer("https://www.checkmarknetwork.com/"),
+			Description:  nil,
+			AdditionDate: nil,
+			DependsOn:    []string{  },
+		}
+
+	case "Mozilla/5.0 (compatible; Uptimebot/1.0; +http://www.uptime.com/uptimebot)":
+		return &Crawler{
+			Pattern:      `www\.uptime\.com`,
+			Instances:    []string{ "Mozilla/5.0 (compatible; Uptimebot/1.0; +http://www.uptime.com/uptimebot)" },
+			URL:          stringer("http://www.uptime.com/uptimebot"),
 			Description:  nil,
 			AdditionDate: nil,
 			DependsOn:    []string{  },
