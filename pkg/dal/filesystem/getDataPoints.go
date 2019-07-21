@@ -3,6 +3,7 @@ package filesystem
 import (
 	"fmt"
 	"net"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -92,12 +93,21 @@ func (d *DP) GetDataPoints(from time.Time, to time.Time) (datapoints []objects.D
 		if err != nil {
 			return nil, err
 		}
+		userAgentTmp, err := url.PathUnescape(log["cs(User-Agent)"])
+		if err != nil {
+			return nil, err
+		}
+		userAgent, err := url.PathUnescape(userAgentTmp)
+		if err != nil {
+			return nil, err
+		}
+
 		datapoints = append(datapoints, objects.DataPoint{
 			ID:                       log["x-edge-request-id"],
 			DateTime:                 dt,
 			ElapsedTime:              et,
 			ClientIP:                 net.ParseIP(log["c-ip"]),
-			ClientUserAgent:          log["cs(User-Agent)"],
+			ClientUserAgent:          userAgent,
 			RequestDomain:            log["x-host-header"],
 			RequestURI:               log["cs-uri-stem"],
 			RequestURIQuery:          log["cs-uri-query"],
