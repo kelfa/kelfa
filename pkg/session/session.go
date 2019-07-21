@@ -7,6 +7,7 @@ import (
 	"sort"
 	"time"
 
+	"go.kelfa.io/kelfa/pkg/crawlerflagger"
 	"go.kelfa.io/kelfa/pkg/dal/objects"
 )
 
@@ -15,6 +16,7 @@ type Session struct {
 	End        *time.Time
 	IP         *net.IP
 	UserAgent  *string
+	Crawler    bool
 	DataPoints []objects.DataPoint
 }
 
@@ -49,6 +51,9 @@ func (s *Session) AddDataPoint(dp *objects.DataPoint) error {
 	}
 	if s.UserAgent == nil {
 		s.UserAgent = &dp.ClientUserAgent
+		if c := crawlerflagger.ExactMatch(*s.UserAgent); c != nil {
+			s.Crawler = true
+		}
 	}
 	s.syncTimes()
 	return nil
