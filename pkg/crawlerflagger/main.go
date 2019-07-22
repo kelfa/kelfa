@@ -1469,10 +1469,12 @@ func ExactMatch(ua string) *Crawler {
 		}
 
 	case "Mozilla/5.0 (compatible; SMTBot/1.0; +http://www.similartech.com/smtbot)",
-        "SMTBot (similartech.com/smtbot)":
+        "SMTBot (similartech.com/smtbot)",
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko)                 Version/6.0 Mobile/10A5376e Safari/8536.25 (compatible; SMTBot/1.0; +http://www.similartech.com/smtbot)",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.75 Safari/537.36 (compatible; SMTBot/1.0; +http://www.similartech.com/smtbot)":
 		return &Crawler{
 			Pattern:      `smtbot`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; SMTBot/1.0; +http://www.similartech.com/smtbot)", "SMTBot (similartech.com/smtbot)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; SMTBot/1.0; +http://www.similartech.com/smtbot)", "SMTBot (similartech.com/smtbot)", "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko)                 Version/6.0 Mobile/10A5376e Safari/8536.25 (compatible; SMTBot/1.0; +http://www.similartech.com/smtbot)", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.75 Safari/537.36 (compatible; SMTBot/1.0; +http://www.similartech.com/smtbot)" },
 			URL:          stringer("http://www.similartech.com/smtbot"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -1560,11 +1562,12 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
 
-	case "SemanticScholarBot/1.0 (+http://s2.allenai.org/bot.html)":
+	case "SemanticScholarBot/1.0 (+http://s2.allenai.org/bot.html)",
+        "Mozilla/5.0 (compatible) SemanticScholarBot (+https://www.semanticscholar.org/crawler)":
 		return &Crawler{
 			Pattern:      `SemanticScholarBot`,
-			Instances:    []string{ "SemanticScholarBot/1.0 (+http://s2.allenai.org/bot.html)" },
-			URL:          stringer("http://s2.allenai.org/bot.html"),
+			Instances:    []string{ "SemanticScholarBot/1.0 (+http://s2.allenai.org/bot.html)", "Mozilla/5.0 (compatible) SemanticScholarBot (+https://www.semanticscholar.org/crawler)" },
+			URL:          stringer("https://www.semanticscholar.org/crawler"),
 			Description:  nil,
 			AdditionDate: nil,
 			DependsOn:    []string{  },
@@ -4134,6 +4137,17 @@ func ExactMatch(ua string) *Crawler {
 			Pattern:      `www\.uptime\.com`,
 			Instances:    []string{ "Mozilla/5.0 (compatible; Uptimebot/1.0; +http://www.uptime.com/uptimebot)" },
 			URL:          stringer("http://www.uptime.com/uptimebot"),
+			Description:  nil,
+			AdditionDate: nil,
+			DependsOn:    []string{  },
+		}
+
+	case "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.1) Streamline3Bot/1.0",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64; +https://www.ubtsupport.com/legal/Streamline3Bot.php) Streamline3Bot/1.0":
+		return &Crawler{
+			Pattern:      `Streamline3Bot\/`,
+			Instances:    []string{ "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.1) Streamline3Bot/1.0", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; +https://www.ubtsupport.com/legal/Streamline3Bot.php) Streamline3Bot/1.0" },
+			URL:          stringer("https://www.ubtsupport.com/legal/Streamline3Bot.php"),
 			Description:  nil,
 			AdditionDate: nil,
 			DependsOn:    []string{  },

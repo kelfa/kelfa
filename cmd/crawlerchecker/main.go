@@ -38,7 +38,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-	ss := a.GetSessions()
+	ss := a.GetSessions(viper.GetDuration("session_inactivity_timeout"))
 
 	uas := UAS{}
 	for _, s := range ss.Sessions {
