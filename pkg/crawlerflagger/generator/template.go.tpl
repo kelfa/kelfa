@@ -1,5 +1,5 @@
-// DO NOT EDIT: Auto generated
 package crawlerflagger
+// DO NOT EDIT: Auto generated
 
 import "regexp"
 
