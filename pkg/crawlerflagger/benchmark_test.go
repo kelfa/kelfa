@@ -11,11 +11,11 @@ func BenchmarkExactMatch(b *testing.B) {
 		name string
 		ua   string
 	}{
-		{"first", "Googlebot/2.1 (+http://www.google.com/bot.html)"},
-		{"line1000", "ZoominfoBot (zoominfobot at zoominfo dot com)"},
-		{"line2000", "Mozilla/5.0 (Windows NT 6.1; WOW64) SkypeUriPreview Preview/0.5"},
-		{"line3000", "Companybook-Crawler (+https://www.companybooknetworking.com/)"},
-		{"line4000", "Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)"},
+		{"case0", "Googlebot/2.1 (+http://www.google.com/bot.html)"},
+		{"case101", "Summify (Summify/1.0.1; +http://summify.com)"},
+		{"case200", "www.deadlinkchecker.com XMLHTTP/1.0"},
+		{"case300", "Mozilla/5.0 (compatible; BomboraBot/1.0; +http://www.bombora.com/bot)"},
+		{"case400", "Clickagy Intelligence Bot v2"},
 		{"miss", "non-existant-uas"},
 	}
 	for _, ua := range uas {
