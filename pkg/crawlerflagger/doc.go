@@ -1,3 +1,4 @@
+// Package to identify crawlers based on their User Agent.
 //  BenchmarkExactMatch/case0-8             10000000               182 ns/op
 //  BenchmarkExactMatch/case101-8           10000000               128 ns/op
 //  BenchmarkExactMatch/case200-8           10000000               137 ns/op
