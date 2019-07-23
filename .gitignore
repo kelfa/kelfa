@@ -1,3 +1,4 @@
 cmd/kelfa/kelfa
 cmd/crawlerchecker/crawlerchecker
+cmd/crawlermatcher/crawlermatcher
 pkg/crawlerflagger/generator/generator
