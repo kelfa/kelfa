@@ -4,7 +4,7 @@
 //  BenchmarkExactMatch/case200-8           10000000               137 ns/op
 //  BenchmarkExactMatch/case300-8           10000000               124 ns/op
 //  BenchmarkExactMatch/case400-8           20000000               113 ns/op
-//  BenchmarkExactMatch/miss-8              200000000                8.03 ns/op
+//  BenchmarkExactMatch/miss-8             200000000                 8.03 ns/op
 //  BenchmarkRegExpMatch/case0-8             5000000               292 ns/op
 //  BenchmarkRegExpMatch/case101-8            200000              7335 ns/op
 //  BenchmarkRegExpMatch/case200-8            100000             12866 ns/op
