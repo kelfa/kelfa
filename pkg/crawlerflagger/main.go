@@ -216,10 +216,12 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
     // #17
-	case "python-requests/2.18.4":
+	case "python-requests/2.18.4",
+        "python-requests/2.21.0",
+        "python-requests/2.22.0":
 		return &Crawler{
 			Pattern:      `python-requests`,
-			Instances:    []string{ "python-requests/2.18.4" },
+			Instances:    []string{ "python-requests/2.18.4", "python-requests/2.21.0", "python-requests/2.22.0" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -1229,10 +1231,11 @@ func ExactMatch(ua string) *Crawler {
 		}
     // #119
 	case "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)",
-        "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)":
+        "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)",
+        "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)":
 		return &Crawler{
 			Pattern:      `DuckDuckBot`,
-			Instances:    []string{ "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)", "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)" },
+			Instances:    []string{ "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)", "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)", "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)" },
 			URL:          stringer("http://duckduckgo.com/duckduckbot.html"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -1363,10 +1366,11 @@ func ExactMatch(ua string) *Crawler {
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Firefox/1.5.0.11 360Spider;",
         "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Gecko/20070312 Firefox/1.5.0.11; 360Spider",
         "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider",
-        "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)":
+        "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)",
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36; 360Spider":
 		return &Crawler{
 			Pattern:      `360Spider`,
-			Instances:    []string{ "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36 QIHU 360SE; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; )  Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11)  Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Firefox/1.5.0.11 360Spider;", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Gecko/20070312 Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)" },
+			Instances:    []string{ "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36 QIHU 360SE; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; )  Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11)  Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Firefox/1.5.0.11 360Spider;", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Gecko/20070312 Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36; 360Spider" },
 			URL:          stringer("http://needs-be.blogspot.co.uk/2013/02/how-to-block-spider360.html"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -1629,10 +1633,11 @@ func ExactMatch(ua string) *Crawler {
 	case "Mozilla/5.0 (compatible; heritrix/3.1.1-SNAPSHOT-20120116.200628 +http://www.archive.org/details/archive.org_bot)",
         "Mozilla/5.0 (compatible; archive.org_bot/heritrix-1.15.4 +http://www.archive.org)",
         "Mozilla/5.0 (compatible; heritrix/3.3.0-SNAPSHOT-20140702-2247 +http://archive.org/details/archive.org_bot)",
-        "Mozilla/5.0 (compatible; archive.org_bot +http://www.archive.org/details/archive.org_bot)":
+        "Mozilla/5.0 (compatible; archive.org_bot +http://www.archive.org/details/archive.org_bot)",
+        "Mozilla/5.0 (compatible; archive.org_bot +http://archive.org/details/archive.org_bot)":
 		return &Crawler{
 			Pattern:      `archive.org_bot`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; heritrix/3.1.1-SNAPSHOT-20120116.200628 +http://www.archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot/heritrix-1.15.4 +http://www.archive.org)", "Mozilla/5.0 (compatible; heritrix/3.3.0-SNAPSHOT-20140702-2247 +http://archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot +http://www.archive.org/details/archive.org_bot)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; heritrix/3.1.1-SNAPSHOT-20120116.200628 +http://www.archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot/heritrix-1.15.4 +http://www.archive.org)", "Mozilla/5.0 (compatible; heritrix/3.3.0-SNAPSHOT-20140702-2247 +http://archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot +http://www.archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot +http://archive.org/details/archive.org_bot)" },
 			URL:          stringer("http://www.archive.org/details/archive.org_bot"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -1688,10 +1693,11 @@ func ExactMatch(ua string) *Crawler {
         "Mozilla/5.0 (compatible; SemrushBot/3~bl; +http://www.semrush.com/bot.html)",
         "Mozilla/5.0 (compatible; SemrushBot/0.98~bl; +http://www.semrush.com/bot.html)",
         "Mozilla/5.0 (compatible; SemrushBot-BA; +http://www.semrush.com/bot.html)",
+        "Mozilla/5.0 (compatible; SemrushBot/6~bl; +http://www.semrush.com/bot.html)",
         "SEMrushBot":
 		return &Crawler{
 			Pattern:      `S[eE][mM]rushBot`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; SemrushBot-SA/0.97; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot-SI/0.97; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/3~bl; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/0.98~bl; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot-BA; +http://www.semrush.com/bot.html)", "SEMrushBot" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; SemrushBot-SA/0.97; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot-SI/0.97; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/3~bl; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/0.98~bl; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot-BA; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/6~bl; +http://www.semrush.com/bot.html)", "SEMrushBot" },
 			URL:          stringer("http://www.semrush.com/bot.html"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -2748,10 +2754,13 @@ func ExactMatch(ua string) *Crawler {
         "Apache-HttpClient/4.3.3 (java 1.5)",
         "Apache-HttpClient/4.3.5 (java 1.5)",
         "Apache-HttpClient/4.4.1 (Java/1.8.0_65)",
-        "Apache-HttpClient/4.5.3 (Java/1.8.0_121)":
+        "Apache-HttpClient/4.5.3 (Java/1.8.0_121)",
+        "Apache-HttpClient/4.5.2 (Java/1.8.0_161)",
+        "Apache-HttpClient/4.5.2 (Java/1.8.0_151)",
+        "Apache-HttpClient/4.5.7 (Java/11.0.3)":
 		return &Crawler{
 			Pattern:      `Apache-HttpClient`,
-			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)" },
+			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)", "Apache-HttpClient/4.5.2 (Java/1.8.0_161)", "Apache-HttpClient/4.5.2 (Java/1.8.0_151)", "Apache-HttpClient/4.5.7 (Java/11.0.3)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -4156,6 +4165,16 @@ func ExactMatch(ua string) *Crawler {
 			AdditionDate: nil,
 			DependsOn:    []string{  },
 		}
+    // #413
+	case "serpstatbot/1.0 (advanced backlink tracking bot; http://serpstatbot.com/; abuse@serpstatbot.com)":
+		return &Crawler{
+			Pattern:      `serpstatbot\/`,
+			Instances:    []string{ "serpstatbot/1.0 (advanced backlink tracking bot; http://serpstatbot.com/; abuse@serpstatbot.com)" },
+			URL:          stringer("http://serpstatbot.com"),
+			Description:  nil,
+			AdditionDate: nil,
+			DependsOn:    []string{  },
+		}
 
 	default:
 		return nil
@@ -4576,6 +4595,7 @@ var rgxp409 = regexp.MustCompile(`HeadlessChrome`)
 var rgxp410 = regexp.MustCompile(`CheckMarkNetwork\/`)
 var rgxp411 = regexp.MustCompile(`www\.uptime\.com`)
 var rgxp412 = regexp.MustCompile(`Streamline3Bot\/`)
+var rgxp413 = regexp.MustCompile(`serpstatbot\/`)
 
 // RegexpMatch allows you to identify if and which kind of crawler a User Agent belongs to
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
@@ -4755,7 +4775,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp17.MatchString(ua):
 		return &Crawler{
 			Pattern:      `python-requests`,
-			Instances:    []string{ "python-requests/2.18.4" },
+			Instances:    []string{ "python-requests/2.18.4", "python-requests/2.21.0", "python-requests/2.22.0" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -5775,7 +5795,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp119.MatchString(ua):
 		return &Crawler{
 			Pattern:      `DuckDuckBot`,
-			Instances:    []string{ "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)", "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)" },
+			Instances:    []string{ "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)", "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)", "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)" },
 			URL:          stringer("http://duckduckgo.com/duckduckbot.html"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -6015,7 +6035,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp143.MatchString(ua):
 		return &Crawler{
 			Pattern:      `360Spider`,
-			Instances:    []string{ "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36 QIHU 360SE; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; )  Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11)  Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Firefox/1.5.0.11 360Spider;", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Gecko/20070312 Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)" },
+			Instances:    []string{ "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/21.0.1180.89 Safari/537.1; 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36 QIHU 360SE; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; )  Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11)  Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Firefox/1.5.0.11 360Spider;", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.8.0.11) Gecko/20070312 Firefox/1.5.0.11; 360Spider", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0); 360Spider(compatible; HaosouSpider; http://www.haosou.com/help/help_3_2.html)", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36; 360Spider" },
 			URL:          stringer("http://needs-be.blogspot.co.uk/2013/02/how-to-block-spider360.html"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -6295,7 +6315,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp171.MatchString(ua):
 		return &Crawler{
 			Pattern:      `archive.org_bot`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; heritrix/3.1.1-SNAPSHOT-20120116.200628 +http://www.archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot/heritrix-1.15.4 +http://www.archive.org)", "Mozilla/5.0 (compatible; heritrix/3.3.0-SNAPSHOT-20140702-2247 +http://archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot +http://www.archive.org/details/archive.org_bot)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; heritrix/3.1.1-SNAPSHOT-20120116.200628 +http://www.archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot/heritrix-1.15.4 +http://www.archive.org)", "Mozilla/5.0 (compatible; heritrix/3.3.0-SNAPSHOT-20140702-2247 +http://archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot +http://www.archive.org/details/archive.org_bot)", "Mozilla/5.0 (compatible; archive.org_bot +http://archive.org/details/archive.org_bot)" },
 			URL:          stringer("http://www.archive.org/details/archive.org_bot"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -6345,7 +6365,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp176.MatchString(ua):
 		return &Crawler{
 			Pattern:      `S[eE][mM]rushBot`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; SemrushBot-SA/0.97; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot-SI/0.97; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/3~bl; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/0.98~bl; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot-BA; +http://www.semrush.com/bot.html)", "SEMrushBot" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; SemrushBot-SA/0.97; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot-SI/0.97; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/3~bl; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/0.98~bl; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot-BA; +http://www.semrush.com/bot.html)", "Mozilla/5.0 (compatible; SemrushBot/6~bl; +http://www.semrush.com/bot.html)", "SEMrushBot" },
 			URL:          stringer("http://www.semrush.com/bot.html"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -7355,7 +7375,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp277.MatchString(ua):
 		return &Crawler{
 			Pattern:      `Apache-HttpClient`,
-			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)" },
+			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)", "Apache-HttpClient/4.5.2 (Java/1.8.0_161)", "Apache-HttpClient/4.5.2 (Java/1.8.0_151)", "Apache-HttpClient/4.5.7 (Java/11.0.3)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -8707,6 +8727,16 @@ func RegexpMatch(ua string) *Crawler {
 			Pattern:      `Streamline3Bot\/`,
 			Instances:    []string{ "Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.1) Streamline3Bot/1.0", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; +https://www.ubtsupport.com/legal/Streamline3Bot.php) Streamline3Bot/1.0" },
 			URL:          stringer("https://www.ubtsupport.com/legal/Streamline3Bot.php"),
+			Description:  nil,
+			AdditionDate: nil,
+			DependsOn:    []string{  },
+		}
+
+	case rgxp413.MatchString(ua):
+		return &Crawler{
+			Pattern:      `serpstatbot\/`,
+			Instances:    []string{ "serpstatbot/1.0 (advanced backlink tracking bot; http://serpstatbot.com/; abuse@serpstatbot.com)" },
+			URL:          stringer("http://serpstatbot.com"),
 			Description:  nil,
 			AdditionDate: nil,
 			DependsOn:    []string{  },
