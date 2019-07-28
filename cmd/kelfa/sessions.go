@@ -41,18 +41,25 @@ func sessions(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	a, err := analytics.New(&ds, fromTime, toTime)
+	mode, err := analytics.ParseMode(viper.GetString("mode"))
 	if err != nil {
 		return err
 	}
-	ss := a.GetSessions(viper.GetDuration("session_inactivity_timeout"))
+	a, err := analytics.New(&ds, fromTime, toTime, mode, viper.GetDuration("session_inactivity_timeout"))
+	if err != nil {
+		return err
+	}
+	var sessionsAmount int
 	var cs int
-	for _, s := range ss.Sessions {
-		if s.Crawler {
-			cs++
+	for _, ds := range a.Data {
+		for _, s := range ds.Sessions {
+			if s.Crawler {
+				cs++
+			}
+			sessionsAmount++
 		}
 	}
-	fmt.Printf("a total of %v sessions have been registered\n", len(ss.Sessions))
+	fmt.Printf("a total of %v sessions have been registered\n", sessionsAmount)
 	fmt.Printf("of those, %v sessions are made by crawlers\n", cs)
 	return nil
 }

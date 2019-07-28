@@ -42,7 +42,11 @@ func resources(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	a, err := analytics.New(&ds, fromTime, toTime)
+	mode, err := analytics.ParseMode(viper.GetString("mode"))
+	if err != nil {
+		return err
+	}
+	a, err := analytics.New(&ds, fromTime, toTime, mode, viper.GetDuration("session_inactivity_timeout"))
 	if err != nil {
 		return err
 	}
