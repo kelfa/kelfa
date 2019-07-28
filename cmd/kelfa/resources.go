@@ -15,8 +15,6 @@ import (
 
 func init() {
 	rootCmd.AddCommand(resourcesCmd)
-	resourcesCmd.MarkFlagRequired("from")
-	resourcesCmd.MarkFlagRequired("to")
 }
 
 var resourcesCmd = &cobra.Command{

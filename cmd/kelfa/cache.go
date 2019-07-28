@@ -15,8 +15,6 @@ import (
 
 func init() {
 	rootCmd.AddCommand(cacheCmd)
-	cacheCmd.MarkFlagRequired("from")
-	cacheCmd.MarkFlagRequired("to")
 }
 
 var cacheCmd = &cobra.Command{

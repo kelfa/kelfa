@@ -14,8 +14,6 @@ import (
 
 func init() {
 	rootCmd.AddCommand(sessionsCmd)
-	sessionsCmd.MarkFlagRequired("from")
-	sessionsCmd.MarkFlagRequired("to")
 }
 
 var sessionsCmd = &cobra.Command{

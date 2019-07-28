@@ -30,9 +30,15 @@ func init() {
 	rootCmd.PersistentFlags().StringP("to", "t", defaultToDate(), "to")
 	rootCmd.PersistentFlags().StringP("data", "d", "", "data folder")
 
-	viper.BindPFlag("data_folder", rootCmd.PersistentFlags().Lookup("data"))
-	viper.BindPFlag("period_from", rootCmd.PersistentFlags().Lookup("from"))
-	viper.BindPFlag("period_to", rootCmd.PersistentFlags().Lookup("to"))
+	if err := viper.BindPFlag("data_folder", rootCmd.PersistentFlags().Lookup("data")); err != nil {
+		panic(err)
+	}
+	if err := viper.BindPFlag("period_from", rootCmd.PersistentFlags().Lookup("from")); err != nil {
+		panic(err)
+	}
+	if err := viper.BindPFlag("period_to", rootCmd.PersistentFlags().Lookup("to")); err != nil {
+		panic(err)
+	}
 }
 
 var rootCmd = &cobra.Command{
