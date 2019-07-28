@@ -19,7 +19,7 @@ func SplitSessionsByMaxInactiveTime(s Session, mit time.Duration) (ss []Session)
 		}
 		if pdpdt.Add(mit).Before(dp.DateTime) {
 			// Ignoring error, safe by definition
-			ns, err := NewSessionWithDataPoints(s.DataPoints[lastCut:k])
+			ns, err := NewSessionWithDataPoints(s.DataPoints[lastCut : k+1])
 			if err != nil {
 				fmt.Println(err)
 			}
