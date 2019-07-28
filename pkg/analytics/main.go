@@ -32,7 +32,7 @@ func ParseMode(s string) (Mode, error) {
 	case "monthly":
 		return Monthly, nil
 	default:
-		return None, fmt.Errorf("the '%v' mode is not valid. Valid modes are: none, hourly, daily, weekly, monthly")
+		return None, fmt.Errorf("the '%v' mode is not valid. Valid modes are: none, hourly, daily, weekly, monthly", s)
 	}
 }
 

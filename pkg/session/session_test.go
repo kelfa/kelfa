@@ -9,7 +9,7 @@ import (
 	"go.kelfa.io/kelfa/pkg/session"
 )
 
-func TestCacheStats(t *testing.T) {
+func TestSession(t *testing.T) {
 	tests := []struct {
 		Datapoints        []objects.DataPoint
 		ExpectedBegin     time.Time
