@@ -60,7 +60,7 @@ func New(ds *dal.DataSource, from time.Time, to time.Time, mode Mode, mit time.D
 	}
 	ss.SplitSessions(mit)
 
-	if len(ss.Sessions) == 0 {
+	if len(ss) == 0 {
 		return nil, errors.New("no data to show")
 	}
 
