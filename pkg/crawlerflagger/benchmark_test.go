@@ -16,7 +16,7 @@ func BenchmarkExactMatch(b *testing.B) {
 		{"case200", "www.deadlinkchecker.com XMLHTTP/1.0"},
 		{"case300", "Mozilla/5.0 (compatible; BomboraBot/1.0; +http://www.bombora.com/bot)"},
 		{"case400", "Clickagy Intelligence Bot v2"},
-		{"miss", "non-existant-uas"},
+		{"miss", "non-existent-user-agent"},
 	}
 	for _, ua := range uas {
 		b.Run(ua.name, func(b *testing.B) {
@@ -38,7 +38,7 @@ func BenchmarkRegExpMatch(b *testing.B) {
 		{"case200", "www.deadlinkchecker.com XMLHTTP/1.0"},
 		{"case300", "Mozilla/5.0 (compatible; BomboraBot/1.0; +http://www.bombora.com/bot)"},
 		{"case400", "Clickagy Intelligence Bot v2"},
-		{"miss", "non-existant-uas"},
+		{"miss", "non-existent-user-agent"},
 	}
 	for _, ua := range uas {
 		b.Run(ua.name, func(b *testing.B) {
