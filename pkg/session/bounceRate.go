@@ -2,7 +2,7 @@ package session
 
 func (ss *Sessions) Bounces() int {
 	var bounches int
-	for _, s := range ss.Sessions {
+	for _, s := range *ss {
 		if len(s.DataPoints) == 1 {
 			bounches++
 		}
@@ -11,5 +11,5 @@ func (ss *Sessions) Bounces() int {
 }
 
 func (ss *Sessions) BounceRate() float64 {
-	return float64(len(ss.Sessions)) / float64(ss.Bounces())
+	return float64(len(*ss)) / float64(ss.Bounces())
 }

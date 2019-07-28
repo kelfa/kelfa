@@ -6,28 +6,26 @@ import (
 	"go.kelfa.io/kelfa/pkg/dal/objects"
 )
 
-type Sessions struct {
-	Sessions []Session
-}
+type Sessions []Session
 
 func (ss *Sessions) SplitSessions(mit time.Duration) {
 	nss := []Session{}
-	for _, s := range ss.Sessions {
+	for _, s := range *ss {
 		nss = append(nss, SplitSessionsByMaxInactiveTime(s, mit)...)
 	}
-	ss.Sessions = nss
+	*ss = nss
 }
 
 func (ss *Sessions) AddDataPoint(dp *objects.DataPoint) {
-	for k, s := range ss.Sessions {
+	for k, s := range *ss {
 		if dp.ClientIP.Equal(*s.IP) &&
 			dp.ClientUserAgent == *s.UserAgent {
 			// Ignoring the error since we have just checked that no error will occur
-			_ = ss.Sessions[k].AddDataPoint(dp)
+			_ = (*ss)[k].AddDataPoint(dp)
 			return
 		}
 	}
 	ns := Session{}
 	_ = ns.AddDataPoint(dp) // Surely safe, being the first one
-	ss.Sessions = append(ss.Sessions, ns)
+	*ss = append(*ss, ns)
 }
