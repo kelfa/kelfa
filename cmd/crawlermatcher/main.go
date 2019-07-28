@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"sort"
+	"time"
 
 	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/viper"
@@ -35,19 +36,20 @@ func main() {
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-	a, err := analytics.New(&ds, *fromTime, *toTime)
+	a, err := analytics.New(&ds, *fromTime, *toTime, analytics.None, time.Hour)
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-	ss := a.GetSessions(viper.GetDuration("session_inactivity_timeout"))
 
 	uas := UAS{}
-	for _, s := range ss.Sessions {
-		if s.Crawler {
-			continue
-		}
-		if c := crawlerflagger.RegexpMatch(*s.UserAgent); c != nil {
-			uas.Add(*s.UserAgent)
+	for _, ds := range a.Data {
+		for _, s := range ds.Sessions {
+			if s.Crawler {
+				continue
+			}
+			if c := crawlerflagger.RegexpMatch(*s.UserAgent); c != nil {
+				uas.Add(*s.UserAgent)
+			}
 		}
 	}
 	sort.Slice(uas.UAs, func(i, j int) bool {
