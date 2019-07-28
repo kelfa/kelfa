@@ -29,7 +29,7 @@ func TestCacheStats(t *testing.T) {
 		t.Errorf("an error occurred while creating the filesystem object: %v", err)
 	}
 	for _, dp := range tests {
-		a, err := analytics.New(&data, dp.From, dp.To)
+		a, err := analytics.New(&data, dp.From, dp.To, analytics.None, time.Hour)
 		if err != nil {
 			t.Errorf("an error occurred while creating the analytics object: %v", err)
 		}

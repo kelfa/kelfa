@@ -1,20 +1,39 @@
 package analytics
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
 	"go.kelfa.io/kelfa/pkg/dal"
-	"go.kelfa.io/kelfa/pkg/dal/objects"
+	"go.kelfa.io/kelfa/pkg/session"
 )
 
-type Analytics struct {
-	from       time.Time
-	to         time.Time
-	dataPoints []objects.DataPoint
+type Mode int
+
+const (
+	None Mode = iota
+	Hourly
+	Daily
+	Weekly
+	Monthly
+)
+
+type DataSet struct {
+	Begin    time.Time
+	End      time.Time
+	Sessions session.Sessions
 }
 
-func New(ds *dal.DataSource, from time.Time, to time.Time) (*Analytics, error) {
+type Analytics struct {
+	Begin        time.Time
+	End          time.Time
+	GroupingMode Mode
+	Data         []DataSet
+}
+
+// TODO: Split Data based on modes. For now period always = None
+func New(ds *dal.DataSource, from time.Time, to time.Time, mode Mode, mit time.Duration) (*Analytics, error) {
 	dsbt, err := (*ds).DataBeginTime()
 	if err != nil {
 		return nil, err
@@ -33,10 +52,30 @@ func New(ds *dal.DataSource, from time.Time, to time.Time) (*Analytics, error) {
 	if err != nil {
 		return nil, err
 	}
-	a := Analytics{
-		from:       from,
-		to:         to,
-		dataPoints: dsdps,
+
+	var ss session.Sessions
+	for _, s := range dsdps {
+		s := s
+		ss.AddDataPoint(&s)
 	}
+	ss.SplitSessions(mit)
+
+	if len(ss.Sessions) == 0 {
+		return nil, errors.New("no data to show")
+	}
+
+	a := Analytics{
+		Begin:        from,
+		End:          to,
+		GroupingMode: mode,
+		Data: []DataSet{
+			{
+				Begin:    from,
+				End:      to,
+				Sessions: ss,
+			},
+		},
+	}
+
 	return &a, nil
 }
