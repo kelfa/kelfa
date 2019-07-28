@@ -1,25 +1,13 @@
 package analytics
 
-import (
-	"net/http"
+import "go.kelfa.io/kelfa/pkg/session"
 
-	"go.kelfa.io/kelfa/pkg/filepath"
-)
-
-func (a *Analytics) DataByResourceFormat(ignoreErrors bool) map[string]int {
-	exts := make(map[string]int)
-	for _, log := range a.dataPoints {
-		if ignoreErrors {
-			if log.ResponseCode != http.StatusOK {
-				continue
-			}
-		}
-		e := filepath.Ext(log.RequestURI, "html")
-		if val, ok := exts[e]; ok {
-			exts[e] = val + 1
-		} else {
-			exts[e] = 1
+func (a *Analytics) DataByResourceFormat(ignoreErrors bool) *session.ResourceTypes {
+	rt := session.ResourceTypes{}
+	for _, ds := range a.Data {
+		for _, s := range ds.Sessions {
+			rt.Add(s.DataByResourceFormat(ignoreErrors))
 		}
 	}
-	return exts
+	return &rt
 }
