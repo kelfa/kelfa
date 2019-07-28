@@ -1,4 +1,5 @@
 cmd/kelfa/kelfa
 cmd/crawlerchecker/crawlerchecker
 cmd/crawlermatcher/crawlermatcher
+cmd/googlebotValidator/googlebotValidator
 pkg/crawlerflagger/generator/generator
