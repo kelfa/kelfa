@@ -24,11 +24,11 @@ func SplitSessionsByMaxInactiveTime(s Session, mit time.Duration) (ss []Session)
 				fmt.Println(err)
 			}
 			ss = append(ss, *ns)
-			lastCut = k
+			lastCut = k + 1
 		}
 	}
-	if lastCut != len(s.DataPoints)-1 {
-		ns, _ := NewSessionWithDataPoints(s.DataPoints[lastCut : len(s.DataPoints)-1])
+	if lastCut != len(s.DataPoints) {
+		ns, _ := NewSessionWithDataPoints(s.DataPoints[lastCut:len(s.DataPoints)])
 		ss = append(ss, *ns)
 	}
 	return ss

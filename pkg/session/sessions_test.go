@@ -18,7 +18,7 @@ func TestSessions(t *testing.T) {
 		{
 			From:     time.Date(2019, time.July, 01, 0, 0, 0, 0, time.UTC),
 			To:       time.Date(2019, time.July, 01, 23, 59, 59, 0, time.UTC),
-			Sessions: 4,
+			Sessions: 5,
 		},
 	}
 
