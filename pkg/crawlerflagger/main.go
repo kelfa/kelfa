@@ -2668,10 +2668,11 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
     // #269
-	case "YisouSpider":
+	case "YisouSpider",
+        "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 YisouSpider/5.0 Safari/537.36":
 		return &Crawler{
 			Pattern:      `YisouSpider`,
-			Instances:    []string{ "YisouSpider" },
+			Instances:    []string{ "YisouSpider", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 YisouSpider/5.0 Safari/537.36" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -3058,12 +3059,13 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
     // #307
-	case "newspaper/0.2.5",
+	case "newspaper/0.1.0.7",
+        "newspaper/0.2.5",
         "newspaper/0.2.6",
-        "newspaper/0.1.0.7":
+        "newspaper/0.2.8":
 		return &Crawler{
 			Pattern:      `newspaper\/`,
-			Instances:    []string{ "newspaper/0.2.5", "newspaper/0.2.6", "newspaper/0.1.0.7" },
+			Instances:    []string{ "newspaper/0.1.0.7", "newspaper/0.2.5", "newspaper/0.2.6", "newspaper/0.2.8" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -4125,10 +4127,12 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
     // #409
-	case "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/74.0.3729.169 Safari/537.36":
+	case "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/74.0.3729.169 Safari/537.36",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/69.0.3494.0 Safari/537.36",
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/76.0.3803.0 Safari/537.36":
 		return &Crawler{
 			Pattern:      `HeadlessChrome`,
-			Instances:    []string{ "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/74.0.3729.169 Safari/537.36" },
+			Instances:    []string{ "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/74.0.3729.169 Safari/537.36", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/69.0.3494.0 Safari/537.36", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/76.0.3803.0 Safari/537.36" },
 			URL:          stringer("https://developers.google.com/web/updates/2017/04/headless-chrome"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -7295,7 +7299,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp269.MatchString(ua):
 		return &Crawler{
 			Pattern:      `YisouSpider`,
-			Instances:    []string{ "YisouSpider" },
+			Instances:    []string{ "YisouSpider", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 YisouSpider/5.0 Safari/537.36" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -7675,7 +7679,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp307.MatchString(ua):
 		return &Crawler{
 			Pattern:      `newspaper\/`,
-			Instances:    []string{ "newspaper/0.2.5", "newspaper/0.2.6", "newspaper/0.1.0.7" },
+			Instances:    []string{ "newspaper/0.1.0.7", "newspaper/0.2.5", "newspaper/0.2.6", "newspaper/0.2.8" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -8695,7 +8699,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp409.MatchString(ua):
 		return &Crawler{
 			Pattern:      `HeadlessChrome`,
-			Instances:    []string{ "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/74.0.3729.169 Safari/537.36" },
+			Instances:    []string{ "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/74.0.3729.169 Safari/537.36", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/69.0.3494.0 Safari/537.36", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/76.0.3803.0 Safari/537.36" },
 			URL:          stringer("https://developers.google.com/web/updates/2017/04/headless-chrome"),
 			Description:  nil,
 			AdditionDate: nil,
