@@ -43,7 +43,7 @@ func main() {
 
 	grgxp := regexp.MustCompile(`Googlebot`)
 	hrgxp := regexp.MustCompile(`(\.googlebot\.com\.|\.googleusercontent\.com\.)$`)
-	gbdps := make(DP, 0)
+	gbdps := make(DP)
 	for _, ds := range a.Data {
 		for _, s := range ds.Sessions {
 			if grgxp.MatchString(*s.UserAgent) {
@@ -60,7 +60,7 @@ func main() {
 		for _, dp := range gbdp {
 			host, err := net.LookupAddr(dp.IP.String())
 			if err != nil {
-				fmt.Errorf("error: %v", host)
+				fmt.Printf("error: %v", host)
 			}
 			if len(host) == 0 {
 				unmatched = append(unmatched, dp.IP.String())
@@ -110,5 +110,4 @@ func (dp *DP) Add(s *session.Session) {
 			IP:   *s.IP,
 		},
 	}
-	return
 }
