@@ -36,17 +36,35 @@ func ParseMode(s string) (Mode, error) {
 	}
 }
 
+type DataSets []DataSet
+
 type DataSet struct {
 	Begin    time.Time
 	End      time.Time
 	Sessions session.Sessions
 }
 
+func GenerateDataSets(from time.Time, to time.Time, m Mode) *DataSets {
+	var dss DataSets
+	slots := createSlots(from, to, m)
+	for _, slot := range slots {
+		dss = append(dss, DataSet{
+			Begin: slot.Begin,
+			End:   slot.End,
+		})
+	}
+	return &dss
+}
+
+func (ds *DataSets) AddSession(s *session.Session) {
+
+}
+
 type Analytics struct {
 	Begin        time.Time
 	End          time.Time
 	GroupingMode Mode
-	Data         []DataSet
+	Data         DataSets
 }
 
 // TODO: Split Data based on modes. For now period always = None
@@ -85,8 +103,8 @@ func New(ds *dal.DataSource, from time.Time, to time.Time, mode Mode, mit time.D
 		Begin:        from,
 		End:          to,
 		GroupingMode: mode,
-		Data: []DataSet{
-			{
+		Data: DataSets{
+			DataSet{
 				Begin:    from,
 				End:      to,
 				Sessions: ss,
