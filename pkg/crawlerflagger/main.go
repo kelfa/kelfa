@@ -261,10 +261,11 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
     // #21
-	case "Go-http-client/1.1":
+	case "Go-http-client/1.1",
+        "Go-http-client/2.0":
 		return &Crawler{
 			Pattern:      `Go-http-client`,
-			Instances:    []string{ "Go-http-client/1.1" },
+			Instances:    []string{ "Go-http-client/1.1", "Go-http-client/2.0" },
 			URL:          stringer("https://golang.org/pkg/net/http/"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -4179,6 +4180,16 @@ func ExactMatch(ua string) *Crawler {
 			AdditionDate: nil,
 			DependsOn:    []string{  },
 		}
+    // #414
+	case "MixnodeCache/1.8(+https://cache.mixnode.com/)":
+		return &Crawler{
+			Pattern:      `MixnodeCache\/`,
+			Instances:    []string{ "MixnodeCache/1.8(+https://cache.mixnode.com/)" },
+			URL:          stringer("https://cache.mixnode.com/"),
+			Description:  nil,
+			AdditionDate: nil,
+			DependsOn:    []string{  },
+		}
 
 	default:
 		return nil
@@ -4600,6 +4611,7 @@ var rgxp410 = regexp.MustCompile(`CheckMarkNetwork\/`)
 var rgxp411 = regexp.MustCompile(`www\.uptime\.com`)
 var rgxp412 = regexp.MustCompile(`Streamline3Bot\/`)
 var rgxp413 = regexp.MustCompile(`serpstatbot\/`)
+var rgxp414 = regexp.MustCompile(`MixnodeCache\/`)
 
 // RegexpMatch allows you to identify if and which kind of crawler a User Agent belongs to
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
@@ -4819,7 +4831,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp21.MatchString(ua):
 		return &Crawler{
 			Pattern:      `Go-http-client`,
-			Instances:    []string{ "Go-http-client/1.1" },
+			Instances:    []string{ "Go-http-client/1.1", "Go-http-client/2.0" },
 			URL:          stringer("https://golang.org/pkg/net/http/"),
 			Description:  nil,
 			AdditionDate: nil,
@@ -8741,6 +8753,16 @@ func RegexpMatch(ua string) *Crawler {
 			Pattern:      `serpstatbot\/`,
 			Instances:    []string{ "serpstatbot/1.0 (advanced backlink tracking bot; http://serpstatbot.com/; abuse@serpstatbot.com)" },
 			URL:          stringer("http://serpstatbot.com"),
+			Description:  nil,
+			AdditionDate: nil,
+			DependsOn:    []string{  },
+		}
+
+	case rgxp414.MatchString(ua):
+		return &Crawler{
+			Pattern:      `MixnodeCache\/`,
+			Instances:    []string{ "MixnodeCache/1.8(+https://cache.mixnode.com/)" },
+			URL:          stringer("https://cache.mixnode.com/"),
 			Description:  nil,
 			AdditionDate: nil,
 			DependsOn:    []string{  },
