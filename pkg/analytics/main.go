@@ -9,29 +9,6 @@ import (
 	"go.kelfa.io/kelfa/pkg/session"
 )
 
-type DataSets []DataSet
-
-type DataSet struct {
-	Begin    time.Time
-	End      time.Time
-	Sessions session.Sessions
-}
-
-func GenerateDataSets(from time.Time, to time.Time, m Mode) *DataSets {
-	var dss DataSets
-	slots := createSlots(from, to, m)
-	for _, slot := range slots {
-		dss = append(dss, DataSet{
-			Begin: slot.Begin,
-			End:   slot.End,
-		})
-	}
-	return &dss
-}
-
-func (dss *DataSets) AddSession(s *session.Session) {
-}
-
 type Analytics struct {
 	Begin        time.Time
 	End          time.Time
