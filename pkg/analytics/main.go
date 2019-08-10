@@ -9,33 +9,6 @@ import (
 	"go.kelfa.io/kelfa/pkg/session"
 )
 
-type Mode int
-
-const (
-	None Mode = iota
-	Hourly
-	Daily
-	Weekly
-	Monthly
-)
-
-func ParseMode(s string) (Mode, error) {
-	switch s {
-	case "none":
-		return None, nil
-	case "hourly":
-		return Hourly, nil
-	case "daily":
-		return Daily, nil
-	case "weekly":
-		return Weekly, nil
-	case "monthly":
-		return Monthly, nil
-	default:
-		return None, fmt.Errorf("the '%v' mode is not valid. Valid modes are: none, hourly, daily, weekly, monthly", s)
-	}
-}
-
 type DataSets []DataSet
 
 type DataSet struct {
@@ -56,18 +29,16 @@ func GenerateDataSets(from time.Time, to time.Time, m Mode) *DataSets {
 	return &dss
 }
 
-func (ds *DataSets) AddSession(s *session.Session) {
-
+func (dss *DataSets) AddSession(s *session.Session) {
 }
 
 type Analytics struct {
 	Begin        time.Time
 	End          time.Time
 	GroupingMode Mode
-	Data         DataSets
+	Sessions     session.Sessions
 }
 
-// TODO: Split Data based on modes. For now period always = None
 func New(ds *dal.DataSource, from time.Time, to time.Time, mode Mode, mit time.Duration) (*Analytics, error) {
 	dsbt, err := (*ds).DataBeginTime()
 	if err != nil {
@@ -103,13 +74,7 @@ func New(ds *dal.DataSource, from time.Time, to time.Time, mode Mode, mit time.D
 		Begin:        from,
 		End:          to,
 		GroupingMode: mode,
-		Data: DataSets{
-			DataSet{
-				Begin:    from,
-				End:      to,
-				Sessions: ss,
-			},
-		},
+		Sessions:     ss,
 	}
 
 	return &a, nil
