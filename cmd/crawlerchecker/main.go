@@ -41,13 +41,11 @@ func main() {
 	}
 
 	uas := UAS{}
-	for _, ds := range a.Data {
-		for _, s := range ds.Sessions {
-			if s.Crawler {
-				continue
-			}
-			uas.Add(*s.UserAgent)
+	for _, s := range a.Sessions {
+		if s.Crawler {
+			continue
 		}
+		uas.Add(*s.UserAgent)
 	}
 	sort.Slice(uas.UAs, func(i, j int) bool {
 		return uas.UAs[i].Count < uas.UAs[j].Count

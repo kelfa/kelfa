@@ -42,14 +42,12 @@ func main() {
 	}
 
 	uas := UAS{}
-	for _, ds := range a.Data {
-		for _, s := range ds.Sessions {
-			if s.Crawler {
-				continue
-			}
-			if c := crawlerflagger.RegexpMatch(*s.UserAgent); c != nil {
-				uas.Add(*s.UserAgent)
-			}
+	for _, s := range a.Sessions {
+		if s.Crawler {
+			continue
+		}
+		if c := crawlerflagger.RegexpMatch(*s.UserAgent); c != nil {
+			uas.Add(*s.UserAgent)
 		}
 	}
 	sort.Slice(uas.UAs, func(i, j int) bool {

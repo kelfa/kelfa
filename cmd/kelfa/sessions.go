@@ -49,13 +49,11 @@ func sessions(cmd *cobra.Command, args []string) error {
 	}
 	var sessionsAmount int
 	var cs int
-	for _, ds := range a.Data {
-		for _, s := range ds.Sessions {
-			if s.Crawler {
-				cs++
-			}
-			sessionsAmount++
+	for _, s := range a.Sessions {
+		if s.Crawler {
+			cs++
 		}
+		sessionsAmount++
 	}
 	fmt.Printf("a total of %v sessions have been registered\n", sessionsAmount)
 	fmt.Printf("of those, %v sessions are made by crawlers\n", cs)
