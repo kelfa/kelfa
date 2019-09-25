@@ -44,11 +44,9 @@ func main() {
 	grgxp := regexp.MustCompile(`Googlebot`)
 	hrgxp := regexp.MustCompile(`(\.googlebot\.com\.|\.googleusercontent\.com\.)$`)
 	gbdps := make(DP)
-	for _, ds := range a.Data {
-		for _, s := range ds.Sessions {
-			if grgxp.MatchString(*s.UserAgent) {
-				gbdps.Add(&s)
-			}
+	for _, s := range a.Sessions {
+		if grgxp.MatchString(*s.UserAgent) {
+			gbdps.Add(&s)
 		}
 	}
 
