@@ -4268,6 +4268,16 @@ func ExactMatch(ua string) *Crawler {
 			AdditionDate: nil,
 			DependsOn:    []string{  },
 		}
+    // #420
+	case "NextCloud-News/1.0":
+		return &Crawler{
+			Pattern:      `NextCloud`,
+			Instances:    []string{ "NextCloud-News/1.0" },
+			URL:          stringer("https://nextcloud.com/"),
+			Description:  nil,
+			AdditionDate: nil,
+			DependsOn:    []string{  },
+		}
 
 	default:
 		return nil
@@ -4695,6 +4705,7 @@ var rgxp416 = regexp.MustCompile(`RSSingBot`)
 var rgxp417 = regexp.MustCompile(`Jooblebot`)
 var rgxp418 = regexp.MustCompile(`fedoraplanet`)
 var rgxp419 = regexp.MustCompile(`Friendica`)
+var rgxp420 = regexp.MustCompile(`NextCloud`)
 
 // RegexpMatch allows you to identify if and which kind of crawler a User Agent belongs to
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
@@ -8896,6 +8907,16 @@ func RegexpMatch(ua string) *Crawler {
 			Pattern:      `Friendica`,
 			Instances:    []string{ "Friendica 'The Tazmans Flax-lily' 2019.01-1293; https://hoyer.xyz" },
 			URL:          stringer("https://hoyer.xyz"),
+			Description:  nil,
+			AdditionDate: nil,
+			DependsOn:    []string{  },
+		}
+
+	case rgxp420.MatchString(ua):
+		return &Crawler{
+			Pattern:      `NextCloud`,
+			Instances:    []string{ "NextCloud-News/1.0" },
+			URL:          stringer("https://nextcloud.com/"),
 			Description:  nil,
 			AdditionDate: nil,
 			DependsOn:    []string{  },
