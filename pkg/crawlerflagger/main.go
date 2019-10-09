@@ -167,10 +167,11 @@ func ExactMatch(ua string) *Crawler {
 		}
     // #13
 	case "WGETbot/1.0 (+http://wget.alanreed.org)",
-        "Wget/1.14 (linux-gnu)":
+        "Wget/1.14 (linux-gnu)",
+        "Wget/1.20.3 (linux-gnu)":
 		return &Crawler{
 			Pattern:      `[wW]get`,
-			Instances:    []string{ "WGETbot/1.0 (+http://wget.alanreed.org)", "Wget/1.14 (linux-gnu)" },
+			Instances:    []string{ "WGETbot/1.0 (+http://wget.alanreed.org)", "Wget/1.14 (linux-gnu)", "Wget/1.20.3 (linux-gnu)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -178,10 +179,11 @@ func ExactMatch(ua string) *Crawler {
 		}
     // #14
 	case "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)",
-        "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/4.3 +http://www.linkedin.com)":
+        "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/4.3 +http://www.linkedin.com)",
+        "LinkedInBot/1.0 (compatible; Mozilla/5.0; Apache-HttpClient +http://www.linkedin.com)":
 		return &Crawler{
 			Pattern:      `LinkedInBot`,
-			Instances:    []string{ "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)", "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/4.3 +http://www.linkedin.com)" },
+			Instances:    []string{ "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)", "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/4.3 +http://www.linkedin.com)", "LinkedInBot/1.0 (compatible; Mozilla/5.0; Apache-HttpClient +http://www.linkedin.com)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -1231,10 +1233,11 @@ func ExactMatch(ua string) *Crawler {
     // #118
 	case "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)",
         "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)",
-        "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)":
+        "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)",
+        "'Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)'":
 		return &Crawler{
 			Pattern:      `DuckDuckBot`,
-			Instances:    []string{ "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)", "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)", "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)" },
+			Instances:    []string{ "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)", "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)", "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)", "'Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)'" },
 			URL:          stringer("http://duckduckgo.com/duckduckbot.html"),
 			Description:  nil,
 			AdditionDate: stringer("2012/09/19"),
@@ -2768,7 +2771,7 @@ func ExactMatch(ua string) *Crawler {
         "Apache-HttpClient/4.5.2 (Java/1.8.0_151)",
         "Apache-HttpClient/4.5.7 (Java/11.0.3)":
 		return &Crawler{
-			Pattern:      `Apache-HttpClient`,
+			Pattern:      `^Apache-HttpClient`,
 			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)", "Apache-HttpClient/4.5.2 (Java/1.8.0_161)", "Apache-HttpClient/4.5.2 (Java/1.8.0_151)", "Apache-HttpClient/4.5.7 (Java/11.0.3)" },
 			URL:          nil,
 			Description:  nil,
@@ -4278,6 +4281,16 @@ func ExactMatch(ua string) *Crawler {
 			AdditionDate: stringer("2019/09/30"),
 			DependsOn:    []string{  },
 		}
+    // #421
+	case "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)":
+		return &Crawler{
+			Pattern:      `Tiny Tiny RSS`,
+			Instances:    []string{ "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)" },
+			URL:          stringer("http://tt-rss.org/"),
+			Description:  nil,
+			AdditionDate: stringer("2019/10/04"),
+			DependsOn:    []string{  },
+		}
 
 	default:
 		return nil
@@ -4561,7 +4574,7 @@ var rgxp272 = regexp.MustCompile(`Jamie's Spider`)
 var rgxp273 = regexp.MustCompile(`AHC\/`)
 var rgxp274 = regexp.MustCompile(`NetcraftSurveyAgent`)
 var rgxp275 = regexp.MustCompile(`Laserlikebot`)
-var rgxp276 = regexp.MustCompile(`Apache-HttpClient`)
+var rgxp276 = regexp.MustCompile(`^Apache-HttpClient`)
 var rgxp277 = regexp.MustCompile(`AppEngine-Google`)
 var rgxp278 = regexp.MustCompile(`Jetty`)
 var rgxp279 = regexp.MustCompile(`Upflow`)
@@ -4706,6 +4719,7 @@ var rgxp417 = regexp.MustCompile(`Jooblebot`)
 var rgxp418 = regexp.MustCompile(`fedoraplanet`)
 var rgxp419 = regexp.MustCompile(`Friendica`)
 var rgxp420 = regexp.MustCompile(`NextCloud`)
+var rgxp421 = regexp.MustCompile(`Tiny Tiny RSS`)
 
 // RegexpMatch allows you to identify if and which kind of crawler a User Agent belongs to
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
@@ -4845,7 +4859,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp13.MatchString(ua):
 		return &Crawler{
 			Pattern:      `[wW]get`,
-			Instances:    []string{ "WGETbot/1.0 (+http://wget.alanreed.org)", "Wget/1.14 (linux-gnu)" },
+			Instances:    []string{ "WGETbot/1.0 (+http://wget.alanreed.org)", "Wget/1.14 (linux-gnu)", "Wget/1.20.3 (linux-gnu)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -4855,7 +4869,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp14.MatchString(ua):
 		return &Crawler{
 			Pattern:      `LinkedInBot`,
-			Instances:    []string{ "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)", "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/4.3 +http://www.linkedin.com)" },
+			Instances:    []string{ "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)", "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/4.3 +http://www.linkedin.com)", "LinkedInBot/1.0 (compatible; Mozilla/5.0; Apache-HttpClient +http://www.linkedin.com)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: nil,
@@ -5895,7 +5909,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp118.MatchString(ua):
 		return &Crawler{
 			Pattern:      `DuckDuckBot`,
-			Instances:    []string{ "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)", "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)", "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)" },
+			Instances:    []string{ "DuckDuckBot/1.0; (+http://duckduckgo.com/duckduckbot.html)", "DuckDuckBot/1.1; (+http://duckduckgo.com/duckduckbot.html)", "Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)", "'Mozilla/5.0 (compatible; DuckDuckBot-Https/1.1; https://duckduckgo.com/duckduckbot)'" },
 			URL:          stringer("http://duckduckgo.com/duckduckbot.html"),
 			Description:  nil,
 			AdditionDate: stringer("2012/09/19"),
@@ -7474,7 +7488,7 @@ func RegexpMatch(ua string) *Crawler {
 
 	case rgxp276.MatchString(ua):
 		return &Crawler{
-			Pattern:      `Apache-HttpClient`,
+			Pattern:      `^Apache-HttpClient`,
 			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)", "Apache-HttpClient/4.5.2 (Java/1.8.0_161)", "Apache-HttpClient/4.5.2 (Java/1.8.0_151)", "Apache-HttpClient/4.5.7 (Java/11.0.3)" },
 			URL:          nil,
 			Description:  nil,
@@ -8919,6 +8933,16 @@ func RegexpMatch(ua string) *Crawler {
 			URL:          stringer("https://nextcloud.com/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/09/30"),
+			DependsOn:    []string{  },
+		}
+
+	case rgxp421.MatchString(ua):
+		return &Crawler{
+			Pattern:      `Tiny Tiny RSS`,
+			Instances:    []string{ "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)" },
+			URL:          stringer("http://tt-rss.org/"),
+			Description:  nil,
+			AdditionDate: stringer("2019/10/04"),
 			DependsOn:    []string{  },
 		}
 
