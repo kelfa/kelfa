@@ -213,12 +213,13 @@ func ExactMatch(ua string) *Crawler {
 	case "python-requests/2.9.2",
         "python-requests/2.11.1",
         "python-requests/2.18.4",
+        "python-requests/2.19.1",
         "python-requests/2.20.0",
         "python-requests/2.21.0",
         "python-requests/2.22.0":
 		return &Crawler{
 			Pattern:      `python-requests`,
-			Instances:    []string{ "python-requests/2.9.2", "python-requests/2.11.1", "python-requests/2.18.4", "python-requests/2.20.0", "python-requests/2.21.0", "python-requests/2.22.0" },
+			Instances:    []string{ "python-requests/2.9.2", "python-requests/2.11.1", "python-requests/2.18.4", "python-requests/2.19.1", "python-requests/2.20.0", "python-requests/2.21.0", "python-requests/2.22.0" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2018/05/27"),
@@ -1561,10 +1562,11 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
     // #163
-	case "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +https://www.megaindex.ru/?tab=linkAnalyze)":
+	case "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +https://www.megaindex.ru/?tab=linkAnalyze)",
+        "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +http://megaindex.com/crawler)":
 		return &Crawler{
 			Pattern:      `MegaIndex`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +https://www.megaindex.ru/?tab=linkAnalyze)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +https://www.megaindex.ru/?tab=linkAnalyze)", "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +http://megaindex.com/crawler)" },
 			URL:          stringer("https://www.megaindex.ru/?tab=linkAnalyze"),
 			Description:  nil,
 			AdditionDate: stringer("2015/03/28"),
@@ -4282,10 +4284,12 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
     // #421
-	case "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)":
+	case "Tiny Tiny RSS/1.15.3 (http://tt-rss.org/)",
+        "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)",
+        "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)":
 		return &Crawler{
 			Pattern:      `Tiny Tiny RSS`,
-			Instances:    []string{ "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)" },
+			Instances:    []string{ "Tiny Tiny RSS/1.15.3 (http://tt-rss.org/)", "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)", "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)" },
 			URL:          stringer("http://tt-rss.org/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/10/04"),
@@ -4889,7 +4893,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp16.MatchString(ua):
 		return &Crawler{
 			Pattern:      `python-requests`,
-			Instances:    []string{ "python-requests/2.9.2", "python-requests/2.11.1", "python-requests/2.18.4", "python-requests/2.20.0", "python-requests/2.21.0", "python-requests/2.22.0" },
+			Instances:    []string{ "python-requests/2.9.2", "python-requests/2.11.1", "python-requests/2.18.4", "python-requests/2.19.1", "python-requests/2.20.0", "python-requests/2.21.0", "python-requests/2.22.0" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2018/05/27"),
@@ -6359,7 +6363,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp163.MatchString(ua):
 		return &Crawler{
 			Pattern:      `MegaIndex`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +https://www.megaindex.ru/?tab=linkAnalyze)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +https://www.megaindex.ru/?tab=linkAnalyze)", "Mozilla/5.0 (compatible; MegaIndex.ru/2.0; +http://megaindex.com/crawler)" },
 			URL:          stringer("https://www.megaindex.ru/?tab=linkAnalyze"),
 			Description:  nil,
 			AdditionDate: stringer("2015/03/28"),
@@ -8939,7 +8943,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp421.MatchString(ua):
 		return &Crawler{
 			Pattern:      `Tiny Tiny RSS`,
-			Instances:    []string{ "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)" },
+			Instances:    []string{ "Tiny Tiny RSS/1.15.3 (http://tt-rss.org/)", "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)", "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)" },
 			URL:          stringer("http://tt-rss.org/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/10/04"),
