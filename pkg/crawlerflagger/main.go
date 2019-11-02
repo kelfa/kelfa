@@ -1626,10 +1626,11 @@ func ExactMatch(ua string) *Crawler {
     // #169
 	case "Mozilla/5.0 (compatible; Qwantify/2.0n; +https://www.qwant.com/)/*",
         "Mozilla/5.0 (compatible; Qwantify/2.4w; +https://www.qwant.com/)/2.4w",
-        "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.1; +https://help.qwant.com/bot)":
+        "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.1; +https://help.qwant.com/bot)",
+        "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.2.1; +https://help.qwant.com/bot)":
 		return &Crawler{
 			Pattern:      `Qwantify`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; Qwantify/2.0n; +https://www.qwant.com/)/*", "Mozilla/5.0 (compatible; Qwantify/2.4w; +https://www.qwant.com/)/2.4w", "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.1; +https://help.qwant.com/bot)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; Qwantify/2.0n; +https://www.qwant.com/)/*", "Mozilla/5.0 (compatible; Qwantify/2.4w; +https://www.qwant.com/)/2.4w", "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.1; +https://help.qwant.com/bot)", "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.2.1; +https://help.qwant.com/bot)" },
 			URL:          stringer("https://www.qwant.com/"),
 			Description:  nil,
 			AdditionDate: stringer("2015/04/06"),
@@ -2641,10 +2642,11 @@ func ExactMatch(ua string) *Crawler {
 	case "okhttp/2.5.0",
         "okhttp/2.7.5",
         "okhttp/3.2.0",
-        "okhttp/3.5.0":
+        "okhttp/3.5.0",
+        "okhttp/4.1.0":
 		return &Crawler{
 			Pattern:      `okhttp`,
-			Instances:    []string{ "okhttp/2.5.0", "okhttp/2.7.5", "okhttp/3.2.0", "okhttp/3.5.0" },
+			Instances:    []string{ "okhttp/2.5.0", "okhttp/2.7.5", "okhttp/3.2.0", "okhttp/3.5.0", "okhttp/4.1.0" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2017/11/02"),
@@ -4295,6 +4297,16 @@ func ExactMatch(ua string) *Crawler {
 			AdditionDate: stringer("2019/10/04"),
 			DependsOn:    []string{  },
 		}
+    // #422
+	case "Mozilla/5.0 (compatible; RegionStuttgartBot/1.0; +http://it.region-stuttgart.de/competenzatlas/unternehmen-suchen/)":
+		return &Crawler{
+			Pattern:      `RegionStuttgartBot`,
+			Instances:    []string{ "Mozilla/5.0 (compatible; RegionStuttgartBot/1.0; +http://it.region-stuttgart.de/competenzatlas/unternehmen-suchen/)" },
+			URL:          stringer("http://it.region-stuttgart.de/competenzatlas/unternehmen-suchen/"),
+			Description:  nil,
+			AdditionDate: stringer("2019/10/17"),
+			DependsOn:    []string{  },
+		}
 
 	default:
 		return nil
@@ -4724,6 +4736,7 @@ var rgxp418 = regexp.MustCompile(`fedoraplanet`)
 var rgxp419 = regexp.MustCompile(`Friendica`)
 var rgxp420 = regexp.MustCompile(`NextCloud`)
 var rgxp421 = regexp.MustCompile(`Tiny Tiny RSS`)
+var rgxp422 = regexp.MustCompile(`RegionStuttgartBot`)
 
 // RegexpMatch allows you to identify if and which kind of crawler a User Agent belongs to
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
@@ -6423,7 +6436,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp169.MatchString(ua):
 		return &Crawler{
 			Pattern:      `Qwantify`,
-			Instances:    []string{ "Mozilla/5.0 (compatible; Qwantify/2.0n; +https://www.qwant.com/)/*", "Mozilla/5.0 (compatible; Qwantify/2.4w; +https://www.qwant.com/)/2.4w", "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.1; +https://help.qwant.com/bot)" },
+			Instances:    []string{ "Mozilla/5.0 (compatible; Qwantify/2.0n; +https://www.qwant.com/)/*", "Mozilla/5.0 (compatible; Qwantify/2.4w; +https://www.qwant.com/)/2.4w", "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.1; +https://help.qwant.com/bot)", "Mozilla/5.0 (compatible; Qwantify/Bleriot/1.2.1; +https://help.qwant.com/bot)" },
 			URL:          stringer("https://www.qwant.com/"),
 			Description:  nil,
 			AdditionDate: stringer("2015/04/06"),
@@ -7373,7 +7386,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp264.MatchString(ua):
 		return &Crawler{
 			Pattern:      `okhttp`,
-			Instances:    []string{ "okhttp/2.5.0", "okhttp/2.7.5", "okhttp/3.2.0", "okhttp/3.5.0" },
+			Instances:    []string{ "okhttp/2.5.0", "okhttp/2.7.5", "okhttp/3.2.0", "okhttp/3.5.0", "okhttp/4.1.0" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2017/11/02"),
@@ -8947,6 +8960,16 @@ func RegexpMatch(ua string) *Crawler {
 			URL:          stringer("http://tt-rss.org/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/10/04"),
+			DependsOn:    []string{  },
+		}
+
+	case rgxp422.MatchString(ua):
+		return &Crawler{
+			Pattern:      `RegionStuttgartBot`,
+			Instances:    []string{ "Mozilla/5.0 (compatible; RegionStuttgartBot/1.0; +http://it.region-stuttgart.de/competenzatlas/unternehmen-suchen/)" },
+			URL:          stringer("http://it.region-stuttgart.de/competenzatlas/unternehmen-suchen/"),
+			Description:  nil,
+			AdditionDate: stringer("2019/10/17"),
 			DependsOn:    []string{  },
 		}
 
