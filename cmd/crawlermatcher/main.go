@@ -6,7 +6,6 @@ import (
 	"sort"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/viper"
 	"go.kelfa.io/kelfa/pkg/analytics"
 	"go.kelfa.io/kelfa/pkg/crawlerflagger"
@@ -53,7 +52,9 @@ func main() {
 	sort.Slice(uas.UAs, func(i, j int) bool {
 		return uas.UAs[i].Count < uas.UAs[j].Count
 	})
-	spew.Dump(uas)
+	for _, ua := range uas.UAs {
+		fmt.Printf("%v - %s\n", ua.Count, ua.UserAgent)
+	}
 }
 
 type UA struct {
