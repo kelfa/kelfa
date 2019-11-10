@@ -3671,10 +3671,11 @@ func ExactMatch(ua string) *Crawler {
 			DependsOn:    []string{  },
 		}
     // #362
-	case "axios/0.18.0":
+	case "axios/0.18.0",
+        "axios/0.19.0":
 		return &Crawler{
 			Pattern:      `axios`,
-			Instances:    []string{ "axios/0.18.0" },
+			Instances:    []string{ "axios/0.18.0", "axios/0.19.0" },
 			URL:          stringer("https://github.com/axios/axios"),
 			Description:  nil,
 			AdditionDate: stringer("2018/09/06"),
@@ -4213,13 +4214,15 @@ func ExactMatch(ua string) *Crawler {
     // #414
 	case "curl",
         "curl/7.29.0",
+        "curl/7.47.0",
+        "curl/7.54.0",
         "curl/7.55.1",
         "curl/7.64.0",
         "curl/7.64.1",
         "curl/7.65.3":
 		return &Crawler{
 			Pattern:      `^curl`,
-			Instances:    []string{ "curl", "curl/7.29.0", "curl/7.55.1", "curl/7.64.0", "curl/7.64.1", "curl/7.65.3" },
+			Instances:    []string{ "curl", "curl/7.29.0", "curl/7.47.0", "curl/7.54.0", "curl/7.55.1", "curl/7.64.0", "curl/7.64.1", "curl/7.65.3" },
 			URL:          stringer("https://curl.haxx.se/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/08/15"),
@@ -8366,7 +8369,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp362.MatchString(ua):
 		return &Crawler{
 			Pattern:      `axios`,
-			Instances:    []string{ "axios/0.18.0" },
+			Instances:    []string{ "axios/0.18.0", "axios/0.19.0" },
 			URL:          stringer("https://github.com/axios/axios"),
 			Description:  nil,
 			AdditionDate: stringer("2018/09/06"),
@@ -8886,7 +8889,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp414.MatchString(ua):
 		return &Crawler{
 			Pattern:      `^curl`,
-			Instances:    []string{ "curl", "curl/7.29.0", "curl/7.55.1", "curl/7.64.0", "curl/7.64.1", "curl/7.65.3" },
+			Instances:    []string{ "curl", "curl/7.29.0", "curl/7.47.0", "curl/7.54.0", "curl/7.55.1", "curl/7.64.0", "curl/7.64.1", "curl/7.65.3" },
 			URL:          stringer("https://curl.haxx.se/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/08/15"),
