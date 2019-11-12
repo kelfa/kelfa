@@ -2103,11 +2103,16 @@ func ExactMatch(ua string) *Crawler {
         "WhatsApp/2.16.2/i",
         "WhatsApp/2.16.42 A",
         "WhatsApp/2.16.57 A",
+        "WhatsApp/2.19.92 i",
         "WhatsApp/2.19.175 A",
-        "WhatsApp/0.3.4479 N":
+        "WhatsApp/2.19.244 A",
+        "WhatsApp/2.19.258 A",
+        "WhatsApp/0.3.4479 N",
+        "WhatsApp/0.3.4679 N",
+        "WhatsApp/0.3.4941 N":
 		return &Crawler{
 			Pattern:      `WhatsApp`,
-			Instances:    []string{ "WhatsApp", "WhatsApp/2.12.15/i", "WhatsApp/2.12.16/i", "WhatsApp/2.12.17/i", "WhatsApp/2.12.449 A", "WhatsApp/2.12.453 A", "WhatsApp/2.12.510 A", "WhatsApp/2.12.540 A", "WhatsApp/2.12.548 A", "WhatsApp/2.12.555 A", "WhatsApp/2.12.556 A", "WhatsApp/2.16.1/i", "WhatsApp/2.16.13 A", "WhatsApp/2.16.2/i", "WhatsApp/2.16.42 A", "WhatsApp/2.16.57 A", "WhatsApp/2.19.175 A", "WhatsApp/0.3.4479 N" },
+			Instances:    []string{ "WhatsApp", "WhatsApp/2.12.15/i", "WhatsApp/2.12.16/i", "WhatsApp/2.12.17/i", "WhatsApp/2.12.449 A", "WhatsApp/2.12.453 A", "WhatsApp/2.12.510 A", "WhatsApp/2.12.540 A", "WhatsApp/2.12.548 A", "WhatsApp/2.12.555 A", "WhatsApp/2.12.556 A", "WhatsApp/2.16.1/i", "WhatsApp/2.16.13 A", "WhatsApp/2.16.2/i", "WhatsApp/2.16.42 A", "WhatsApp/2.16.57 A", "WhatsApp/2.19.92 i", "WhatsApp/2.19.175 A", "WhatsApp/2.19.244 A", "WhatsApp/2.19.258 A", "WhatsApp/0.3.4479 N", "WhatsApp/0.3.4679 N", "WhatsApp/0.3.4941 N" },
 			URL:          stringer("https://www.whatsapp.com/"),
 			Description:  nil,
 			AdditionDate: stringer("2016/11/15"),
@@ -2770,13 +2775,17 @@ func ExactMatch(ua string) *Crawler {
         "Apache-HttpClient/4.3.3 (java 1.5)",
         "Apache-HttpClient/4.3.5 (java 1.5)",
         "Apache-HttpClient/4.4.1 (Java/1.8.0_65)",
-        "Apache-HttpClient/4.5.3 (Java/1.8.0_121)",
-        "Apache-HttpClient/4.5.2 (Java/1.8.0_161)",
+        "Apache-HttpClient/4.5.2 (Java/1.8.0_65)",
         "Apache-HttpClient/4.5.2 (Java/1.8.0_151)",
-        "Apache-HttpClient/4.5.7 (Java/11.0.3)":
+        "Apache-HttpClient/4.5.2 (Java/1.8.0_161)",
+        "Apache-HttpClient/4.5.2 (Java/1.8.0_181)",
+        "Apache-HttpClient/4.5.3 (Java/1.8.0_121)",
+        "Apache-HttpClient/4.5.3-SNAPSHOT (Java/1.8.0_152)",
+        "Apache-HttpClient/4.5.7 (Java/11.0.3)",
+        "Apache-HttpClient/4.5.10 (Java/1.8.0_201)":
 		return &Crawler{
 			Pattern:      `^Apache-HttpClient`,
-			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)", "Apache-HttpClient/4.5.2 (Java/1.8.0_161)", "Apache-HttpClient/4.5.2 (Java/1.8.0_151)", "Apache-HttpClient/4.5.7 (Java/11.0.3)" },
+			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.2 (Java/1.8.0_65)", "Apache-HttpClient/4.5.2 (Java/1.8.0_151)", "Apache-HttpClient/4.5.2 (Java/1.8.0_161)", "Apache-HttpClient/4.5.2 (Java/1.8.0_181)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)", "Apache-HttpClient/4.5.3-SNAPSHOT (Java/1.8.0_152)", "Apache-HttpClient/4.5.7 (Java/11.0.3)", "Apache-HttpClient/4.5.10 (Java/1.8.0_201)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2017/11/02"),
@@ -3154,10 +3163,12 @@ func ExactMatch(ua string) *Crawler {
 	case "Hatena Antenna/0.3",
         "Hatena::Russia::Crawler/0.01",
         "Hatena-Favicon/2 (http://www.hatena.ne.jp/faq/)",
-        "Hatena::Scissors/0.01":
+        "Hatena::Scissors/0.01",
+        "HatenaBookmark/4.0 (Hatena::Bookmark; Analyzer)",
+        "Hatena::Fetcher/0.01 (master) Furl/3.13":
 		return &Crawler{
 			Pattern:      `Hatena`,
-			Instances:    []string{ "Hatena Antenna/0.3", "Hatena::Russia::Crawler/0.01", "Hatena-Favicon/2 (http://www.hatena.ne.jp/faq/)", "Hatena::Scissors/0.01" },
+			Instances:    []string{ "Hatena Antenna/0.3", "Hatena::Russia::Crawler/0.01", "Hatena-Favicon/2 (http://www.hatena.ne.jp/faq/)", "Hatena::Scissors/0.01", "HatenaBookmark/4.0 (Hatena::Bookmark; Analyzer)", "Hatena::Fetcher/0.01 (master) Furl/3.13" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2018/05/29"),
@@ -4125,10 +4136,11 @@ func ExactMatch(ua string) *Crawler {
     // #406
 	case "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36 HubSpot Webcrawler - web-crawlers@hubspot.com",
         "Mozilla/5.0 (X11; Linux x86_64; HubSpot Single Page link check; web-crawlers+links@hubspot.com) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36",
-        "Mozilla/5.0 (compatible; HubSpot Crawler; web-crawlers@hubspot.com)":
+        "Mozilla/5.0 (compatible; HubSpot Crawler; web-crawlers@hubspot.com)",
+        "HubSpot Connect 2.0 (http://dev.hubspot.com/) - BizOpsCompanies-Tq2-BizCoDomainValidationAudit":
 		return &Crawler{
 			Pattern:      `HubSpot`,
-			Instances:    []string{ "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36 HubSpot Webcrawler - web-crawlers@hubspot.com", "Mozilla/5.0 (X11; Linux x86_64; HubSpot Single Page link check; web-crawlers+links@hubspot.com) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36", "Mozilla/5.0 (compatible; HubSpot Crawler; web-crawlers@hubspot.com)" },
+			Instances:    []string{ "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36 HubSpot Webcrawler - web-crawlers@hubspot.com", "Mozilla/5.0 (X11; Linux x86_64; HubSpot Single Page link check; web-crawlers+links@hubspot.com) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36", "Mozilla/5.0 (compatible; HubSpot Crawler; web-crawlers@hubspot.com)", "HubSpot Connect 2.0 (http://dev.hubspot.com/) - BizOpsCompanies-Tq2-BizCoDomainValidationAudit" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2019/04/15"),
@@ -4291,10 +4303,11 @@ func ExactMatch(ua string) *Crawler {
     // #421
 	case "Tiny Tiny RSS/1.15.3 (http://tt-rss.org/)",
         "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)",
-        "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)":
+        "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)",
+        "Tiny Tiny RSS/19.8 (http://tt-rss.org/)":
 		return &Crawler{
 			Pattern:      `Tiny Tiny RSS`,
-			Instances:    []string{ "Tiny Tiny RSS/1.15.3 (http://tt-rss.org/)", "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)", "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)" },
+			Instances:    []string{ "Tiny Tiny RSS/1.15.3 (http://tt-rss.org/)", "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)", "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)", "Tiny Tiny RSS/19.8 (http://tt-rss.org/)" },
 			URL:          stringer("http://tt-rss.org/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/10/04"),
@@ -4740,6 +4753,7 @@ var rgxp419 = regexp.MustCompile(`Friendica`)
 var rgxp420 = regexp.MustCompile(`NextCloud`)
 var rgxp421 = regexp.MustCompile(`Tiny Tiny RSS`)
 var rgxp422 = regexp.MustCompile(`RegionStuttgartBot`)
+var rgxp423 = regexp.MustCompile(`Bytespider`)
 
 // RegexpMatch allows you to identify if and which kind of crawler a User Agent belongs to
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
@@ -6869,7 +6883,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp212.MatchString(ua):
 		return &Crawler{
 			Pattern:      `WhatsApp`,
-			Instances:    []string{ "WhatsApp", "WhatsApp/2.12.15/i", "WhatsApp/2.12.16/i", "WhatsApp/2.12.17/i", "WhatsApp/2.12.449 A", "WhatsApp/2.12.453 A", "WhatsApp/2.12.510 A", "WhatsApp/2.12.540 A", "WhatsApp/2.12.548 A", "WhatsApp/2.12.555 A", "WhatsApp/2.12.556 A", "WhatsApp/2.16.1/i", "WhatsApp/2.16.13 A", "WhatsApp/2.16.2/i", "WhatsApp/2.16.42 A", "WhatsApp/2.16.57 A", "WhatsApp/2.19.175 A", "WhatsApp/0.3.4479 N" },
+			Instances:    []string{ "WhatsApp", "WhatsApp/2.12.15/i", "WhatsApp/2.12.16/i", "WhatsApp/2.12.17/i", "WhatsApp/2.12.449 A", "WhatsApp/2.12.453 A", "WhatsApp/2.12.510 A", "WhatsApp/2.12.540 A", "WhatsApp/2.12.548 A", "WhatsApp/2.12.555 A", "WhatsApp/2.12.556 A", "WhatsApp/2.16.1/i", "WhatsApp/2.16.13 A", "WhatsApp/2.16.2/i", "WhatsApp/2.16.42 A", "WhatsApp/2.16.57 A", "WhatsApp/2.19.92 i", "WhatsApp/2.19.175 A", "WhatsApp/2.19.244 A", "WhatsApp/2.19.258 A", "WhatsApp/0.3.4479 N", "WhatsApp/0.3.4679 N", "WhatsApp/0.3.4941 N" },
 			URL:          stringer("https://www.whatsapp.com/"),
 			Description:  nil,
 			AdditionDate: stringer("2016/11/15"),
@@ -7509,7 +7523,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp276.MatchString(ua):
 		return &Crawler{
 			Pattern:      `^Apache-HttpClient`,
-			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)", "Apache-HttpClient/4.5.2 (Java/1.8.0_161)", "Apache-HttpClient/4.5.2 (Java/1.8.0_151)", "Apache-HttpClient/4.5.7 (Java/11.0.3)" },
+			Instances:    []string{ "Apache-HttpClient/4.2.3 (java 1.5)", "Apache-HttpClient/4.2.5 (java 1.5)", "Apache-HttpClient/4.3.1 (java 1.5)", "Apache-HttpClient/4.3.3 (java 1.5)", "Apache-HttpClient/4.3.5 (java 1.5)", "Apache-HttpClient/4.4.1 (Java/1.8.0_65)", "Apache-HttpClient/4.5.2 (Java/1.8.0_65)", "Apache-HttpClient/4.5.2 (Java/1.8.0_151)", "Apache-HttpClient/4.5.2 (Java/1.8.0_161)", "Apache-HttpClient/4.5.2 (Java/1.8.0_181)", "Apache-HttpClient/4.5.3 (Java/1.8.0_121)", "Apache-HttpClient/4.5.3-SNAPSHOT (Java/1.8.0_152)", "Apache-HttpClient/4.5.7 (Java/11.0.3)", "Apache-HttpClient/4.5.10 (Java/1.8.0_201)" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2017/11/02"),
@@ -7879,7 +7893,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp313.MatchString(ua):
 		return &Crawler{
 			Pattern:      `Hatena`,
-			Instances:    []string{ "Hatena Antenna/0.3", "Hatena::Russia::Crawler/0.01", "Hatena-Favicon/2 (http://www.hatena.ne.jp/faq/)", "Hatena::Scissors/0.01" },
+			Instances:    []string{ "Hatena Antenna/0.3", "Hatena::Russia::Crawler/0.01", "Hatena-Favicon/2 (http://www.hatena.ne.jp/faq/)", "Hatena::Scissors/0.01", "HatenaBookmark/4.0 (Hatena::Bookmark; Analyzer)", "Hatena::Fetcher/0.01 (master) Furl/3.13" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2018/05/29"),
@@ -8809,7 +8823,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp406.MatchString(ua):
 		return &Crawler{
 			Pattern:      `HubSpot`,
-			Instances:    []string{ "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36 HubSpot Webcrawler - web-crawlers@hubspot.com", "Mozilla/5.0 (X11; Linux x86_64; HubSpot Single Page link check; web-crawlers+links@hubspot.com) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36", "Mozilla/5.0 (compatible; HubSpot Crawler; web-crawlers@hubspot.com)" },
+			Instances:    []string{ "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36 HubSpot Webcrawler - web-crawlers@hubspot.com", "Mozilla/5.0 (X11; Linux x86_64; HubSpot Single Page link check; web-crawlers+links@hubspot.com) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36", "Mozilla/5.0 (compatible; HubSpot Crawler; web-crawlers@hubspot.com)", "HubSpot Connect 2.0 (http://dev.hubspot.com/) - BizOpsCompanies-Tq2-BizCoDomainValidationAudit" },
 			URL:          nil,
 			Description:  nil,
 			AdditionDate: stringer("2019/04/15"),
@@ -8959,7 +8973,7 @@ func RegexpMatch(ua string) *Crawler {
 	case rgxp421.MatchString(ua):
 		return &Crawler{
 			Pattern:      `Tiny Tiny RSS`,
-			Instances:    []string{ "Tiny Tiny RSS/1.15.3 (http://tt-rss.org/)", "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)", "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)" },
+			Instances:    []string{ "Tiny Tiny RSS/1.15.3 (http://tt-rss.org/)", "Tiny Tiny RSS/17.12 (a2d1fa5) (http://tt-rss.org/)", "Tiny Tiny RSS/19.2 (b68db2d) (http://tt-rss.org/)", "Tiny Tiny RSS/19.8 (http://tt-rss.org/)" },
 			URL:          stringer("http://tt-rss.org/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/10/04"),
@@ -8973,6 +8987,16 @@ func RegexpMatch(ua string) *Crawler {
 			URL:          stringer("http://it.region-stuttgart.de/competenzatlas/unternehmen-suchen/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/10/17"),
+			DependsOn:    []string{  },
+		}
+
+	case rgxp423.MatchString(ua):
+		return &Crawler{
+			Pattern:      `Bytespider`,
+			Instances:    []string{  },
+			URL:          stringer("https://stackoverflow.com/questions/57908900/what-is-the-bytespider-user-agent"),
+			Description:  nil,
+			AdditionDate: stringer("2019/11/11"),
 			DependsOn:    []string{  },
 		}
 
