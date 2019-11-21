@@ -1,4 +1,5 @@
 package crawlerflagger
+
 // DO NOT EDIT: Auto generated
 
 import "regexp"
@@ -16,15 +17,15 @@ type Crawler struct {
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
 func ExactMatch(ua string) *Crawler {
 	switch ua {
-{{ range $k, $v := . }}{{ if .Instances }}    // #{{ $k }}
-	case {{ range $i, $e := .Instances }}{{ if $i }}{{printf ",\n        "}}{{ end }}"{{ . }}"{{ end }}:
+{{ range $k, $v := . }}{{ if .Instances }}               // #{{ $k }}
+	case {{ range $i, $e := .Instances }}{{ if $i }}{{printf ",\n               "}}{{ end }}"{{ . }}"{{ end }}:
 		return &Crawler{
 			Pattern:      `{{ .Pattern }}`,
-			Instances:    []string{ {{ range $i, $e := .Instances }}{{if $i}}, {{ end }}"{{ . }}"{{ end }} },
+			Instances:    []string{{`{`}}{{ range $i, $e := .Instances }}{{if $i}}, {{ end }}"{{ . }}"{{ end }}{{`}`}},
 			URL:          {{ if .URL }}stringer("{{ .URL }}"){{ else }}nil{{ end }},
 			Description:  {{ if .Description }}stringer("{{ .Description }}"){{ else }}nil{{ end }},
 			AdditionDate: {{ if .AdditionDate }}stringer("{{ .AdditionDate }}"){{ else }}nil{{ end }},
-			DependsOn:    []string{ {{ range $i, $e := .DependsOn }}{{ if $i }}, {{ end }}"{{ . }}"{{ end }} },
+			DependsOn:    []string{{`{`}}{{ range $i, $e := .DependsOn }}{{ if $i }}, {{ end }}"{{ . }}"{{ end }}{{`}`}},
 		}
 {{ end }}{{ end }}
 	default:
