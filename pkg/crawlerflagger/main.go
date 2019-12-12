@@ -4366,6 +4366,16 @@ func ExactMatch(ua string) *Crawler {
 			AdditionDate: stringer("2019/11/17"),
 			DependsOn:    []string{},
 		}
+               // #425
+	case "Mozilla/5.0 (compatible; Google-Site-Verification/1.0)":
+		return &Crawler{
+			Pattern:      `Google-Site-Verification`,
+			Instances:    []string{"Mozilla/5.0 (compatible; Google-Site-Verification/1.0)"},
+			URL:          stringer("https://support.google.com/webmasters/answer/9008080"),
+			Description:  nil,
+			AdditionDate: stringer("2019/12/11"),
+			DependsOn:    []string{},
+		}
 
 	default:
 		return nil
@@ -4798,6 +4808,7 @@ var rgxp421 = regexp.MustCompile(`Tiny Tiny RSS`)
 var rgxp422 = regexp.MustCompile(`RegionStuttgartBot`)
 var rgxp423 = regexp.MustCompile(`Bytespider`)
 var rgxp424 = regexp.MustCompile(`Datanyze`)
+var rgxp425 = regexp.MustCompile(`Google-Site-Verification`)
 
 // RegexpMatch allows you to identify if and which kind of crawler a User Agent belongs to
 // The data are taken from the https://github.com/monperrus/crawler-user-agents/ project
@@ -9051,6 +9062,16 @@ func RegexpMatch(ua string) *Crawler {
 			URL:          stringer("https://www.datanyze.com/dnyzbot/"),
 			Description:  nil,
 			AdditionDate: stringer("2019/11/17"),
+			DependsOn:    []string{  },
+		}
+
+	case rgxp425.MatchString(ua):
+		return &Crawler{
+			Pattern:      `Google-Site-Verification`,
+			Instances:    []string{ "Mozilla/5.0 (compatible; Google-Site-Verification/1.0)" },
+			URL:          stringer("https://support.google.com/webmasters/answer/9008080"),
+			Description:  nil,
+			AdditionDate: stringer("2019/12/11"),
 			DependsOn:    []string{  },
 		}
 
