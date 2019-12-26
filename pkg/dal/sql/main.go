@@ -1,6 +1,7 @@
 package sql
 
 import (
+	"errors"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -15,7 +16,10 @@ type DP struct {
 }
 
 func New(bo objects.BackendOptions) (*DP, error) {
-	conn, err := gorm.Open("sqlite3", "database.db")
+	if len(bo.Path) == 0 {
+		return nil, errors.New("path option in back-end options is required")
+	}
+	conn, err := gorm.Open("sqlite3", bo.Path)
 	if err != nil {
 		return nil, err
 	}

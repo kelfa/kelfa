@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/spf13/viper"
 	"go.kelfa.io/kelfa/pkg/dal"
@@ -18,7 +19,7 @@ func main() {
 		fmt.Printf("fatal error config file: %s \n", err)
 		return
 	}
-	fs, err := dal.New("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder")})
+	fs, err := dal.New("filesystem", objects.BackendOptions{Path: fmt.Sprintf("%s/.kelfa/database.db", os.Getenv("HOME"))})
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
