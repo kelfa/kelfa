@@ -11,8 +11,7 @@ import (
 )
 
 type DP struct {
-	conn   *gorm.DB
-	prefix string
+	conn *gorm.DB
 }
 
 func New(bo objects.BackendOptions) (*DP, error) {
