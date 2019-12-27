@@ -19,11 +19,11 @@ func main() {
 		fmt.Printf("fatal error config file: %s \n", err)
 		return
 	}
-	fs, err := dal.New("filesystem", objects.BackendOptions{Path: fmt.Sprintf("%s/.kelfa/database.db", os.Getenv("HOME"))})
+	fs, err := dal.New("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder")})
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
-	sql, err := dal.NewWritableDataSource("sqlite", objects.BackendOptions{})
+	sql, err := dal.NewWritableDataSource("sqlite", objects.BackendOptions{Path: fmt.Sprintf("%s/.kelfa/database.db", os.Getenv("HOME"))})
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
@@ -39,9 +39,26 @@ func main() {
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
+	dpssql, err := sql.GetDataPoints(*fromTime, *toTime)
+	if err != nil {
+		log.Fatalf("%v", err)
+	}
 	for _, dp := range dps {
-		if err := sql.AddDataPoint(dp); err != nil {
-			log.Fatalf("%v", err)
+		var present bool
+		for _, dpsql := range dpssql {
+			if dp.ID == dpsql.ID {
+				present = true
+				break
+			}
+		}
+		if !present {
+			fmt.Printf("Going to add %s %s...", dp.DateTime, dp.ID)
+			if err := sql.AddDataPoint(dp); err != nil {
+				log.Fatalf("%v", err)
+			}
+			fmt.Printf(" done\n")
+		} else {
+			fmt.Printf("Not going to add %s %s. Already present\n", dp.DateTime, dp.ID)
 		}
 	}
 }

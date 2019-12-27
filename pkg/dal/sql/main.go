@@ -31,7 +31,7 @@ func New(bo objects.BackendOptions) (*DP, error) {
 
 func (d *DP) DataBeginTime() (*time.Time, error) {
 	dp := new(objects.DataPoint)
-	err := d.conn.Order("date-time").First(&dp).Error
+	err := d.conn.Order("date_time").First(&dp).Error
 	if gorm.IsRecordNotFoundError(err) {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ func (d *DP) DataBeginTime() (*time.Time, error) {
 
 func (d *DP) DataEndTime() (*time.Time, error) {
 	dp := new(objects.DataPoint)
-	err := d.conn.Order("date-time desc").First(&dp).Error
+	err := d.conn.Order("date_time desc").First(&dp).Error
 	if gorm.IsRecordNotFoundError(err) {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (d *DP) DataEndTime() (*time.Time, error) {
 
 func (d *DP) GetDataPoints(from time.Time, to time.Time) ([]objects.DataPoint, error) {
 	var items []objects.DataPoint
-	if err := d.conn.Where("date-time >= ?", from).Where("date-time <= ?", to).Find(&items).Error; err != nil {
+	if err := d.conn.Where("date_time >= ?", from).Where("date_time <= ?", to).Find(&items).Error; err != nil {
 		return nil, err
 	}
 	return items, nil
