@@ -15,7 +15,7 @@ type DataSource interface {
 	GetDataPoints(from time.Time, to time.Time) ([]objects.DataPoint, error)
 }
 
-func New(backend string, bo objects.BackendOptions) (DataSource, error) {
+func NewDataSource(backend string, bo objects.BackendOptions) (DataSource, error) {
 	switch backend {
 	case "filesystem":
 		return filesystem.New(bo)

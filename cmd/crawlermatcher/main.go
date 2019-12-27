@@ -23,7 +23,7 @@ func main() {
 		return
 	}
 
-	ds, err := dal.New("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder")})
+	ds, err := dal.NewDataSource("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder")})
 	if err != nil {
 		log.Fatalf("%v", err)
 	}

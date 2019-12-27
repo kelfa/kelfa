@@ -28,7 +28,7 @@ var dbImportCmd = &cobra.Command{
 }
 
 func dbImport(cmd *cobra.Command, args []string) error {
-	fs, err := dal.New("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder")})
+	fs, err := dal.NewDataSource("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder")})
 	if err != nil {
 		return err
 	}

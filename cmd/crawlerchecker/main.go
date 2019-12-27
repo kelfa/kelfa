@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"sort"
 	"time"
 
@@ -22,7 +23,7 @@ func main() {
 		return
 	}
 
-	ds, err := dal.New("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder")})
+	ds, err := dal.NewDataSource("sqlite", objects.BackendOptions{Path: fmt.Sprintf("%s/.kelfa/database.db", os.Getenv("HOME"))})
 	if err != nil {
 		log.Fatalf("%v", err)
 	}

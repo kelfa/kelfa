@@ -24,7 +24,7 @@ func TestCacheStats(t *testing.T) {
 		},
 	}
 
-	data, err := dal.New("filesystem", objects.BackendOptions{Path: "../../test/data/logs"})
+	data, err := dal.NewDataSource("filesystem", objects.BackendOptions{Path: "../../test/data/logs"})
 	if err != nil {
 		t.Errorf("an error occurred while creating the filesystem object: %v", err)
 	}
