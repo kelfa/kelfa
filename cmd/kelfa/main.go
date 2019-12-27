@@ -52,5 +52,5 @@ func defaultFromDate() string {
 
 func defaultToDate() string {
 	d := time.Now().AddDate(0, 0, -2)
-	return time.Date(d.Year(), d.Month(), d.Day(), 23, 59, 59, 0, time.UTC).Format(time.RFC3339)
+	return time.Date(d.Year(), d.Month(), d.Day(), 23, 59, 59, 999999999, time.UTC).Format(time.RFC3339)
 }
