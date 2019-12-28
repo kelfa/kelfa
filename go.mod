@@ -13,5 +13,4 @@ require (
 	github.com/spf13/viper v1.4.0
 	github.com/t-tiger/gorm-bulk-insert v1.2.0
 	github.com/urfave/negroni v1.0.0
-	go.kelfa.io/elf v0.0.0-20190716181855-16550ebaeb55
 )

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"go.kelfa.io/aws-cloudfront-logCompactor/pkg/timeSafety"
+	"go.kelfa.io/pkg/timeSafety"
 )
 
 type dataPoint struct {

@@ -264,9 +264,6 @@ github.com/valyala/tcplisten v0.0.0-20161114210144-ceec8f93295a/go.mod h1:v3UYOV
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
 github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77/go.mod h1:aYKd//L2LvnjZzWKhF00oedf4jCCReLcmhLdhm1A27Q=
 go.etcd.io/bbolt v1.3.2/go.mod h1:IbVyRI1SCnLcuJnV2u8VeU0CEYM7e686BmAb1XKL+uU=
-go.kelfa.io v0.0.0-20191228104231-105af033134d h1:ppdRMhOiqV/RnA5ANbc+gY2gxzZFgQ5t/Gc1aPmkAs8=
-go.kelfa.io/elf v0.0.0-20190716181855-16550ebaeb55 h1:ihSgVe72Pfw7wOZHxfuYlZ6jdqppYUmXW5kDpA+q5O8=
-go.kelfa.io/elf v0.0.0-20190716181855-16550ebaeb55/go.mod h1:VHjXCJgjScl+/K7GPzbu+3tB2AY6mr6vbEeSiAZra/g=
 go.opencensus.io v0.20.1/go.mod h1:6WKK9ahsWS3RSO+PY9ZHZUfv2irvY6gN279GOPZjmmk=
 go.uber.org/atomic v1.4.0/go.mod h1:gD2HeocX3+yG+ygLZcrzQJaqmWj9AIm7n08wl/qW/PE=
 go.uber.org/multierr v1.1.0/go.mod h1:wR5kodmAFQ0UK8QlbwjlSNy0Z68gJhDJUG5sjR94q/0=
