@@ -3,6 +3,7 @@ module go.kelfa.io/kelfa
 go 1.12
 
 require (
+	github.com/aws/aws-sdk-go v1.26.8
 	github.com/davecgh/go-spew v1.1.1
 	github.com/golangci/golangci-lint v1.19.1 // indirect
 	github.com/gorilla/mux v1.7.3
