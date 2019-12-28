@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/jinzhu/gorm"
-	"go.kelfa.io/kelfa/pkg/dal/objects"
+	"go.kelfa.io/pkg/dal/objects"
 
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )

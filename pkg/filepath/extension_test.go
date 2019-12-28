@@ -3,7 +3,7 @@ package filepath_test
 import (
 	"testing"
 
-	"go.kelfa.io/kelfa/pkg/filepath"
+	"go.kelfa.io/pkg/filepath"
 )
 
 func TestExt(t *testing.T) {

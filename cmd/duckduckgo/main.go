@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
-	"go.kelfa.io/kelfa/pkg/analytics"
-	"go.kelfa.io/kelfa/pkg/dal"
-	"go.kelfa.io/kelfa/pkg/dal/objects"
-	"go.kelfa.io/kelfa/pkg/session"
+	"go.kelfa.io/pkg/analytics"
+	"go.kelfa.io/pkg/dal"
+	"go.kelfa.io/pkg/dal/objects"
+	"go.kelfa.io/pkg/session"
 )
 
 func main() {

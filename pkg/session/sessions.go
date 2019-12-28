@@ -3,7 +3,7 @@ package session
 import (
 	"time"
 
-	"go.kelfa.io/kelfa/pkg/dal/objects"
+	"go.kelfa.io/pkg/dal/objects"
 )
 
 type Sessions []Session

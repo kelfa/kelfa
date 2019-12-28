@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"go.kelfa.io/kelfa/pkg/dal/filesystem"
-	"go.kelfa.io/kelfa/pkg/dal/objects"
-	"go.kelfa.io/kelfa/pkg/dal/sql"
+	"go.kelfa.io/pkg/dal/filesystem"
+	"go.kelfa.io/pkg/dal/objects"
+	"go.kelfa.io/pkg/dal/sql"
 )
 
 type DataSource interface {

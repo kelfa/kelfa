@@ -1,7 +1,7 @@
 package filesystem
 
 import (
-	"go.kelfa.io/kelfa/pkg/dal/objects"
+	"go.kelfa.io/pkg/dal/objects"
 )
 
 type DP struct {

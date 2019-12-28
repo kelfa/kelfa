@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"go.kelfa.io/kelfa/pkg/dal/filesystem"
-	"go.kelfa.io/kelfa/pkg/dal/objects"
+	"go.kelfa.io/pkg/dal/filesystem"
+	"go.kelfa.io/pkg/dal/objects"
 )
 
 func TestDataEndTime(t *testing.T) {

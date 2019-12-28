@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"go.kelfa.io/elf"
-	"go.kelfa.io/kelfa/pkg/dal/objects"
+	"go.kelfa.io/pkg/dal/objects"
 )
 
 func (d *DP) getRelatedDays(from time.Time, to time.Time) []time.Time {

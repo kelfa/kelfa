@@ -1,6 +1,7 @@
-cmd/kelfa/kelfa
+cmd/aws-cloudfront-logCompactor/aws-cloudfront-logCompactor
 cmd/crawlerchecker/crawlerchecker
 cmd/crawlermatcher/crawlermatcher
 cmd/duckduckgo/duckduckgo
 cmd/googlebotValidator/googlebotValidator
+cmd/kelfa/kelfa
 pkg/crawlerflagger/generator/generator
