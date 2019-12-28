@@ -7,7 +7,7 @@ go:
 matrix:
   allow_failures:
     - go: master
-go_import_path: go.kelfa.io/kelfa
+go_import_path: go.kelfa.io
 before_script:
   - go get github.com/golangci/golangci-lint/cmd/golangci-lint
   - go install github.com/golangci/golangci-lint/cmd/golangci-lint
