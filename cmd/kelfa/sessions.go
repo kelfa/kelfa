@@ -6,10 +6,6 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-
-	"go.kelfa.io/pkg/analytics"
-	"go.kelfa.io/pkg/dal"
-	"go.kelfa.io/pkg/dal/objects"
 )
 
 func init() {
@@ -35,27 +31,26 @@ var sessionsCmd = &cobra.Command{
 }
 
 func sessions(cmd *cobra.Command, args []string) error {
-	ds, err := dal.NewDataSource("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder"), From: fromTime, To: toTime})
-	if err != nil {
-		return err
-	}
-	mode, err := analytics.ParseMode(viper.GetString("mode"))
-	if err != nil {
-		return err
-	}
-	a, err := analytics.New(&ds, fromTime, toTime, mode, viper.GetDuration("session_inactivity_timeout"))
-	if err != nil {
-		return err
-	}
-	var sessionsAmount int
-	var cs int
-	for _, s := range a.Sessions {
-		if s.Crawler {
-			cs++
+	/*
+		mode, err := analytics.ParseMode(viper.GetString("mode"))
+		if err != nil {
+			return err
 		}
-		sessionsAmount++
-	}
-	fmt.Printf("a total of %v sessions have been registered\n", sessionsAmount)
-	fmt.Printf("of those, %v sessions are made by crawlers\n", cs)
+		a, err := analytics.New(&ds, fromTime, toTime, mode, viper.GetDuration("session_inactivity_timeout"))
+		if err != nil {
+			return err
+		}
+		var sessionsAmount int
+		var cs int
+		for _, s := range a.Sessions {
+			if s.Crawler {
+				cs++
+			}
+			sessionsAmount++
+		}
+		fmt.Printf("a total of %v sessions have been registered\n", sessionsAmount)
+		fmt.Printf("of those, %v sessions are made by crawlers\n", cs)
+		return nil
+	*/
 	return nil
 }

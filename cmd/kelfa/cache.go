@@ -4,13 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-
-	"go.kelfa.io/pkg/analytics"
-	"go.kelfa.io/pkg/dal"
-	"go.kelfa.io/pkg/dal/objects"
 )
 
 func init() {
@@ -39,19 +34,17 @@ var fromTime time.Time
 var toTime time.Time
 
 func cache(cmd *cobra.Command, args []string) error {
-	ds, err := dal.NewDataSource("filesystem", objects.BackendOptions{Path: viper.GetString("data_folder"), From: fromTime, To: toTime})
-	if err != nil {
-		return err
-	}
-	mode, err := analytics.ParseMode(viper.GetString("mode"))
-	if err != nil {
-		return err
-	}
-	a, err := analytics.New(&ds, fromTime, toTime, mode, viper.GetDuration("session_inactivity_timeout"))
-	if err != nil {
-		return err
-	}
-	cs := a.CacheStats()
-	spew.Dump(cs)
+	/*	mode, err := analytics.ParseMode(viper.GetString("mode"))
+		if err != nil {
+			return err
+		}
+		a, err := analytics.New(&ds, fromTime, toTime, mode, viper.GetDuration("session_inactivity_timeout"))
+		if err != nil {
+			return err
+		}
+		cs := a.CacheStats()
+		spew.Dump(cs)
+	*/
+	ds.CacheStats()
 	return nil
 }

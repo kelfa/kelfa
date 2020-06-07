@@ -7,7 +7,10 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"go.kelfa.io/pkg/lib"
 )
+
+var ds *lib.DataSource
 
 func main() {
 	if err := rootCmd.Execute(); err != nil {
@@ -23,6 +26,11 @@ func init() {
 	err := viper.ReadInConfig()
 	if err != nil {
 		fmt.Printf("fatal error config file: %s \n", err)
+		return
+	}
+	ds, err = lib.New(fmt.Sprintf("%s/.kelfa/database.db", os.Getenv("HOME")))
+	if err != nil {
+		fmt.Printf("fatal error loading datasource: %s \n", err)
 		return
 	}
 
@@ -46,11 +54,12 @@ var rootCmd = &cobra.Command{
 }
 
 func defaultFromDate() string {
-	d := time.Now().AddDate(0, 0, -8)
+	dd, _ := ds.DataEndTime()
+	d := dd.AddDate(0, 0, -6)
 	return time.Date(d.Year(), d.Month(), d.Day(), 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
 }
 
 func defaultToDate() string {
-	d := time.Now().AddDate(0, 0, -2)
-	return time.Date(d.Year(), d.Month(), d.Day(), 23, 59, 59, 999999999, time.UTC).Format(time.RFC3339)
+	d, _ := ds.DataEndTime()
+	return d.Format(time.RFC3339)
 }

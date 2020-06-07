@@ -9,12 +9,14 @@ import (
 	"github.com/spf13/viper"
 	"go.kelfa.io/pkg/dal"
 	"go.kelfa.io/pkg/dal/objects"
+	"go.kelfa.io/pkg/lib"
 )
 
 func init() {
 	rootCmd.AddCommand(dbCmd)
 	dbCmd.AddCommand(dbImportCmd)
 	dbImportCmd.PersistentFlags().Bool("full", false, "rescan all files")
+	dbCmd.AddCommand(dbSessionsUpdateCmd)
 }
 
 var dbCmd = &cobra.Command{
@@ -126,4 +128,33 @@ func dbDeepImport(cmd *cobra.Command, args []string) error {
 		}
 	}
 	return nil
+}
+
+var dbSessionsUpdateCmd = &cobra.Command{
+	Use:   "sessions-update",
+	Short: "update sessions data",
+	RunE:  dbSessionUpdate,
+}
+
+func dbSessionUpdate(cmd *cobra.Command, args []string) error {
+	fromTime, err := ds.DataBeginTime()
+	if err != nil {
+		return err
+	}
+	toTime, err := ds.DataEndTime()
+	if err != nil {
+		return err
+	}
+	dsdps, err := ds.GetDataPoints(*fromTime, *toTime)
+	if err != nil {
+		return err
+	}
+	var ss lib.Sessions
+	for _, s := range dsdps {
+		s := s
+		ss.AddDataPoint(&s)
+	}
+	ss.SplitSessions(viper.GetDuration("session_inactivity_timeout"))
+	err = ds.SaveSessionsToDB(ss)
+	return err
 }

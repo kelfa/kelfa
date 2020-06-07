@@ -7,12 +7,14 @@ import (
 	"go.kelfa.io/pkg/dal/filesystem"
 	"go.kelfa.io/pkg/dal/objects"
 	"go.kelfa.io/pkg/dal/sql"
+	"go.kelfa.io/pkg/session"
 )
 
 type DataSource interface {
 	DataBeginTime() (*time.Time, error)
 	DataEndTime() (*time.Time, error)
 	GetDataPoints(from time.Time, to time.Time) ([]objects.DataPoint, error)
+	CacheStats() *session.CacheStats
 }
 
 func NewDataSource(backend string, bo objects.BackendOptions) (DataSource, error) {
