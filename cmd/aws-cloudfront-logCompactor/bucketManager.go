@@ -164,13 +164,13 @@ func (b *BucketManager) MergeFiles(fromFiles []string, toFile string) (err error
 	for _, lf := range fromFiles {
 		content, err := b.ReadLogFile(lf)
 		if err != nil {
-			return fmt.Errorf("unable to read the content of the %s file: %v", lf, err)
+			return fmt.Errorf("unable to read the content of the file %s: %v", lf, err)
 		}
 		elfReader := elf.NewReader(bytes.NewReader(content))
 		entries, err := elfReader.ReadAll()
 		allEntries = append(allEntries, entries...)
 		if err != nil {
-			return err
+			return fmt.Errorf("error while processing the file %s: %v", lf, err)
 		}
 		fields = elfReader.Fields
 	}

@@ -1,4 +1,4 @@
-// Copyright 2019 The Kelfe authors. All rights reserved.
+// Copyright 2019 The Kelfa authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE.txt file.
 
@@ -10,11 +10,6 @@ import (
 	"fmt"
 	"io"
 	"strings"
-)
-
-var (
-	// ErrFieldCount is returned when the line has the wrong number of fields
-	ErrFieldCount = errors.New("wrong number of fields")
 )
 
 // A Reader reads records from an Extended Log Format file.
@@ -60,7 +55,7 @@ func NewReader(r io.Reader) *Reader {
 
 // Read reads one record (a slice of fields) from r.
 // If the record has an unexpected number of fields,
-// Read returns the error ErrFieldCount.
+// it returns an error
 //
 // Read always returns either a non-nil record or a non-nil error, but not both.
 // The only exception is if the line is a comment or empty, then both the
@@ -111,9 +106,10 @@ func (r *Reader) readRecord() (map[string]string, error) {
 	if len(r.Fields) == 0 {
 		return nil, errors.New("no Fields directive found")
 	}
-	fs := strings.Fields(string(bs))
+	bss := strings.ReplaceAll(string(bs), ", ", ",%20")
+	fs := strings.Fields(bss)
 	if len(fs) != len(r.Fields) {
-		return nil, ErrFieldCount
+		return nil, fmt.Errorf("wrong number of fields: expecting %v, found %v", len(r.Fields), len(fs))
 	}
 	record := make(map[string]string)
 	for i, f := range fs {
