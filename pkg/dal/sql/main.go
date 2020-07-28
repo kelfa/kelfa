@@ -6,6 +6,7 @@ import (
 
 	"github.com/jinzhu/gorm"
 	"go.kelfa.io/pkg/dal/objects"
+	"go.kelfa.io/pkg/session"
 
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
@@ -68,6 +69,19 @@ func (d *DP) AddDataPoint(item objects.DataPoint) error {
 func (d *DP) AddDataPoints(items []objects.DataPoint) error {
 	for _, item := range items {
 		if err := d.AddDataPoint(item); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (d *DP) AddSession(item session.Session) error {
+	return d.conn.Create(&item).Error
+}
+
+func (d *DP) AddSessions(items []session.Session) error {
+	for _, item := range items {
+		if err := d.AddSession(item); err != nil {
 			return err
 		}
 	}

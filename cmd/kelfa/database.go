@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/viper"
 	"go.kelfa.io/pkg/dal"
 	"go.kelfa.io/pkg/dal/objects"
-	"go.kelfa.io/pkg/lib"
+	"go.kelfa.io/pkg/session"
 )
 
 func init() {
@@ -149,12 +149,12 @@ func dbSessionUpdate(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	var ss lib.Sessions
+	var ss session.Sessions
 	for _, s := range dsdps {
 		s := s
 		ss.AddDataPoint(&s)
 	}
 	ss.SplitSessions(viper.GetDuration("session_inactivity_timeout"))
-	err = ds.SaveSessionsToDB(ss)
+	err = ds.AddSessions(ss)
 	return err
 }

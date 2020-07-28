@@ -7,10 +7,11 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"go.kelfa.io/pkg/lib"
+	"go.kelfa.io/pkg/dal"
+	"go.kelfa.io/pkg/dal/objects"
 )
 
-var ds *lib.DataSource
+var ds dal.WritableDataSource
 
 func main() {
 	if err := rootCmd.Execute(); err != nil {
@@ -28,7 +29,7 @@ func init() {
 		fmt.Printf("fatal error config file: %s \n", err)
 		return
 	}
-	ds, err = lib.New(fmt.Sprintf("%s/.kelfa/database.db", os.Getenv("HOME")))
+	ds, err = dal.NewWritableDataSource("sqlite", objects.BackendOptions{Path: fmt.Sprintf("%s/.kelfa/database.db", os.Getenv("HOME"))})
 	if err != nil {
 		fmt.Printf("fatal error loading datasource: %s \n", err)
 		return

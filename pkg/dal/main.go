@@ -31,6 +31,8 @@ type WritableDataSource interface {
 	DataSource
 	AddDataPoint(objects.DataPoint) error
 	AddDataPoints([]objects.DataPoint) error
+	AddSession(session.Session) error
+	AddSessions([]session.Session) error
 }
 
 func NewWritableDataSource(backend string, bo objects.BackendOptions) (WritableDataSource, error) {
