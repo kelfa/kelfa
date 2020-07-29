@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -16,6 +17,7 @@ func init() {
 	rootCmd.AddCommand(dbCmd)
 	dbCmd.AddCommand(dbImportCmd)
 	dbImportCmd.PersistentFlags().Bool("full", false, "rescan all files")
+	viper.BindPFlag("full", dbImportCmd.PersistentFlags().Lookup("full"))
 	dbCmd.AddCommand(dbSessionsUpdateCmd)
 }
 
@@ -63,6 +65,7 @@ func dbIncrementalImport(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
+	var imported time.Time
 	for _, dp := range dps {
 		var present bool
 		for _, dpsql := range dpssql {
@@ -71,14 +74,14 @@ func dbIncrementalImport(cmd *cobra.Command, args []string) error {
 				break
 			}
 		}
+		if imported.Format("20060102") != dp.DateTime.Format("20060102") {
+			fmt.Printf("Importing data of %s\n", dp.DateTime.Format("02/01/2006"))
+			imported = dp.DateTime
+		}
 		if !present {
-			fmt.Printf("Going to add %s %s...", dp.DateTime, dp.ID)
 			if err := sql.AddDataPoint(dp); err != nil {
 				log.Fatalf("%v", err)
 			}
-			fmt.Printf(" done\n")
-		} else {
-			fmt.Printf("Not going to add %s %s. Already present\n", dp.DateTime, dp.ID)
 		}
 	}
 	return nil
@@ -109,6 +112,7 @@ func dbDeepImport(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
+	var imported time.Time
 	for _, dp := range dps {
 		var present bool
 		for _, dpsql := range dpssql {
@@ -117,14 +121,14 @@ func dbDeepImport(cmd *cobra.Command, args []string) error {
 				break
 			}
 		}
+		if imported.Format("20060102") != dp.DateTime.Format("20060102") {
+			fmt.Printf("Importing data of %s\n", dp.DateTime.Format("02/01/2006"))
+			imported = dp.DateTime
+		}
 		if !present {
-			fmt.Printf("Going to add %s %s...", dp.DateTime, dp.ID)
 			if err := sql.AddDataPoint(dp); err != nil {
 				log.Fatalf("%v", err)
 			}
-			fmt.Printf(" done\n")
-		} else {
-			fmt.Printf("Not going to add %s %s. Already present\n", dp.DateTime, dp.ID)
 		}
 	}
 	return nil
