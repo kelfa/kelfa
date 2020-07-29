@@ -55,12 +55,18 @@ var rootCmd = &cobra.Command{
 }
 
 func defaultFromDate() string {
-	dd, _ := ds.DataEndTime()
+	dd, err := ds.DataEndTime()
+	if err != nil {
+		return time.Time{}.Format(time.RFC3339)
+	}
 	d := dd.AddDate(0, 0, -6)
 	return time.Date(d.Year(), d.Month(), d.Day(), 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
 }
 
 func defaultToDate() string {
-	d, _ := ds.DataEndTime()
+	d, err := ds.DataEndTime()
+	if err != nil {
+		return time.Time{}.Format(time.RFC3339)
+	}
 	return d.Format(time.RFC3339)
 }

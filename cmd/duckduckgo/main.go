@@ -42,9 +42,9 @@ func main() {
 
 	grgxp := regexp.MustCompile(`DuckDuck`)
 	gbdps := make(DP)
-	for _, s := range a.Sessions {
-		if grgxp.MatchString(*s.UserAgent) {
-			gbdps.Add(&s)
+	for i := range a.Sessions {
+		if grgxp.MatchString(*a.Sessions[i].UserAgent) {
+			gbdps.Add(&a.Sessions[i])
 		}
 	}
 
