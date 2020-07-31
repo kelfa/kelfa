@@ -17,7 +17,9 @@ func init() {
 	rootCmd.AddCommand(dbCmd)
 	dbCmd.AddCommand(dbImportCmd)
 	dbImportCmd.PersistentFlags().Bool("full", false, "rescan all files")
-	viper.BindPFlag("full", dbImportCmd.PersistentFlags().Lookup("full"))
+	if err := viper.BindPFlag("full", dbImportCmd.PersistentFlags().Lookup("full")); err != nil {
+		panic(err)
+	}
 	dbCmd.AddCommand(dbSessionsUpdateCmd)
 }
 
