@@ -24,6 +24,7 @@ func New(bo objects.BackendOptions) (*DP, error) {
 		return nil, err
 	}
 	conn.AutoMigrate(&objects.DataPoint{})
+	conn.AutoMigrate(&session.Session{})
 	d := DP{
 		conn: conn,
 	}
