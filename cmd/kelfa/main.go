@@ -24,6 +24,7 @@ func init() {
 	viper.SetConfigType("yaml")
 	viper.SetConfigName("config")
 	viper.AddConfigPath("$HOME/.kelfa")
+	viper.SetDefault("session_inactivity_timeout", "1h")
 	err := viper.ReadInConfig()
 	if err != nil {
 		fmt.Printf("fatal error config file: %s \n", err)
