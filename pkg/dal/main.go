@@ -15,6 +15,7 @@ type DataSource interface {
 	DataEndTime() (*time.Time, error)
 	GetDataPoints(from time.Time, to time.Time) ([]objects.DataPoint, error)
 	CacheStats() *session.CacheStats
+	DailySessions(time.Time, time.Time) (map[time.Time][]session.Session, error)
 }
 
 func NewDataSource(backend string, bo objects.BackendOptions) (DataSource, error) {

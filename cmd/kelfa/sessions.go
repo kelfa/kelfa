@@ -31,26 +31,12 @@ var sessionsCmd = &cobra.Command{
 }
 
 func sessions(cmd *cobra.Command, args []string) error {
-	/*
-		mode, err := analytics.ParseMode(viper.GetString("mode"))
-		if err != nil {
-			return err
-		}
-		a, err := analytics.New(&ds, fromTime, toTime, mode, viper.GetDuration("session_inactivity_timeout"))
-		if err != nil {
-			return err
-		}
-		var sessionsAmount int
-		var cs int
-		for _, s := range a.Sessions {
-			if s.Crawler {
-				cs++
-			}
-			sessionsAmount++
-		}
-		fmt.Printf("a total of %v sessions have been registered\n", sessionsAmount)
-		fmt.Printf("of those, %v sessions are made by crawlers\n", cs)
-		return nil
-	*/
+	dss, err := ds.DailySessions(fromTime, toTime)
+	if err != nil {
+		return err
+	}
+	for day, ss := range dss {
+		fmt.Printf("on the %v there have been %v sessions\n", day.Format("2006-01-02"), len(ss))
+	}
 	return nil
 }
