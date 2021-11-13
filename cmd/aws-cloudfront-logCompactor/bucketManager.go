@@ -101,23 +101,23 @@ func (b *BucketManager) ListFilesInTimeSlot(property string, ts string) ([]strin
 	return files, nil
 }
 
-// TODO: Make it AWS S3 API limit safe
 func (b *BucketManager) ListFilesInDay(property string, day string) ([]string, error) {
 	svc := s3.New(b.session)
 	logFiles := regexp.MustCompile(`([a-zA-Z0-9]+)\.([0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{2})\.([a-z0-9]+)\.gz`)
-	resp, _ := svc.ListObjects(&s3.ListObjectsInput{
+
+	var files []string
+	svc.ListObjectsPages(&s3.ListObjectsInput{
 		Bucket: &b.bucket,
 		Prefix: aws.String(fmt.Sprintf("%s.%s-", property, day)),
-	})
-	if len(resp.Contents) == 0 {
-		return nil, errors.New("no log files matching the requested parameters in the bucket")
-	}
-	var files []string
-	for _, key := range resp.Contents {
-		if logFiles.MatchString(*key.Key) {
-			files = append(files, *key.Key)
-		}
-	}
+	},
+		func(page *s3.ListObjectsOutput, lastPage bool) bool {
+			for _, value := range page.Contents {
+				if logFiles.MatchString(*value.Key) {
+					files = append(files, *value.Key)
+				}
+			}
+			return true
+		})
 	return files, nil
 }
 
