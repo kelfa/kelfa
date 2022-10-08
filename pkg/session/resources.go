@@ -3,7 +3,7 @@ package session
 import (
 	"net/http"
 
-	"go.kelfa.io/pkg/filepath"
+	"github.com/kelfa/kelfa/pkg/filepath"
 )
 
 type ResourceTypes map[string]int

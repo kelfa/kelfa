@@ -3,7 +3,7 @@ package crawlerflagger_test
 import (
 	"testing"
 
-	"go.kelfa.io/pkg/crawlerflagger"
+	"github.com/kelfa/kelfa/pkg/crawlerflagger"
 )
 
 func BenchmarkExactMatch(b *testing.B) {

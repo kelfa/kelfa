@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"go.kelfa.io/elf"
+	"github.com/kelfa/kelfa/elf"
 )
 
 func TestReadAll(t *testing.T) {

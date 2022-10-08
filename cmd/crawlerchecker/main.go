@@ -8,9 +8,9 @@ import (
 	"time"
 
 	"github.com/spf13/viper"
-	"go.kelfa.io/pkg/analytics"
-	"go.kelfa.io/pkg/dal"
-	"go.kelfa.io/pkg/dal/objects"
+	"github.com/kelfa/kelfa/pkg/analytics"
+	"github.com/kelfa/kelfa/pkg/dal"
+	"github.com/kelfa/kelfa/pkg/dal/objects"
 )
 
 func main() {

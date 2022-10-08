@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"go.kelfa.io/pkg/analytics"
-	"go.kelfa.io/pkg/dal"
-	"go.kelfa.io/pkg/dal/objects"
+	"github.com/kelfa/kelfa/pkg/analytics"
+	"github.com/kelfa/kelfa/pkg/dal"
+	"github.com/kelfa/kelfa/pkg/dal/objects"
 )
 
 func TestCacheStats(t *testing.T) {

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"go.kelfa.io/pkg/dal"
-	"go.kelfa.io/pkg/session"
+	"github.com/kelfa/kelfa/pkg/dal"
+	"github.com/kelfa/kelfa/pkg/session"
 )
 
 type Analytics struct {

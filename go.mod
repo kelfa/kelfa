@@ -1,4 +1,4 @@
-module go.kelfa.io
+module github.com/kelfa/kelfa
 
 go 1.12
 

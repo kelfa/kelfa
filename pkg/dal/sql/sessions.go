@@ -3,7 +3,7 @@ package sql
 import (
 	"time"
 
-	"go.kelfa.io/pkg/session"
+	"github.com/kelfa/kelfa/pkg/session"
 )
 
 func (d *DP) DailySessions(from time.Time, to time.Time) (map[time.Time][]session.Session, error) {

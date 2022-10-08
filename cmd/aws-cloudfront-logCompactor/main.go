@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/spf13/viper"
 
-	"go.kelfa.io/pkg/timeSafety"
+	"github.com/kelfa/kelfa/pkg/timeSafety"
 )
 
 func main() {

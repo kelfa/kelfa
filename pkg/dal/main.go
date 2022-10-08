@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 
-	"go.kelfa.io/pkg/dal/filesystem"
-	"go.kelfa.io/pkg/dal/objects"
-	"go.kelfa.io/pkg/dal/sql"
-	"go.kelfa.io/pkg/session"
+	"github.com/kelfa/kelfa/pkg/dal/filesystem"
+	"github.com/kelfa/kelfa/pkg/dal/objects"
+	"github.com/kelfa/kelfa/pkg/dal/sql"
+	"github.com/kelfa/kelfa/pkg/session"
 )
 
 type DataSource interface {

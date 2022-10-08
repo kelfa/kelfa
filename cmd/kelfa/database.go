@@ -8,9 +8,9 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"go.kelfa.io/pkg/dal"
-	"go.kelfa.io/pkg/dal/objects"
-	"go.kelfa.io/pkg/session"
+	"github.com/kelfa/kelfa/pkg/dal"
+	"github.com/kelfa/kelfa/pkg/dal/objects"
+	"github.com/kelfa/kelfa/pkg/session"
 )
 
 func init() {

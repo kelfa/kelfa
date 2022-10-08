@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"time"
 
-	"go.kelfa.io/elf"
-	"go.kelfa.io/pkg/dal/objects"
+	"github.com/kelfa/kelfa/elf"
+	"github.com/kelfa/kelfa/pkg/dal/objects"
 )
 
 func (d *DP) getRelatedDays(from time.Time, to time.Time) []time.Time {

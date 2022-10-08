@@ -1,6 +1,6 @@
 package analytics
 
-import "go.kelfa.io/pkg/session"
+import "github.com/kelfa/kelfa/pkg/session"
 
 func (a *Analytics) CacheStats() *session.CacheStats {
 	cs := session.CacheStats{}

@@ -7,8 +7,8 @@ import (
 	"sort"
 	"time"
 
-	"go.kelfa.io/pkg/crawlerflagger"
-	"go.kelfa.io/pkg/dal/objects"
+	"github.com/kelfa/kelfa/pkg/crawlerflagger"
+	"github.com/kelfa/kelfa/pkg/dal/objects"
 )
 
 type Session struct {

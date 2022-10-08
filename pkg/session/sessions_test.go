@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"go.kelfa.io/pkg/dal"
-	"go.kelfa.io/pkg/dal/objects"
-	"go.kelfa.io/pkg/session"
+	"github.com/kelfa/kelfa/pkg/dal"
+	"github.com/kelfa/kelfa/pkg/dal/objects"
+	"github.com/kelfa/kelfa/pkg/session"
 )
 
 func TestSessions(t *testing.T) {

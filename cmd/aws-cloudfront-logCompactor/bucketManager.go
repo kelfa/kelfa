@@ -20,7 +20,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"github.com/spf13/viper"
 
-	"go.kelfa.io/elf"
+	"github.com/kelfa/kelfa/elf"
 )
 
 type BucketManager struct {

@@ -3,7 +3,7 @@ package filepath_test
 import (
 	"testing"
 
-	"go.kelfa.io/pkg/filepath"
+	"github.com/kelfa/kelfa/pkg/filepath"
 )
 
 func TestPath(t *testing.T) {

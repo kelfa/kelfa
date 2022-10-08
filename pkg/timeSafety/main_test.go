@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"go.kelfa.io/pkg/timeSafety"
+	"github.com/kelfa/kelfa/pkg/timeSafety"
 )
 
 type dataPoint struct {

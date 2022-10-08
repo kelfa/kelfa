@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"go.kelfa.io/elf"
+	"github.com/kelfa/kelfa/elf"
 )
 
 func TestWriteAll(t *testing.T) {
